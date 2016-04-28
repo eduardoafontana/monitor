@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.uniritter.monitor.domain.Test1" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-04-27T02:03:08" hostname="Note_Fontana" time="0.009">
+  <properties/>
+  <testcase name="testNotificar" classname="com.uniritter.monitor.domain.Test1" time="0.006"/>
+  <testcase name="testCriarMedicao" classname="com.uniritter.monitor.domain.Test1" time="0.0"/>
+  <testcase name="testNovaMetrica" classname="com.uniritter.monitor.domain.Test1" time="0.0"/>
+  <testcase name="testUltimaMedicao" classname="com.uniritter.monitor.domain.Test1" time="0.0"/>
+  <testcase name="tesNovaMedicao" classname="com.uniritter.monitor.domain.Test1" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

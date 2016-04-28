@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uniritter.monitor.domain.Metrica;
-import uniritter.monitor.domain.MetricaService;
+import com.uniritter.monitor.domain.service.MetricaService;
+import com.uniritter.monitor.domain.model.MetricaDados;
 
 @Component
 @Produces("application/json")
@@ -29,10 +29,8 @@ public class MetricaController {
 	}
 	
 	@POST
-	public Response createMetrica(Metrica metrica){//Metrica deve virar interface
+	public Response createMetrica(MetricaDados metrica){
 		
-		Metrica nova = service.createMetrica("novo nome");
-		
-		return Response.ok(nova).build();
+		return Response.ok(service.createMetrica(metrica)).build();
 	}
 }
