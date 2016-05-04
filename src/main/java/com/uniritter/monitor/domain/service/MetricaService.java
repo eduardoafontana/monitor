@@ -19,13 +19,11 @@ public class MetricaService {
 
 	public Metrica createMetrica(MetricaDados metricaDados) {
 
-//		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
-//		host.IP = metricaDados.IP;
-//		host.MAC = metricaDados.MAC;
-//		
-//		return new Metrica(MetricaTipo.valueOf(metricaDados.Tipo), host);
-
-		return new Metrica(MetricaTipo.CargaDeRede, new Host(HostGrupo.Firewall));
+		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
+		host.IP = metricaDados.IP;
+		host.MAC = metricaDados.MAC;
+		
+		return new Metrica(MetricaTipo.valueOf(metricaDados.Tipo), host);
 		
 		// TODO adicionar ao repositorio
 		// return repository.createMetrica(nomeMetrica);
