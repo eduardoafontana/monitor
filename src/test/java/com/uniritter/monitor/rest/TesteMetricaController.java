@@ -21,11 +21,7 @@ public class TesteMetricaController {
 //		HttpHeaders headers = new HttpHeaders();
 //		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 //
-//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas")
-//		        .queryParam("ID", 123456)
-//		        .queryParam("MAC", 111222333)
-//		        .queryParam("Tipo",  MetricaTipo.CargaDeRede.toString())
-//		        .queryParam("Grupo", HostGrupo.DbServer.toString());
+//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas");
 //
 //		HttpEntity<?> entity = new HttpEntity<>(headers);
 //
@@ -33,5 +29,27 @@ public class TesteMetricaController {
 //		
 //		assertNotNull(response);
 	}
+
+//	@Test
+//	public void testCreateMetrica() {
+//
+//
+//		RestTemplate restTemplate = new RestTemplate();
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+//
+//		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas");
+////		        .queryParam("ID", 123456)
+////		        .queryParam("MAC", 111222333)
+////		        .queryParam("Tipo",  MetricaTipo.CargaDeRede.toString())
+////		        .queryParam("Grupo", HostGrupo.Firewall.toString());
+//
+//		HttpEntity<?> entity = new HttpEntity<>(headers);
+//
+//		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, String.class);
+//		
+//		assertNotNull(response);
+//	}	
 
 }

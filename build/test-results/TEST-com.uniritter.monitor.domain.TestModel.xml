@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.uniritter.monitor.domain.TestModel" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-05-04T01:30:28" hostname="Note_Fontana" time="0.004">
+<testsuite name="com.uniritter.monitor.domain.TestModel" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-05-07T13:38:33" hostname="ZS-LAB103-65023" time="0.005">
   <properties/>
-  <testcase name="testNotificar" classname="com.uniritter.monitor.domain.TestModel" time="0.002"/>
+  <testcase name="testNotificar" classname="com.uniritter.monitor.domain.TestModel" time="0.004"/>
   <testcase name="testCriarMedicao" classname="com.uniritter.monitor.domain.TestModel" time="0.0"/>
   <testcase name="testNovaMetrica" classname="com.uniritter.monitor.domain.TestModel" time="0.0"/>
   <testcase name="testUltimaMedicao" classname="com.uniritter.monitor.domain.TestModel" time="0.0"/>
