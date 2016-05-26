@@ -3,19 +3,26 @@ package com.uniritter.monitor.domain.service;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
+import com.uniritter.monitor.domain.repository.IRepository;
+import com.uniritter.monitor.persistence.service.MetricaDao;
 
 @Component
 public class MetricaService {
 
+	private final IRepository repository;
+	
 	@Autowired
-	MetricaRepository repository;
-
+	public MetricaService(IRepository repository){
+		this.repository = repository;
+	}	
+	
 	public List<Metrica> getMetricas() {
-		return repository.getMetricas();
+		return (List<Metrica>)repository.getList();
 	}
 
 //	public Metrica createMetrica(MetricaDados metricaDados) {
@@ -32,10 +39,13 @@ public class MetricaService {
 	
 	public int createMetrica(MetricaDados metricaDados) {
 
-		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
-		host.IP = metricaDados.IP;
-		host.MAC = metricaDados.MAC;
+//		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
+//		host.IP = metricaDados.IP;
+//		host.MAC = metricaDados.MAC;
 
-		return repository.createMetrica(new Metrica(1, "nova metrica", new Date()));
+		ModelMapper modelMapper = new ModelMapper();
+		Metrica metrica = modelMapper.map(metricaDados, Metrica.class);
+		
+		return repository.save(metrica);
 	}	
 }

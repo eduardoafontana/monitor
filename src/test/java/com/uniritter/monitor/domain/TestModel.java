@@ -24,7 +24,7 @@ public class TestModel {
 		assertEquals(metrica.getTipo(), MetricaTipo.EspacoEmDisco);
 		assertEquals(metrica.getHost().getGrupo(), HostGrupo.DbServer);
 	}
-	
+
 	@Test
 	public void tesNovaMedicao() {
 		Metrica metrica = new Metrica(MetricaTipo.EspacoEmDisco, new Host(HostGrupo.DbServer));

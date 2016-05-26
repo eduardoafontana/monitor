@@ -1,5 +1,8 @@
 package com.uniritter.monitor.rest;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.service.MetricaService;
-import com.uniritter.monitor.domain.model.MetricaDados;
+import com.uniritter.monitor.domain.model.*;
 
 @Component
 @Produces("application/json")

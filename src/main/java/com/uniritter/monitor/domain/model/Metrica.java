@@ -5,7 +5,33 @@ import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
-public class Metrica extends Observable {
+import com.uniritter.monitor.domain.repository.IEntity;
+
+public class Metrica extends Observable implements IEntity {
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
 	public long id;
 	public String nome;
 	public Date created;
@@ -23,6 +49,17 @@ public class Metrica extends Observable {
 		return this.host;
 	}
 
+	public Metrica() {
+		//Foi inserido apenas para funcionar em aula.
+
+		this.tipo = MetricaTipo.CargaDeRede;
+		this.host = new Host(HostGrupo.Firewall);
+		
+		medicoes = new ArrayList<Medicao>();
+		alertas = new ArrayList<Alerta>();
+	}	
+
+
 	public Metrica(MetricaTipo tipo, Host host) {
 		this.tipo = tipo;
 		this.host = host;
@@ -36,14 +73,14 @@ public class Metrica extends Observable {
 		this.id = id;
 		this.nome = nome;
 		this.created = created;
-		
+	
 		//Foi inserido apenas para funcionar em aula.
 		this.tipo = MetricaTipo.CargaDeRede;
 		this.host = new Host(HostGrupo.Firewall);
 		
 		medicoes = new ArrayList<Medicao>();
 		alertas = new ArrayList<Alerta>();
-		//
+		
 	}	
 
 	private void adicionarMedicao(Medicao medicao) {
