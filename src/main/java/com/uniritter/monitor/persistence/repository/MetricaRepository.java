@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Metrica;
 import com.uniritter.monitor.domain.repository.IEntity;
-import com.uniritter.monitor.domain.repository.IRepository;
+import com.uniritter.monitor.domain.repository.IMetricaRepository;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 import com.uniritter.monitor.persistence.service.MetricaDao;
 
 @Component
-public class MetricaRepository implements IRepository {
+public class MetricaRepository implements IMetricaRepository {
 	
 	private final MetricaDao metricaDao;
 	

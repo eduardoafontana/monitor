@@ -1,6 +1,5 @@
 package com.uniritter.monitor.domain.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -8,16 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
-import com.uniritter.monitor.domain.repository.IRepository;
-import com.uniritter.monitor.persistence.service.MetricaDao;
+import com.uniritter.monitor.domain.repository.IMetricaRepository;
 
 @Component
 public class MetricaService {
 
-	private final IRepository repository;
+	private final IMetricaRepository repository;
 	
 	@Autowired
-	public MetricaService(IRepository repository){
+	public MetricaService(IMetricaRepository repository){
 		this.repository = repository;
 	}	
 	

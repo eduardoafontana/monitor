@@ -1,6 +1,8 @@
 package com.uniritter.monitor.domain.model;
 
-public class Host {
+import com.uniritter.monitor.domain.repository.IEntity;
+
+public class Host implements IEntity {
 	public int IP;
 	public int MAC;
 	private HostGrupo grupo;
