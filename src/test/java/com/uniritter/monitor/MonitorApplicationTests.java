@@ -9,7 +9,6 @@ import javax.validation.constraints.AssertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.MappingException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
@@ -17,8 +16,8 @@ import static org.junit.Assert.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -29,7 +28,6 @@ import com.uniritter.monitor.domain.service.MetricaService;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 import com.uniritter.monitor.persistence.repository.MetricaRepository;
 import com.uniritter.monitor.persistence.service.MetricaDao;
-import com.uniritter.monitor.persistence.service.MetricaRowMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MonitorApplication.class)
@@ -123,13 +121,7 @@ public class MonitorApplicationTests {
 		ArrayList<MetricaEntity> metricaEntityList = modelMapper.map(metricaDadosList, listType);
 		
 		assertTrue(metricaEntityList.size() > 0);
-	}	
-	
-	@Test
-	public void testJdbcInsideDao() {
-		
-		assertTrue(metricaDao.isJdbcNotNull());
-	}		
+	}			
 	
 	@Test
 	public void testMetricaDaoGetMetricas() {
@@ -150,7 +142,7 @@ public class MonitorApplicationTests {
 	public void testDataBase(){
 		assertNotNull(jdbcTemplate);
 		
-		List<MetricaEntity> metricaEntity = this.jdbcTemplate.query("select * from metrica order by id", new MetricaRowMapper());
+		List<MetricaEntity> metricaEntity = this.jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
 		
 		assertNotNull(metricaEntity);
 	}

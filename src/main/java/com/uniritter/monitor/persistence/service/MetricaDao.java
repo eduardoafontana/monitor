@@ -3,6 +3,7 @@ package com.uniritter.monitor.persistence.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -17,16 +18,13 @@ public class MetricaDao {
 	public MetricaDao(JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	public List<MetricaEntity> getMetricas(){  
-		return jdbcTemplate.query("select * from metrica order by id", new MetricaRowMapper());
-	}
+
+	public List<MetricaEntity> getMetricas(){
+		
+		return jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
+	}	
 	
 	public int createMetrica(MetricaEntity metrica){
 		return jdbcTemplate.update("insert into metrica (nome, created) values (?, ?)", metrica.nome, metrica.created);
-	}
-	
-	public boolean isJdbcNotNull(){
-		return jdbcTemplate != null;
 	}
 }
