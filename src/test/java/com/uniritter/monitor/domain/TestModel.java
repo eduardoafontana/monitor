@@ -6,7 +6,12 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.uniritter.monitor.MonitorApplication;
 import com.uniritter.monitor.domain.model.Alerta;
 import com.uniritter.monitor.domain.model.HostGrupo;
 import com.uniritter.monitor.domain.model.Host;
@@ -14,7 +19,9 @@ import com.uniritter.monitor.domain.model.Medicao;
 import com.uniritter.monitor.domain.model.Metrica;
 import com.uniritter.monitor.domain.model.MetricaTipo;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = MonitorApplication.class)
+@WebAppConfiguration
 public class TestModel {
 
 	@Test
@@ -26,7 +33,7 @@ public class TestModel {
 	}
 
 	@Test
-	public void tesNovaMedicao() {
+	public void testNovaMedicao() {
 		Metrica metrica = new Metrica(MetricaTipo.EspacoEmDisco, new Host(HostGrupo.DbServer));
 		boolean retorno = metrica.novaMedicao(8);
 		
