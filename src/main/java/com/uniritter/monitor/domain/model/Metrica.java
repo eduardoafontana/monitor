@@ -16,14 +16,14 @@ public class Metrica extends Observable implements IEntity {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public MetricaTipo getTipo() {
+		return this.tipo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
+	public void setTipo(MetricaTipo tipo) {
+		this.tipo = tipo;
+	}	
+	
 	public Date getCreated() {
 		return created;
 	}
@@ -33,17 +33,12 @@ public class Metrica extends Observable implements IEntity {
 	}
 
 	public long id;
-	public String nome;
 	public Date created;
 	
 	private MetricaTipo tipo;
 	private Host host;
-	private List<Medicao> medicoes;
-	private List<Alerta> alertas;
-
-	public MetricaTipo getTipo() {
-		return this.tipo;
-	}
+//	private List<Medicao> medicoes;
+//	private List<Alerta> alertas;
 
 	public Host getHost() {
 		return this.host;
@@ -52,59 +47,58 @@ public class Metrica extends Observable implements IEntity {
 	public Metrica() {
 		//Foi inserido apenas para funcionar em aula.
 
-		this.tipo = MetricaTipo.CargaDeRede;
-		this.host = new Host(HostGrupo.Firewall);
+//		this.tipo = MetricaTipo.CargaDeRede;
+//		this.host = new Host(HostGrupo.Firewall);
 		
-		medicoes = new ArrayList<Medicao>();
-		alertas = new ArrayList<Alerta>();
+//		medicoes = new ArrayList<Medicao>();
+//		alertas = new ArrayList<Alerta>();
 	}	
 
 
-	public Metrica(MetricaTipo tipo, Host host) {
-		this.tipo = tipo;
-		this.host = host;
-		// Pediodicidade
-
-		medicoes = new ArrayList<Medicao>();
-		alertas = new ArrayList<Alerta>();
-	}
-	
-	public Metrica(long id, String nome, Date created) {
-		this.id = id;
-		this.nome = nome;
-		this.created = created;
-	
-		//Foi inserido apenas para funcionar em aula.
-		this.tipo = MetricaTipo.CargaDeRede;
-		this.host = new Host(HostGrupo.Firewall);
-		
-		medicoes = new ArrayList<Medicao>();
-		alertas = new ArrayList<Alerta>();
-		
-	}	
-
-	private void adicionarMedicao(Medicao medicao) {
-		medicoes.add(medicao);
-	}
-
-	public List<Medicao> historicoMedicoes() {
-		return medicoes;
-	}
-
-	public Medicao getUltimaMedicao() {
-		if (medicoes.size() > 0)
-			return medicoes.get(medicoes.size() - 1);
-		
-		return null;
-	}
-
-	public boolean novaMedicao(int valor) {
-		Medicao medicao = new Medicao(valor);
-		adicionarMedicao(medicao);
-
-		setChanged();
-		notifyObservers(getUltimaMedicao());
-
-		return true;
-	}
+//	public Metrica(MetricaTipo tipo, Host host) {
+//		this.tipo = tipo;
+//		this.host = host;
+//		// Pediodicidade
+//
+//		medicoes = new ArrayList<Medicao>();
+//		alertas = new ArrayList<Alerta>();
+//	}
+//	
+//	public Metrica(long id, String nome, Date created) {
+//		this.id = id;
+//		this.created = created;
+//	
+//		//Foi inserido apenas para funcionar em aula.
+//		this.tipo = MetricaTipo.CargaDeRede;
+//		this.host = new Host(HostGrupo.Firewall);
+//		
+//		medicoes = new ArrayList<Medicao>();
+//		alertas = new ArrayList<Alerta>();
+//		
+//	}	
+//
+//	private void adicionarMedicao(Medicao medicao) {
+//		medicoes.add(medicao);
+//	}
+//
+//	public List<Medicao> historicoMedicoes() {
+//		return medicoes;
+//	}
+//
+//	public Medicao getUltimaMedicao() {
+//		if (medicoes.size() > 0)
+//			return medicoes.get(medicoes.size() - 1);
+//		
+//		return null;
+//	}
+//
+//	public boolean novaMedicao(int valor) {
+//		Medicao medicao = new Medicao(valor);
+//		adicionarMedicao(medicao);
+//
+//		setChanged();
+//		notifyObservers(getUltimaMedicao());
+//
+//		return true;
+//	}
 }

@@ -45,5 +45,5 @@ public class MetricaService {
 		Metrica metrica = modelMapper.map(metricaDados, Metrica.class);
 		
 		return repository.save(metrica);
-	}	
+	}
 }

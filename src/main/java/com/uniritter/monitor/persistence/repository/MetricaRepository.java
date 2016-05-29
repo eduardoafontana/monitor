@@ -14,6 +14,7 @@ import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 import com.uniritter.monitor.persistence.service.MetricaDao;
+import com.uniritter.monitor.persistence.service.NoRowsAffected;
 
 @Component
 public class MetricaRepository implements IMetricaRepository {

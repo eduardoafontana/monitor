@@ -24,7 +24,11 @@ public class MetricaDao {
 		return jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
 	}	
 	
-	public int createMetrica(MetricaEntity metrica){
-		return jdbcTemplate.update("insert into metrica (nome, created) values (?, ?)", metrica.nome, metrica.created);
+	public int createMetrica(MetricaEntity metrica) {
+		if(jdbcTemplate.update("insert into metrica (tipo, created) values (?, CURRENT_TIMESTAMP())", metrica.tipo) > 0)
+			return jdbcTemplate.queryForObject("select last_insert_id()", int.class);
+		else 
+			//throw new NoRowsAffected("Nenhuma linha afedata para insert into metrica (nome, created) values (?, ?)");
+			return 0;
 	}
 }

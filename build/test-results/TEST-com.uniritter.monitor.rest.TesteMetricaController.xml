@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.uniritter.monitor.rest.TesteMetricaController" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-05-29T11:03:14" hostname="Note_Fontana" time="0.0">
-  <properties/>
-  <testcase name="testGetMetrica" classname="com.uniritter.monitor.rest.TesteMetricaController" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

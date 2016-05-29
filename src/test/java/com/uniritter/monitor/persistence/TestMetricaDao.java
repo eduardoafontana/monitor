@@ -24,7 +24,7 @@ import com.uniritter.monitor.persistence.service.MetricaDao;
 public class TestMetricaDao {
 
 	@Autowired
-	public JdbcTemplate jdbcTemplate;    
+	public JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public MetricaDao metricaDao;
@@ -39,9 +39,9 @@ public class TestMetricaDao {
 	
 	@Test
 	public void testMetricaDaoCreateMetrica() {
-		MetricaEntity metrica = new MetricaEntity(777, "metrica de teste de repositorio", new Date());		
+		MetricaEntity metrica = new MetricaEntity(777, "metrica de teste de repositorio dao", new Date());		
 		
-		assertEquals(1, metricaDao.createMetrica(metrica));
+		assertNotEquals(0, metricaDao.createMetrica(metrica));
 	}
 	
 	@Test

@@ -50,12 +50,13 @@ public class TestMetricaService {
 		List<Metrica> metricas = metricaService.getMetricas();
 		
 		MetricaDados metricaDados = new MetricaDados();
-		metricaDados.id = 999;
-		metricaDados.nome = "metrica de teste de repositorio";
-		metricaDados.created = new Date();
+		metricaDados.IP = "999";
+		metricaDados.MAC = "999888777";
+		metricaDados.Tipo = MetricaTipo.CPU.toString();
 		
-		metricaService.createMetrica(metricaDados);
+		int id = metricaService.createMetrica(metricaDados);
 		
+		assertNotEquals(id, 0);
 		assertTrue(metricaService.getMetricas().size() > metricas.size());
 		assertTrue((metricaService.getMetricas().size() - 1) == metricas.size());
 	}

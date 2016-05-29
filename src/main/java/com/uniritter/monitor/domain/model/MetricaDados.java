@@ -1,18 +1,16 @@
 package com.uniritter.monitor.domain.model;
 
-import java.util.Date;
-
 public class MetricaDados {
-	public int getIP() {
+	public String getIP() {
 		return IP;
 	}
-	public void setIP(int iP) {
+	public void setIP(String iP) {
 		IP = iP;
 	}
-	public int getMAC() {
+	public String getMAC() {
 		return MAC;
 	}
-	public void setMAC(int mAC) {
+	public void setMAC(String mAC) {
 		MAC = mAC;
 	}
 	public String getTipo() {
@@ -27,30 +25,9 @@ public class MetricaDados {
 	public void setGrupo(String grupo) {
 		Grupo = grupo;
 	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-	public int IP;
-	public int MAC;
+
+	public String IP;
+	public String MAC;
 	public String Tipo;
 	public String Grupo;
-	
-	public long id;
-	public String nome;
-	public Date created;
 }

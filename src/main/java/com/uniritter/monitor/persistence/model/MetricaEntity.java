@@ -11,14 +11,6 @@ public class MetricaEntity {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public Date getCreated() {
 		return created;
 	}
@@ -27,15 +19,23 @@ public class MetricaEntity {
 		this.created = created;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}	
+	
 	public long id;
-	public String nome;
+	public String tipo;
 	public Date created;
 	
 	public MetricaEntity(){}
 	
-	public MetricaEntity(long id, String nome, Date created) {
+	public MetricaEntity(long id, String tipo, Date created) {
 		this.id = id;
-		this.nome = nome;
+		this.tipo = tipo;
 		this.created = created;
 	}
 }
