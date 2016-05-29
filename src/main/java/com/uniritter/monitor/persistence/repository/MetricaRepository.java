@@ -38,10 +38,10 @@ public class MetricaRepository implements IMetricaRepository {
 
 	@Override
 	public int save(IEntity entidade) {
-		Metrica metrica = (Metrica)entidade; 
+		//Metrica metrica = (Metrica)entidade; 
 		
 		ModelMapper modelMapper = new ModelMapper();
-		MetricaEntity metricaEntity = modelMapper.map(metrica, MetricaEntity.class);
+		MetricaEntity metricaEntity = modelMapper.map(entidade, MetricaEntity.class);
 		
 		return this.metricaDao.createMetrica(metricaEntity);
 	}

@@ -28,7 +28,7 @@ public class HostRepository implements IHostRepository {
 	public List<? extends IEntity> getList() {
 		List<HostEntity> hostEntity = this.hostDao.getHosts();
 		
-		ModelMapper modelMapper = new ModelMapper();    
+		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<Host>>() {}.getType();
 		List<Host> hosts = modelMapper.map(hostEntity, listType);	
 		
@@ -37,10 +37,10 @@ public class HostRepository implements IHostRepository {
 
 	@Override
 	public int save(IEntity entidade) {
-		Host host = (Host)entidade; 
-		
+		//Host host = (Host)entidade;
+
 		ModelMapper modelMapper = new ModelMapper();
-		HostEntity hostEntity = modelMapper.map(host, HostEntity.class);
+		HostEntity hostEntity = modelMapper.map(entidade, HostEntity.class);
 		
 		return this.hostDao.createHost(hostEntity);
 	}
