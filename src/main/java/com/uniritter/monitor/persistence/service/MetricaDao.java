@@ -43,5 +43,9 @@ public class MetricaDao {
 		catch(EmptyResultDataAccessException ex){
 			return null;
 		}
-	}	
+	}
+
+	public int deleteMetrica(int id){
+		return jdbcTemplate.update("delete metrica where id = ?", id);
+	}
 }

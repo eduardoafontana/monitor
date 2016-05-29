@@ -33,5 +33,9 @@ public class HostDao {
 		
 		Object[] args = {id};
 		return jdbcTemplate.queryForObject("select * from host where id = ?", args, new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+	}
+
+	public int deleteHost(int id){
+		return jdbcTemplate.update("delete host where id = ?", id);
 	}	
 }

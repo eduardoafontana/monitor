@@ -1,6 +1,7 @@
 package com.uniritter.monitor.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -44,6 +45,18 @@ public class MetricaController {
 			return Response.status(Status.NO_CONTENT).entity(null).build();
 		
 		return Response.status(Status.OK).entity(metrica).build();
+	}
+	
+	@DELETE
+	@Path("{id}")
+	public Response deleteMetrica(@PathParam("id") int id) {
+
+		int rowsDeleted = service.deleteMetrica(id);
+		
+		if(rowsDeleted == 0)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+		
+		return Response.status(Status.ACCEPTED).entity(null).build();
 	}
 	
 	@POST

@@ -34,6 +34,10 @@ public class MetricaService {
 		return (Metrica)metrica;
 	}
 	
+	public int deleteMetrica(int id) {		
+		return repository.deleteById(id);
+	}
+	
 	public String[] getTipos() {
 		return Arrays.toString(MetricaTipo.values()).split(", ");
 	}

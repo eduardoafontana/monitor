@@ -19,10 +19,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.uniritter.monitor.domain.model.Metrica;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MonitorApplication.class)
-@WebAppConfiguration
-public class TestMonitorApplication {
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringApplicationConfiguration(classes = MonitorApplication.class)
+//@WebAppConfiguration
+//public class TestMonitorApplication {
 		
 //	@Test
 //	public void testMetricaMapper(){
@@ -66,4 +66,4 @@ public class TestMonitorApplication {
 //		
 //		assertTrue(metricaEntityList.size() > 0);
 //	}
-}
+//}

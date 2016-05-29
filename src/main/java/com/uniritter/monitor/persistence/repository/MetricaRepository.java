@@ -61,4 +61,10 @@ public class MetricaRepository implements IMetricaRepository {
 		
 		return entidade;
 	}
+	
+	@Override
+	public int deleteById(int id) {
+
+		return this.metricaDao.deleteMetrica(id);
+	}
 }

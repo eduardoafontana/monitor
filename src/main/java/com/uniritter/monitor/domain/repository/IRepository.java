@@ -7,4 +7,5 @@ public interface IRepository {
 	public IEntity getById(int id);
 	//public int save(IEntity entidade) throws Exception;
 	public int save(IEntity entidade);
+	public int deleteById(int id);
 }

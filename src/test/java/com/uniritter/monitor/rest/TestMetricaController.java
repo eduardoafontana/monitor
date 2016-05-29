@@ -2,6 +2,8 @@ package com.uniritter.monitor.rest;
 
 import static org.junit.Assert.*;
 
+import java.net.URI;
+
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,7 +64,48 @@ public class TestMetricaController {
 	}
 	
 	@Test
-	public void testGetMetricaNaoExistente() {
+	public void testDeleteMetrica() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/");
+
+		HttpEntity<String> entity = new HttpEntity<String>(MetricaTipo.CargaDeRede.toString(), headers);
+
+		URI retorno = restTemplate.postForLocation(builder.toUriString(), entity);
+		
+		HttpHeaders headersD = new HttpHeaders();
+		headersD.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builderD = UriComponentsBuilder.fromHttpUrl(retorno.toString());
+
+		ResponseEntity<String> responseD = restTemplate.exchange(builderD.toUriString(), HttpMethod.DELETE, new HttpEntity<>(headersD), String.class);
+		
+		assertNotNull(responseD);
+		assertEquals(responseD.getStatusCode(), HttpStatus.ACCEPTED);
+	}
+	
+	@Test
+	public void testDeleteMetricaInexistente() {
+
+		RestTemplate restTemplate = new RestTemplate();		
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/999999");
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+	}
+	
+	@Test
+	public void testGetMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		

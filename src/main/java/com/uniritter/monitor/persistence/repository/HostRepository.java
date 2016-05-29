@@ -55,4 +55,10 @@ public class HostRepository implements IHostRepository {
 		
 		return entidade;
 	}
+
+	@Override
+	public int deleteById(int id) {
+
+		return this.hostDao.deleteHost(id);
+	}
 }
