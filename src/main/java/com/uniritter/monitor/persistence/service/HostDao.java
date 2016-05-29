@@ -1,5 +1,6 @@
 package com.uniritter.monitor.persistence.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.*;
@@ -27,4 +28,10 @@ public class HostDao {
 	public int createHost(HostEntity host){
 		return jdbcTemplate.update("insert into host (ip, mac) values (?, ?)", host.ip, host.mac);
 	}
+	
+	public HostEntity getHost(int id){
+		
+		Object[] args = {id};
+		return jdbcTemplate.queryForObject("select * from host where id = ?", args, new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+	}	
 }

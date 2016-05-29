@@ -1,5 +1,6 @@
 package com.uniritter.monitor.domain.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
+import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
 
 @Component
@@ -22,6 +24,19 @@ public class MetricaService {
 	public List<Metrica> getMetricas() {
 		return (List<Metrica>)repository.getList();
 	}
+	
+	public Metrica getMetrica(int id) {
+		IEntity metrica = repository.getById(id);
+		
+		if(metrica == null)
+			return null;
+		
+		return (Metrica)metrica;
+	}
+	
+	public String[] getTipos() {
+		return Arrays.toString(MetricaTipo.values()).split(", ");
+	}
 
 //	public Metrica createMetrica(MetricaDados metricaDados) {
 //
@@ -35,14 +50,12 @@ public class MetricaService {
 //		// return repository.createMetrica(nomeMetrica);
 //	}
 	
-	public int createMetrica(MetricaDados metricaDados) {
+	public int createMetrica(MetricaTipo metricaTipo) {
 
-//		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
-//		host.IP = metricaDados.IP;
-//		host.MAC = metricaDados.MAC;
-
-		ModelMapper modelMapper = new ModelMapper();
-		Metrica metrica = modelMapper.map(metricaDados, Metrica.class);
+//		ModelMapper modelMapper = new ModelMapper();
+//		Metrica metrica = modelMapper.map(metricaDados, Metrica.class);
+		
+		Metrica metrica = new Metrica(metricaTipo);
 		
 		return repository.save(metrica);
 	}

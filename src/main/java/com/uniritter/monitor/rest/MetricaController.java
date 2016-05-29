@@ -4,9 +4,11 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -32,10 +34,31 @@ public class MetricaController {
 		return Response.ok(service.getMetricas()).build();
 	}
 	
-	@POST
-	public Response createMetrica(MetricaDados metrica){
+	@GET
+	@Path("{id}")
+	public Response getMetrica(@PathParam("id") int id) {
 
-		int id = service.createMetrica(metrica);
+		Metrica metrica = service.getMetrica(id);
+		
+		if(metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+		
+		return Response.status(Status.OK).entity(metrica).build();
+	}
+	
+	@POST
+	public Response createMetrica(final String metricaTipo){
+		
+		MetricaTipo metricaTipoConvertido;
+		
+		try{
+			metricaTipoConvertido = MetricaTipo.valueOf(metricaTipo);
+		}
+		catch(IllegalArgumentException e){
+			return Response.status(Status.BAD_REQUEST).entity("Valor metricaTipo: " + metricaTipo + " invalido!").build();
+		}
+		
+		int id = service.createMetrica(metricaTipoConvertido);
 		
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(Integer.toString(id));

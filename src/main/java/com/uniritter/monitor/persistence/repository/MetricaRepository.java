@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.uniritter.monitor.domain.model.Metrica;
 import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
+import com.uniritter.monitor.persistence.model.HostEntity;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 import com.uniritter.monitor.persistence.service.MetricaDao;
 import com.uniritter.monitor.persistence.service.NoRowsAffected;
@@ -45,5 +46,19 @@ public class MetricaRepository implements IMetricaRepository {
 		MetricaEntity metricaEntity = modelMapper.map(entidade, MetricaEntity.class);
 		
 		return this.metricaDao.createMetrica(metricaEntity);
+	}
+	
+	@Override
+	public IEntity getById(int id) {
+
+		MetricaEntity metricaEntity = this.metricaDao.getMetrica(id);
+		
+		if(metricaEntity == null)
+			return null;
+		
+		ModelMapper modelMapper = new ModelMapper();
+		Metrica entidade = modelMapper.map(metricaEntity, Metrica.class);
+		
+		return entidade;
 	}
 }

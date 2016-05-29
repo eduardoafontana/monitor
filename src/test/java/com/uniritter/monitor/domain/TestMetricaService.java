@@ -49,12 +49,7 @@ public class TestMetricaService {
 		
 		List<Metrica> metricas = metricaService.getMetricas();
 		
-		MetricaDados metricaDados = new MetricaDados();
-		metricaDados.IP = "999";
-		metricaDados.MAC = "999888777";
-		metricaDados.Tipo = MetricaTipo.CPU.toString();
-		
-		int id = metricaService.createMetrica(metricaDados);
+		int id = metricaService.createMetrica(MetricaTipo.CPU);
 		
 		assertNotEquals(id, 0);
 		assertTrue(metricaService.getMetricas().size() > metricas.size());

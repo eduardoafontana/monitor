@@ -44,4 +44,15 @@ public class HostRepository implements IHostRepository {
 		
 		return this.hostDao.createHost(hostEntity);
 	}
+
+	@Override
+	public IEntity getById(int id) {
+
+		HostEntity hostEntity = this.hostDao.getHost(id);
+		
+		ModelMapper modelMapper = new ModelMapper();
+		IEntity entidade = modelMapper.map(hostEntity, IEntity.class);
+		
+		return entidade;
+	}
 }

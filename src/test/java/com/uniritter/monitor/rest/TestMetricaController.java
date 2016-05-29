@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,7 +26,7 @@ import com.uniritter.monitor.domain.model.MetricaTipo;
 public class TestMetricaController {
 	
 	@Test
-	public void testGetMetrica() {
+	public void testGetTodasMetricas() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -36,9 +37,46 @@ public class TestMetricaController {
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 
-		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 		
 		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}
+	
+	@Test
+	public void testGetMetrica() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/1");
+
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}
+	
+	@Test
+	public void testGetMetricaNaoExistente() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/99999999");
+
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
 	}
 
 	@Test
@@ -51,16 +89,30 @@ public class TestMetricaController {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/");
 
-		JSONObject request = new JSONObject();
-		request.put("IP", "123456");
-		request.put("MAC", "111222333");
-		request.put("Tipo", MetricaTipo.CargaDeRede.toString());
-		request.put("Grupo", HostGrupo.Firewall.toString());
+		//JSONObject request = new JSONObject();
+		//request.put("metricaTipo", MetricaTipo.CargaDeRede.toString());
 		
-        HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
+        //HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
+		HttpEntity<String> entity = new HttpEntity<String>(MetricaTipo.CargaDeRede.toString(), headers);
 
-        HttpEntity<String> response = restTemplate.postForEntity(builder.toUriString(), entity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), entity, String.class);
 		
 		assertNotNull(response);
+		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
+	
+	@Test(expected=RestClientException.class)
+	public void testCreateMetricaTipoInvalido() {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/");
+
+		HttpEntity<String> entity = new HttpEntity<String>("qualquercoisa", headers);
+
+        restTemplate.postForEntity(builder.toUriString(), entity, String.class);
+	}	
 }
