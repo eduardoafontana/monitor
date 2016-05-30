@@ -9,24 +9,27 @@ import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IEntity;
+import com.uniritter.monitor.domain.repository.IHostRepository;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
 
 @Component
 public class MetricaService {
 
-	private final IMetricaRepository repository;
+	private final IMetricaRepository metricaRepository;
+	private final IHostRepository hostRepository;
 	
 	@Autowired
-	public MetricaService(IMetricaRepository repository){
-		this.repository = repository;
-	}	
+	public MetricaService(IMetricaRepository metricaRepository, IHostRepository hostRepository){
+		this.metricaRepository = metricaRepository;
+		this.hostRepository = hostRepository;
+	}
 	
 	public List<Metrica> getMetricas() {
-		return (List<Metrica>)repository.getList();
+		return (List<Metrica>)metricaRepository.getList();
 	}
 	
 	public Metrica getMetrica(int id) {
-		IEntity metrica = repository.getById(id);
+		IEntity metrica = metricaRepository.getById(id);
 		
 		if(metrica == null)
 			return null;
@@ -35,24 +38,12 @@ public class MetricaService {
 	}
 	
 	public int deleteMetrica(int id) {		
-		return repository.deleteById(id);
+		return metricaRepository.deleteById(id);
 	}
 	
 	public String[] getTipos() {
 		return Arrays.toString(MetricaTipo.values()).split(", ");
 	}
-
-//	public Metrica createMetrica(MetricaDados metricaDados) {
-//
-//		Host host = new Host(HostGrupo.valueOf(metricaDados.Grupo));
-//		host.IP = metricaDados.IP;
-//		host.MAC = metricaDados.MAC;
-//		
-//		return new Metrica(MetricaTipo.valueOf(metricaDados.Tipo), host);
-//		
-//		// TODO adicionar ao repositorio
-//		// return repository.createMetrica(nomeMetrica);
-//	}
 	
 	public int createMetrica(MetricaTipo metricaTipo) {
 
@@ -61,6 +52,6 @@ public class MetricaService {
 		
 		Metrica metrica = new Metrica(metricaTipo);
 		
-		return repository.save(metrica);
+		return metricaRepository.save(metrica);
 	}
 }

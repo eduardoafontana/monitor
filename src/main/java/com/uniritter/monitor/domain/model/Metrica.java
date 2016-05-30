@@ -36,15 +36,13 @@ public class Metrica extends Observable implements IEntity {
 	private MetricaTipo tipo;
 	public Date created;
 	
-	private Host host;
+	private List<Host> hosts;
 //	private List<Medicao> medicoes;
 //	private List<Alerta> alertas;
 
-	public Host getHost() {
-		return this.host;
-	}
-
 	public Metrica() {
+		hosts = new ArrayList<Host>();
+		
 		//Foi inserido apenas para funcionar em aula.
 
 //		this.tipo = MetricaTipo.CargaDeRede;
@@ -55,7 +53,10 @@ public class Metrica extends Observable implements IEntity {
 	}
 	
 	public Metrica(MetricaTipo tipo) {
+		
 		this.tipo = tipo;
+		
+		hosts = new ArrayList<Host>();
 	}
 
 

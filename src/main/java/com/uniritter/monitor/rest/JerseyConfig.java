@@ -9,5 +9,6 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig(){
 		register(MetricaController.class);
 		register(MetricaTipoController.class);
+		register(HostGrupoController.class);
 	}
 }
