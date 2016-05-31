@@ -1,12 +1,23 @@
 package com.uniritter.monitor.persistence.model;
 
+import java.util.Date;
+
 public class HostEntity {
-	public long getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public long getMetricaId() {
+		return metricaId;
+	}
+
+	public void setMetricaId(long metricaId) {
+		this.metricaId = metricaId;
 	}
 
 	public int getIp() {
@@ -25,15 +36,28 @@ public class HostEntity {
 		this.mac = mac;
 	}
 
-	public long id;
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public int id;
+	public long metricaId;
 	public int ip;
 	public int mac;
+	public String grupo;
+	public Date created;
 	
 	public HostEntity(){}
-	
-	public HostEntity(long id, int ip, int mac) {
-		this.id = id;
-		this.ip = ip;
-		this.mac = mac;
-	}
 }

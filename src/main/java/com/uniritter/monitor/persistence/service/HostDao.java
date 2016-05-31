@@ -26,7 +26,7 @@ public class HostDao {
 	}
 	
 	public int createHost(HostEntity host){
-		return jdbcTemplate.update("insert into host (ip, mac) values (?, ?)", host.ip, host.mac);
+		return jdbcTemplate.update("insert into host (metricaid, ip, mac, grupo, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())", host.metricaId, host.ip, host.mac, host.grupo);
 	}
 	
 	public HostEntity getHost(int id){

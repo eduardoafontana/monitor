@@ -71,10 +71,38 @@ public class MetricaController {
 			return Response.status(Status.BAD_REQUEST).entity("Valor metricaTipo: " + metricaTipo + " invalido!").build();
 		}
 		
+		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
+		
 		int id = service.createMetrica(metricaTipoConvertido);
 		
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(Integer.toString(id));
+        
+        return Response.created(builder.build()).build();
+	}
+	
+	@POST
+	@Path("{id}/hosts")
+	public Response addHost(@PathParam("id") int id, HostData hostData) {
+		
+		Metrica metrica = service.getMetrica(id);
+		
+		if(metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+		
+		try{
+			HostGrupo.valueOf(hostData.grupo);
+		}
+		catch(IllegalArgumentException e){
+			return Response.status(Status.BAD_REQUEST).entity("Valor grupo: " + hostData.grupo + " invalido!").build();
+		}
+		
+		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
+		
+		int idHost = service.addHost(metrica.id, hostData);
+		
+        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+        builder.path(Integer.toString(idHost));
         
         return Response.created(builder.build()).build();
 	}

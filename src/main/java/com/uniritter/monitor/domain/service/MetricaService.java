@@ -37,7 +37,7 @@ public class MetricaService {
 		return (Metrica)metrica;
 	}
 	
-	public int deleteMetrica(int id) {		
+	public int deleteMetrica(int id) {
 		return metricaRepository.deleteById(id);
 	}
 	
@@ -46,12 +46,19 @@ public class MetricaService {
 	}
 	
 	public int createMetrica(MetricaTipo metricaTipo) {
-
-//		ModelMapper modelMapper = new ModelMapper();
-//		Metrica metrica = modelMapper.map(metricaDados, Metrica.class);
 		
 		Metrica metrica = new Metrica(metricaTipo);
 		
 		return metricaRepository.save(metrica);
+	}
+	
+	public int addHost(long idMetrica, HostData hostData) {
+
+		ModelMapper modelMapper = new ModelMapper();
+		Host host = modelMapper.map(hostData, Host.class);
+		
+		host.metricaId = idMetrica;
+		
+		return hostRepository.save(host);
 	}
 }

@@ -31,12 +31,20 @@ public class Metrica extends Observable implements IEntity {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	
+	public List<Host> getHosts() {
+		return hosts;
+	}
+
+	public void setHosts(List<Host> hosts) {
+		this.hosts = hosts;
+	}
 
 	public long id;
 	private MetricaTipo tipo;
 	public Date created;
 	
-	private List<Host> hosts;
+	public List<Host> hosts;
 //	private List<Medicao> medicoes;
 //	private List<Alerta> alertas;
 

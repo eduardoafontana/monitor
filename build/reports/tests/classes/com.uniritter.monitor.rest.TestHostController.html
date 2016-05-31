@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class com.uniritter.monitor.rest.TestHostController</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class com.uniritter.monitor.rest.TestHostController</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.uniritter.monitor.rest.html">com.uniritter.monitor.rest</a> &gt; TestHostController</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.849s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">50%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="testCreateMetrica"></a>
+<h3 class="failures">testCreateMetrica</h3>
+<span class="code">
+<pre>org.springframework.web.client.HttpClientErrorException: 404 Not Found
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:91)
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:641)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:597)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:557)
+	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:384)
+	at com.uniritter.monitor.rest.TestHostController.testCreateMetrica(TestHostController.java:67)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:112)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:56)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.messaging.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.messaging.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.messaging.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:360)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="failures">testCreateMetrica</td>
+<td>1.564s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">testGetMetrica</td>
+<td>0.285s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2016-05-30 22:23:24.596  INFO 7152 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.uniritter.monitor.rest.TestHostController]: no resource found for suffixes {-context.xml, Context.groovy}.
+2016-05-30 22:23:24.606  INFO 7152 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-05-30 22:23:24.607  INFO 7152 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@288d786, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5e073c17, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3eaee324, org.springframework.test.context.support.DirtiesContextTestExecutionListener@722bc5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4402f8aa, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@238293b9]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.3.3.RELEASE)
+
+2016-05-30 22:23:24.680  INFO 7152 --- [    Test worker] c.u.monitor.rest.TestHostController      : Starting TestHostController on Note_Fontana with PID 7152 (C:\Users\Eduardo\Desktop\workspaceEclipse\monitor\build\classes\test started by Eduardo in C:\Users\Eduardo\Desktop\workspaceEclipse\monitor)
+2016-05-30 22:23:24.681  INFO 7152 --- [    Test worker] c.u.monitor.rest.TestHostController      : No active profile set, falling back to default profiles: default
+2016-05-30 22:23:24.684  INFO 7152 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72d1c9c1: startup date [Mon May 30 22:23:24 GMT-03:00 2016]; root of context hierarchy
+2016-05-30 22:23:25.304  INFO 7152 --- [    Test worker] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'requestContextFilter' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration; factoryMethodName=requestContextFilter; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/jersey/JerseyAutoConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=requestContextFilter; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2016-05-30 22:23:25.305  INFO 7152 --- [    Test worker] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'beanNameViewResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.class]]
+2016-05-30 22:23:25.390  INFO 7152 --- [    Test worker] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-05-30 22:23:25.422  INFO 7152 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ebfbc64e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-05-30 22:23:25.942  INFO 7152 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 9000 (http)
+2016-05-30 22:23:25.963  INFO 7152 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-05-30 22:23:25.964  INFO 7152 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-05-30 22:23:26.156  INFO 7152 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2016-05-30 22:23:26.157  INFO 7152 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1473 ms
+2016-05-30 22:23:26.627  INFO 7152 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'com.uniritter.monitor.rest.JerseyConfig' to [/*]
+2016-05-30 22:23:26.631  INFO 7152 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-05-30 22:23:26.631  INFO 7152 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'webServlet' to [/h2-console/*]
+2016-05-30 22:23:26.636  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'metricFilter' to: [/*]
+2016-05-30 22:23:26.637  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-05-30 22:23:26.637  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2016-05-30 22:23:26.637  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2016-05-30 22:23:26.638  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' to: [/*]
+2016-05-30 22:23:26.638  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'webRequestLoggingFilter' to: [/*]
+2016-05-30 22:23:26.638  INFO 7152 --- [ost-startStop-1] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'applicationContextIdFilter' to: [/*]
+2016-05-30 22:23:27.073  INFO 7152 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72d1c9c1: startup date [Mon May 30 22:23:24 GMT-03:00 2016]; root of context hierarchy
+2016-05-30 22:23:27.117  INFO 7152 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error]}&quot; onto public org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2016-05-30 22:23:27.122  INFO 7152 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error],produces=[text/html]}&quot; onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2016-05-30 22:23:27.159  INFO 7152 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-30 22:23:27.159  INFO 7152 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-30 22:23:27.196  INFO 7152 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-30 22:23:27.647  INFO 7152 --- [    Test worker] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@52166e60: startup date [Mon May 30 22:23:27 GMT-03:00 2016]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72d1c9c1
+2016-05-30 22:23:27.716  INFO 7152 --- [    Test worker] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'handlerExceptionResolver' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration; factoryMethodName=handlerExceptionResolver; initMethodName=null; destroyMethodName=(inferred); defined in class org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=endpointWebMvcChildContextConfiguration; factoryMethodName=compositeHandlerExceptionResolver; initMethodName=null; destroyMethodName=(inferred); defined in org.springframework.boot.actuate.autoconfigure.EndpointWebMvcChildContextConfiguration]
+2016-05-30 22:23:27.753  INFO 7152 --- [    Test worker] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-05-30 22:23:27.781  INFO 7152 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 9001 (http)
+2016-05-30 22:23:27.783  INFO 7152 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2016-05-30 22:23:27.783  INFO 7152 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-05-30 22:23:27.817  INFO 7152 --- [ost-startStop-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2016-05-30 22:23:27.817  INFO 7152 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 171 ms
+2016-05-30 22:23:27.823  INFO 7152 --- [ost-startStop-1] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' to [/]
+2016-05-30 22:23:27.954  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/mappings || /mappings.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.955  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/info || /info.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.956  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/dump || /dump.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.959  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/trace || /trace.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.960  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/beans || /beans.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.961  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/metrics/{name:.*}],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint.value(java.lang.String)
+2016-05-30 22:23:27.961  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/metrics || /metrics.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.964  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/health || /health.json],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint.invoke(java.security.Principal)
+2016-05-30 22:23:27.966  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/env/{name:.*}],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint.value(java.lang.String)
+2016-05-30 22:23:27.967  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/env || /env.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.967  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/configprops || /configprops.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.968  INFO 7152 --- [    Test worker] o.s.b.a.e.mvc.EndpointHandlerMapping     : Mapped &quot;{[/autoconfig || /autoconfig.json],methods=[GET],produces=[application/json]}&quot; onto public java.lang.Object org.springframework.boot.actuate.endpoint.mvc.EndpointMvcAdapter.invoke()
+2016-05-30 22:23:27.996  INFO 7152 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error]}&quot; onto public java.util.Map&lt;java.lang.String, java.lang.Object&gt; org.springframework.boot.actuate.endpoint.mvc.ManagementErrorEndpoint.invoke()
+2016-05-30 22:23:28.008  INFO 7152 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-30 22:23:28.009  INFO 7152 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2016-05-30 22:23:28.028  INFO 7152 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@52166e60: startup date [Mon May 30 22:23:27 GMT-03:00 2016]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@72d1c9c1
+2016-05-30 22:23:28.183  INFO 7152 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9001 (http)
+2016-05-30 22:23:28.209  INFO 7152 --- [    Test worker] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9000 (http)
+2016-05-30 22:23:28.213  INFO 7152 --- [    Test worker] c.u.monitor.rest.TestHostController      : Started TestHostController in 3.595 seconds (JVM running for 13.662)
+2016-05-30 22:23:29.736 ERROR 7152 --- [nio-9000-exec-1] o.a.c.c.C.[.[.[.[.u.m.r.JerseyConfig]    : Servlet.service() for servlet [com.uniritter.monitor.rest.JerseyConfig] in context with path [] threw exception [org.modelmapper.MappingException: ModelMapper mapping errors:
+
+1) Failed to instantiate instance of destination com.uniritter.monitor.domain.model.Host. Ensure that com.uniritter.monitor.domain.model.Host has a non-private no-argument constructor.
+
+1 error] with root cause
+
+java.lang.NoSuchMethodException: com.uniritter.monitor.domain.model.Host.&lt;init&gt;()
+	at java.lang.Class.getConstructor0(Class.java:3082) ~[na:1.8.0_91]
+	at java.lang.Class.getDeclaredConstructor(Class.java:2178) ~[na:1.8.0_91]
+	at org.modelmapper.internal.MappingEngineImpl.instantiate(MappingEngineImpl.java:367) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.internal.MappingEngineImpl.createDestination(MappingEngineImpl.java:383) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.internal.MappingEngineImpl.typeMap(MappingEngineImpl.java:115) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.internal.MappingEngineImpl.map(MappingEngineImpl.java:101) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.internal.MappingEngineImpl.map(MappingEngineImpl.java:60) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.ModelMapper.mapInternal(ModelMapper.java:497) ~[modelmapper-0.7.6.jar:na]
+	at org.modelmapper.ModelMapper.map(ModelMapper.java:340) ~[modelmapper-0.7.6.jar:na]
+	at com.uniritter.monitor.domain.service.MetricaService.addHost(MetricaService.java:58) ~[main/:na]
+	at com.uniritter.monitor.rest.MetricaController.addHost(MetricaController.java:102) ~[main/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_91]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_91]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_91]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_91]
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:144) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:161) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:160) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:99) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:389) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:347) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:102) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:326) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317) ~[jersey-common-2.22.2.jar:na]
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154) ~[jersey-server-2.22.2.jar:na]
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473) ~[jersey-container-servlet-core-2.22.2.jar:na]
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427) ~[jersey-container-servlet-core-2.22.2.jar:na]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388) ~[jersey-container-servlet-core-2.22.2.jar:na]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341) ~[jersey-container-servlet-core-2.22.2.jar:na]
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228) ~[jersey-container-servlet-core-2.22.2.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.boot.actuate.autoconfigure.EndpointWebMvcAutoConfiguration$ApplicationContextHeaderFilter.doFilterInternal(EndpointWebMvcAutoConfiguration.java:237) ~[spring-boot-actuator-1.3.3.RELEASE.jar:1.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.boot.actuate.trace.WebRequestTraceFilter.doFilterInternal(WebRequestTraceFilter.java:112) ~[spring-boot-actuator-1.3.3.RELEASE.jar:1.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:87) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:121) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.springframework.boot.actuate.autoconfigure.MetricsFilter.doFilterInternal(MetricsFilter.java:103) ~[spring-boot-actuator-1.3.3.RELEASE.jar:1.3.3.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.2.5.RELEASE.jar:4.2.5.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212) ~[tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:522) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1095) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:672) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1500) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_91]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_91]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.0.32.jar:8.0.32]
+	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_91]
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 2.12</a> at 30/05/2016 22:23:31</p>
+</div>
+</div>
+</body>
+</html>
