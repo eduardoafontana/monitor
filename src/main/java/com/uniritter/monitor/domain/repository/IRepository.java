@@ -8,4 +8,5 @@ public interface IRepository {
 	//public int save(IEntity entidade) throws Exception;
 	public int save(IEntity entidade);
 	public int deleteById(int id);
+	public List<? extends IEntity> getListFromParent(int parentId);
 }

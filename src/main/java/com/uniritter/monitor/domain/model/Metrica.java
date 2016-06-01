@@ -8,11 +8,11 @@ import java.util.Observable;
 import com.uniritter.monitor.domain.repository.IEntity;
 
 public class Metrica extends Observable implements IEntity {
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -40,7 +40,7 @@ public class Metrica extends Observable implements IEntity {
 		this.hosts = hosts;
 	}
 
-	public long id;
+	public int id;
 	private MetricaTipo tipo;
 	public Date created;
 	

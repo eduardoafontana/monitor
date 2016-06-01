@@ -34,7 +34,18 @@ public class HostRepository implements IHostRepository {
 		
 		return hosts;
 	}
-
+	
+	@Override
+	public List<? extends IEntity> getListFromParent(int parentId) {
+		List<HostEntity> hostEntity = this.hostDao.getHostsFromParent(parentId);
+		
+		ModelMapper modelMapper = new ModelMapper();
+		Type listType = new TypeToken<List<Host>>() {}.getType();
+		List<Host> hosts = modelMapper.map(hostEntity, listType);	
+		
+		return hosts;
+	}
+	
 	@Override
 	public int save(IEntity entidade) {
 		//Host host = (Host)entidade;

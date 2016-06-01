@@ -3,11 +3,11 @@ package com.uniritter.monitor.persistence.model;
 import java.util.Date;
 
 public class MetricaEntity {
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -27,13 +27,13 @@ public class MetricaEntity {
 		this.tipo = tipo;
 	}	
 	
-	public long id;
+	public int id;
 	public String tipo;
 	public Date created;
 	
 	public MetricaEntity(){}
 	
-	public MetricaEntity(long id, String tipo, Date created) {
+	public MetricaEntity(int id, String tipo, Date created) {
 		this.id = id;
 		this.tipo = tipo;
 		this.created = created;

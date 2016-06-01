@@ -49,4 +49,22 @@ public class TestHostController {
 		assertNotNull(response);
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
+	
+	@Test
+	public void testGetTodoHostsDaMetrica1() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/1/hosts");
+
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}	
 }

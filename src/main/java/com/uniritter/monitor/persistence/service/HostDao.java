@@ -25,6 +25,12 @@ public class HostDao {
 		return jdbcTemplate.query("select * from host order by id", new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
 	}
 	
+	public List<HostEntity> getHostsFromParent(int parentId){
+		
+		Object[] args = {parentId};
+		return jdbcTemplate.query("select * from host where metricaid = ?", args, new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+	}	
+	
 	public int createHost(HostEntity host){
 		return jdbcTemplate.update("insert into host (metricaid, ip, mac, grupo, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())", host.metricaId, host.ip, host.mac, host.grupo);
 	}

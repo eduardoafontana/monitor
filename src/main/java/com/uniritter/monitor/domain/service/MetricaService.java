@@ -24,8 +24,16 @@ public class MetricaService {
 		this.hostRepository = hostRepository;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Metrica> getMetricas() {
-		return (List<Metrica>)metricaRepository.getList();
+		
+		List<Metrica> metricas = (List<Metrica>)metricaRepository.getList();
+		
+		for(Metrica metrica : metricas){
+			metrica.hosts = (List<Host>)hostRepository.getListFromParent(metrica.id);
+		}
+		
+		return metricas;
 	}
 	
 	public Metrica getMetrica(int id) {

@@ -2,6 +2,7 @@ package com.uniritter.monitor.persistence.repository;
 
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -36,6 +37,17 @@ public class MetricaRepository implements IMetricaRepository {
 		List<Metrica> metricas = modelMapper.map(metricaEntity, listType);	
 		
 		return metricas;
+	}
+	
+//	@Override
+//	public List<? extends IEntity> getListFromParent(int parentId) throws HasNoParentException {
+//		throw new HasNoParentException("Metrica não é relacionada a alguém.");
+//	}
+	
+	//TODO,  implementar acima, lancando exceção customizada.
+	@Override
+	public List<? extends IEntity> getListFromParent(int parentId){
+		return new ArrayList<IEntity>();
 	}
 
 	@Override
