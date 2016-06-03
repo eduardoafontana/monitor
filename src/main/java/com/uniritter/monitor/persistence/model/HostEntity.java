@@ -12,11 +12,11 @@ public class HostEntity {
 		this.id = id;
 	}
 
-	public long getMetricaId() {
+	public int getMetricaId() {
 		return metricaId;
 	}
 
-	public void setMetricaId(long metricaId) {
+	public void setMetricaId(int metricaId) {
 		this.metricaId = metricaId;
 	}
 
@@ -53,7 +53,7 @@ public class HostEntity {
 	}
 
 	public int id;
-	public long metricaId;
+	public int metricaId;
 	public int ip;
 	public int mac;
 	public String grupo;

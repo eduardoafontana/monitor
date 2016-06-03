@@ -103,7 +103,7 @@ public class MetricaController {
 		
 		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
 		
-		int idHost = metricaService.addHost(metrica.id, hostData);
+		int idHost = hostService.addHost(metrica.id, hostData);
 		
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(Integer.toString(idHost));

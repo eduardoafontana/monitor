@@ -12,10 +12,10 @@ public class Host implements IEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public long getMetricaId() {
+	public int getMetricaId() {
 		return metricaId;
 	}
-	public void setMetricaId(long metricaId) {
+	public void setMetricaId(int metricaId) {
 		this.metricaId = metricaId;
 	}
 	public int getIp() {
@@ -43,7 +43,7 @@ public class Host implements IEntity {
 		this.created = created;
 	}
 	public int id;
-	public long metricaId;
+	public int metricaId;
 	public int ip;
 	public int mac;
 	public HostGrupo grupo;

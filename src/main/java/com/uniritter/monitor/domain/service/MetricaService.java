@@ -16,12 +16,12 @@ import com.uniritter.monitor.domain.repository.IMetricaRepository;
 public class MetricaService {
 
 	private final IMetricaRepository metricaRepository;
-	private final IHostRepository hostRepository;
+	private final HostService hostService;
 	
 	@Autowired
-	public MetricaService(IMetricaRepository metricaRepository, IHostRepository hostRepository){
+	public MetricaService(IMetricaRepository metricaRepository, HostService hostService){
 		this.metricaRepository = metricaRepository;
-		this.hostRepository = hostRepository;
+		this.hostService = hostService;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -30,7 +30,7 @@ public class MetricaService {
 		List<Metrica> metricas = (List<Metrica>)metricaRepository.getList();
 		
 		for(Metrica metrica : metricas){
-			metrica.hosts = (List<Host>)hostRepository.getListFromParent(metrica.id);
+			metrica.hosts = hostService.getHosts(metrica.id);
 		}
 		
 		return metricas;
@@ -42,7 +42,10 @@ public class MetricaService {
 		if(metrica == null)
 			return null;
 		
-		return (Metrica)metrica;
+		Metrica metricaConvertida = (Metrica)metrica;
+		metricaConvertida.hosts = hostService.getHosts(metricaConvertida.id);
+		
+		return metricaConvertida;
 	}
 	
 	public int deleteMetrica(int id) {
@@ -55,18 +58,9 @@ public class MetricaService {
 	
 	public int createMetrica(MetricaTipo metricaTipo) {
 		
-		Metrica metrica = new Metrica(metricaTipo);
+		Metrica metrica = new Metrica();
+		metrica.setTipo(metricaTipo);
 		
 		return metricaRepository.save(metrica);
-	}
-	
-	public int addHost(long idMetrica, HostData hostData) {
-
-		ModelMapper modelMapper = new ModelMapper();
-		Host host = modelMapper.map(hostData, Host.class);
-		
-		host.metricaId = idMetrica;
-		
-		return hostRepository.save(host);
 	}
 }

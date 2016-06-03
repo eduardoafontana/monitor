@@ -5,9 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.uniritter.monitor.domain.repository.IEntity;
+import com.uniritter.monitor.domain.repository.IHostRepository;
+import com.uniritter.monitor.domain.service.HostService;
 
 public class Metrica extends Observable implements IEntity {
+	
 	public int getId() {
 		return id;
 	}
@@ -47,26 +52,16 @@ public class Metrica extends Observable implements IEntity {
 	public List<Host> hosts;
 //	private List<Medicao> medicoes;
 //	private List<Alerta> alertas;
-
-	public Metrica() {
-		hosts = new ArrayList<Host>();
-		
-		//Foi inserido apenas para funcionar em aula.
-
-//		this.tipo = MetricaTipo.CargaDeRede;
-//		this.host = new Host(HostGrupo.Firewall);
-		
-//		medicoes = new ArrayList<Medicao>();
-//		alertas = new ArrayList<Alerta>();
-	}
 	
-	public Metrica(MetricaTipo tipo) {
-		
-		this.tipo = tipo;
-		
-		hosts = new ArrayList<Host>();
-	}
-
+//	@Autowired
+//	HostService hostService;
+	
+//	private final HostService hostService;
+//	
+//	@Autowired
+//	public Metrica(HostService hostService){
+//		this.hostService = hostService;
+//	}
 
 //	public Metrica(MetricaTipo tipo, Host host) {
 //		this.tipo = tipo;
@@ -77,7 +72,7 @@ public class Metrica extends Observable implements IEntity {
 //		alertas = new ArrayList<Alerta>();
 //	}
 //	
-//	public Metrica(long id, String nome, Date created) {
+//	public Metrica(int id, String nome, Date created) {
 //		this.id = id;
 //		this.created = created;
 //	

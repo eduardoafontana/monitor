@@ -3,6 +3,7 @@ package com.uniritter.monitor.domain.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +26,17 @@ public class HostService {
 	
 	@SuppressWarnings("unchecked")
 	public List<Host> getHosts(int metricaId) {
-		
-		//aplicar este gethosts dentro de um lazy load da metrica e remover do servico da metrica
-		
+				
 		return (List<Host>)hostRepository.getListFromParent(metricaId);
-	}		
+	}
+
+	public int addHost(int idMetrica, HostData hostData) {
+
+		ModelMapper modelMapper = new ModelMapper();
+		Host host = modelMapper.map(hostData, Host.class);
+		
+		host.metricaId = idMetrica;
+		
+		return hostRepository.save(host);
+	}
 }
