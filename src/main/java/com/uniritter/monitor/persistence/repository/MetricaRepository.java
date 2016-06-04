@@ -4,6 +4,8 @@ package com.uniritter.monitor.persistence.repository;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -78,5 +80,14 @@ public class MetricaRepository implements IMetricaRepository {
 	public int deleteById(int id) {
 
 		return this.metricaDao.deleteMetrica(id);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		ModelMapper modelMapper = new ModelMapper();
+		MetricaEntity metricaEntity = modelMapper.map(arg, MetricaEntity.class);
+		
+		int id = this.metricaDao.createMetrica(metricaEntity);
 	}
 }

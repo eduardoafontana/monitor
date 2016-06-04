@@ -2,6 +2,7 @@ package com.uniritter.monitor.persistence.repository;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Observable;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -71,5 +72,11 @@ public class HostRepository implements IHostRepository {
 	public int deleteById(int id) {
 
 		return this.hostDao.deleteHost(id);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

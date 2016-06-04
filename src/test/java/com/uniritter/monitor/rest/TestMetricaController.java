@@ -102,6 +102,7 @@ public class TestMetricaController {
 		
 		assertNotNull(response);
 		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+		//Not found aqui
 	}
 	
 	@Test

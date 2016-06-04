@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IHostRepository;
 import com.uniritter.monitor.domain.service.HostService;
+import com.uniritter.monitor.persistence.repository.HostRepository;
 
 public class Metrica extends Observable implements IEntity {
 	

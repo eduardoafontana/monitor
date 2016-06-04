@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class TestMetricaService {
 
 	@Autowired
 	public MetricaService metricaService;
+	
+	@Autowired
+	public HostService hostService;
 	
 	@Test
 	public void testCriarNovaMetrica() {	
@@ -48,5 +52,29 @@ public class TestMetricaService {
 		assertNotNull(metrica);
 		
 		assertTrue(metrica.getHosts().size() > 0);
+	}
+	
+	@Test
+	public void testDeleteMetricaEHosts(){
+		int idMetrica = metricaService.createMetrica(MetricaTipo.EspacoEmDisco);
+		
+		assertNotEquals(idMetrica, 0);
+		
+		HostData hostData = new HostData();
+		hostData.ip = 123465;
+		hostData.mac = 54321;
+		hostData.grupo = "Firewall";
+		
+		int idHost = hostService.addHost(idMetrica, hostData);
+		
+		assertNotEquals(idHost, 0);
+		
+		int rowsAffeted = metricaService.deleteMetrica(idMetrica);
+		
+		assertEquals(rowsAffeted, 1);
+		
+		List<Host> hosts = hostService.getHosts(idMetrica);
+		
+		assertEquals(hosts.size(), 0);
 	}
 }
