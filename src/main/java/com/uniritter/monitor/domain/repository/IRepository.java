@@ -1,13 +1,20 @@
 package com.uniritter.monitor.domain.repository;
 
 import java.util.List;
-import java.util.Observer;
 
-public interface IRepository extends Observer {
+public interface IRepository {
 	public List<? extends IEntity> getList();
+
 	public IEntity getById(int id);
-	//public int save(IEntity entidade) throws Exception;
+
+	// public int save(IEntity entidade) throws Exception;
 	public int save(IEntity entidade);
+
+	public int saveToRelation(IEntity entidade, int parentId);
+
 	public int deleteById(int id);
-	public List<? extends IEntity> getListFromParent(int parentId);
+
+	public List<? extends IEntity> getListFromRelation(int relatedId);
+
+	public int deleteFromRelation(int relatedId);
 }

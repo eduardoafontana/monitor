@@ -22,17 +22,33 @@ import com.uniritter.monitor.domain.service.*;
 public class TestHostService {
 
 	@Autowired
+	public MetricaService metricaService;
+	
+	@Autowired
 	public HostService hostService;
 	
 	@Test
 	public void testGetHosts() {
 		
-		int metricaId = 1;
-		
-		List<Host> hosts = hostService.getHosts(metricaId);
+		List<Host> hosts = hostService.retrieveAll(2);
 		
 		assertNotNull(hosts);
 		assertTrue(hosts.size() > 0);
 	}
-
+	
+	@Test
+	public void testCreateHost(){
+		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		
+		assertNotEquals(0, idMetrica);
+		
+		HostViewModel hostData = new HostViewModel();
+		hostData.ip = 123465;
+		hostData.mac = 54321;
+		hostData.grupo = "Firewall";
+		
+		int idHost = hostService.create(idMetrica, hostData);
+		
+		assertNotEquals(0, idHost);
+	}
 }

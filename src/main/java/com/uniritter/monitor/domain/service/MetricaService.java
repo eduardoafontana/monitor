@@ -1,80 +1,85 @@
 package com.uniritter.monitor.domain.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observable;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
-import com.uniritter.monitor.domain.repository.IEntity;
-import com.uniritter.monitor.domain.repository.IHostRepository;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
-import com.uniritter.monitor.domain.repository.MetricaEvent;
+import com.uniritter.monitor.domain.repository.MetricaEventData;
 
 @Component
 public class MetricaService {
 
 	private final IMetricaRepository metricaRepository;
 	private final HostService hostService;
-	private final MetricaEvent metricaEvent;
-	
+	private final AlertaService alertaService;
+
 	@Autowired
-	public MetricaService(IMetricaRepository metricaRepository, HostService hostService, MetricaEvent metricaEvent){
+	public MetricaService(IMetricaRepository metricaRepository, HostService hostService, AlertaService alertaService) {
 		this.metricaRepository = metricaRepository;
 		this.hostService = hostService;
-		this.metricaEvent = metricaEvent;
+		this.alertaService = alertaService;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Metrica> getMetricas() {
-		
-		List<Metrica> metricas = (List<Metrica>)metricaRepository.getList();
-		
-		for(Metrica metrica : metricas){
-			metrica.hosts = hostService.getHosts(metrica.id);
-		}
-		
-		return metricas;
-	}
-	
-	public Metrica getMetrica(int id) {
-		IEntity metrica = metricaRepository.getById(id);
-		
-		if(metrica == null)
-			return null;
-		
-		Metrica metricaConvertida = (Metrica)metrica;
-		metricaConvertida.hosts = hostService.getHosts(metricaConvertida.id);
-		
-		return metricaConvertida;
-	}
-	
-	public int deleteMetrica(int id) {
-		return metricaRepository.deleteById(id);
-	}
-	
-	public String[] getTipos() {
+
+	public String[] retrieveTipos() {
 		return Arrays.toString(MetricaTipo.values()).split(", ");
 	}
-	
-//	public int createMetrica(MetricaTipo metricaTipo) {
-//		
-//		Metrica metrica = new Metrica();
-//		metrica.setTipo(metricaTipo);
-//		
-//		return metricaRepository.save(metrica);
-//	}
-	
-	public int createMetrica(MetricaTipo metricaTipo) {
-		
-		Metrica metrica = new Metrica();
+
+	@SuppressWarnings("unchecked")
+	public List<Metrica> retrieveAll() {
+
+		List<MetricaEventData> metricaEventData = (List<MetricaEventData>) metricaRepository.getList();
+
+		List<Metrica> metricas = new ArrayList<Metrica>();
+
+		for (MetricaEventData metricaData : metricaEventData) {
+
+			Metrica metrica = new Metrica(this, hostService, alertaService);
+			ModelMapper modelMapper = new ModelMapper();
+			modelMapper.map(metricaData, metrica);
+
+			metricas.add(metrica);
+		}
+
+		return metricas;
+	}
+
+	public Metrica retrieve(int id) {
+		MetricaEventData metricaEventData = (MetricaEventData) metricaRepository.getById(id);
+
+		if (metricaEventData == null)
+			return null;
+
+		Metrica metrica = new Metrica(this, hostService, alertaService);
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(metricaEventData, metrica);
+
+		return metrica;
+	}
+
+	public int remove(int id) {
+
+		int rowsAlertas = alertaService.removePorMetrica(id);
+
+		int rowsHosts = hostService.removePorMetrica(id);
+
+		return rowsAlertas + rowsHosts + metricaRepository.deleteById(id);
+	}
+
+	public int create(MetricaTipo metricaTipo) {
+
+		Metrica metrica = new Metrica(this, hostService, alertaService);
 		metrica.setTipo(metricaTipo);
-		
-		metricaEvent.save(metrica);
-		
-		return 0;
+
+		return metrica.save();
+	}
+
+	public int persist(MetricaEventData metricaData) {
+		return metricaRepository.save(metricaData);
 	}
 }

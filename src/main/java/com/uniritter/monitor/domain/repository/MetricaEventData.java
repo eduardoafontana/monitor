@@ -2,7 +2,11 @@ package com.uniritter.monitor.domain.repository;
 
 import java.util.Date;
 
-public class MetricaEntityEvent {
+public class MetricaEventData implements IEntity {
+	private int id;
+	private String tipo;
+	private Date created;
+
 	public int getId() {
 		return id;
 	}
@@ -25,9 +29,5 @@ public class MetricaEntityEvent {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}	
-	
-	public int id;
-	public String tipo;
-	public Date created;
+	}
 }

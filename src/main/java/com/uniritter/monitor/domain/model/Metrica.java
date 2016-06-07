@@ -1,19 +1,40 @@
 package com.uniritter.monitor.domain.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.repository.IEntity;
-import com.uniritter.monitor.domain.repository.IHostRepository;
+import com.uniritter.monitor.domain.repository.MetricaEventData;
+import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
-import com.uniritter.monitor.persistence.repository.HostRepository;
+import com.uniritter.monitor.domain.service.MetricaService;
 
-public class Metrica extends Observable implements IEntity {
-	
+@Component
+public class Metrica {
+
+	private int id;
+	private MetricaTipo tipo;
+	private Date created;
+
+	private List<Host> hosts;
+	private List<Alerta> alertas;
+	// private List<Medicao> medicoes;
+
+	private MetricaService metricaService;
+	private HostService hostService;
+	private AlertaService alertaService;
+
+	@Autowired
+	public Metrica(MetricaService metricaService, HostService hostService, AlertaService alertaService) {
+
+		this.metricaService = metricaService;
+		this.hostService = hostService;
+		this.alertaService = alertaService;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -28,8 +49,8 @@ public class Metrica extends Observable implements IEntity {
 
 	public void setTipo(MetricaTipo tipo) {
 		this.tipo = tipo;
-	}	
-	
+	}
+
 	public Date getCreated() {
 		return created;
 	}
@@ -37,77 +58,70 @@ public class Metrica extends Observable implements IEntity {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-	public List<Host> getHosts() {
+
+	public final List<Host> getHosts() {
+		if (this.hosts == null)
+			this.hosts = hostService.retrieveAll(this.id);
+
+		// Verificar se hosts do lado de fora de Metrica pode ser foi add
+
 		return hosts;
 	}
 
-	public void setHosts(List<Host> hosts) {
-		this.hosts = hosts;
+	public final List<Alerta> getAlertas() {
+		if (this.alertas == null)
+			this.alertas = alertaService.retrieveAll(this.id);
+
+		// Verificar se alerta do lado de fora de Metrica pode ser foi add
+
+		return alertas;
 	}
 
-	public int id;
-	private MetricaTipo tipo;
-	public Date created;
-	
-	public List<Host> hosts;
-//	private List<Medicao> medicoes;
-//	private List<Alerta> alertas;
-	
-//	@Autowired
-//	HostService hostService;
-	
-//	private final HostService hostService;
-//	
-//	@Autowired
-//	public Metrica(HostService hostService){
-//		this.hostService = hostService;
-//	}
+	public int save() {
+		// testar se metrica eh valida
 
-//	public Metrica(MetricaTipo tipo, Host host) {
-//		this.tipo = tipo;
-//		this.host = host;
-//		// Pediodicidade
-//
-//		medicoes = new ArrayList<Medicao>();
-//		alertas = new ArrayList<Alerta>();
-//	}
-//	
-//	public Metrica(int id, String nome, Date created) {
-//		this.id = id;
-//		this.created = created;
-//	
-//		//Foi inserido apenas para funcionar em aula.
-//		this.tipo = MetricaTipo.CargaDeRede;
-//		this.host = new Host(HostGrupo.Firewall);
-//		
-//		medicoes = new ArrayList<Medicao>();
-//		alertas = new ArrayList<Alerta>();
-//		
-//	}	
-//
-//	private void adicionarMedicao(Medicao medicao) {
-//		medicoes.add(medicao);
-//	}
-//
-//	public List<Medicao> historicoMedicoes() {
-//		return medicoes;
-//	}
-//
-//	public Medicao getUltimaMedicao() {
-//		if (medicoes.size() > 0)
-//			return medicoes.get(medicoes.size() - 1);
-//		
-//		return null;
-//	}
-//
-//	public boolean novaMedicao(int valor) {
-//		Medicao medicao = new Medicao(valor);
-//		adicionarMedicao(medicao);
-//
-//		setChanged();
-//		notifyObservers(getUltimaMedicao());
-//
-//		return true;
-//	}
+		ModelMapper modelMapper = new ModelMapper();
+		MetricaEventData metricaData = modelMapper.map(this, MetricaEventData.class);
+
+		this.id = metricaService.persist(metricaData);
+
+		if (this.hosts != null) {
+			for (Host host : this.hosts) {
+				host.save(this.id);
+			}
+		}
+
+		if (this.alertas != null) {
+			for (Alerta alerta : this.alertas) {
+				alerta.save(this.id);
+			}
+		}
+
+		return this.id;
+	}
+
+	// private void adicionarMedicao(Medicao medicao) {
+	// medicoes.add(medicao);
+	// }
+	//
+	// public List<Medicao> historicoMedicoes() {
+	// return medicoes;
+	// }
+	//
+	// public Medicao getUltimaMedicao() {
+	// if (medicoes.size() > 0)
+	// return medicoes.get(medicoes.size() - 1);
+	//
+	// return null;
+	// }
+	//
+	// public boolean novaMedicao(int valor) {
+	// Medicao medicao = new Medicao(valor);
+	// adicionarMedicao(medicao);
+	//
+	// setChanged();
+	// notifyObservers(getUltimaMedicao());
+	//
+	// return true;
+	// }
 }

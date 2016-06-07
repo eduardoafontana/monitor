@@ -39,7 +39,10 @@ public class TestMetricaDao {
 	
 	@Test
 	public void testMetricaDaoCreateMetrica() {
-		MetricaEntity metrica = new MetricaEntity(777, "metrica de teste de repositorio dao", new Date());		
+		MetricaEntity metrica = new MetricaEntity();
+		metrica.id = 777;
+		metrica.tipo = "metrica de teste de repositorio dao";
+		metrica.created = new Date();
 		
 		assertNotEquals(0, metricaDao.createMetrica(metrica));
 	}

@@ -25,103 +25,106 @@ import com.uniritter.monitor.domain.model.*;
 @Consumes("application/json")
 @Path("metricas")
 public class MetricaController {
-	
+
 	@Autowired
 	MetricaService metricaService;
-	
+
 	@Autowired
-	HostService hostService;	
-	
-	@Context UriInfo uriInfo;
-	
+	HostService hostService;
+
+	@Context
+	UriInfo uriInfo;
+
 	@GET
-	public Response getMetricas(){ 
-		return Response.ok(metricaService.getMetricas()).build();
+	public Response getMetricas() {
+		return Response.ok(metricaService.retrieveAll()).build();
 	}
-	
+
 	@GET
 	@Path("{id}")
 	public Response getMetrica(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.getMetrica(id);
-		
-		if(metrica == null)
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
+
 		return Response.status(Status.OK).entity(metrica).build();
 	}
-	
+
 	@DELETE
 	@Path("{id}")
 	public Response deleteMetrica(@PathParam("id") int id) {
 
-		int rowsDeleted = metricaService.deleteMetrica(id);
-		
-		if(rowsDeleted == 0)
+		int rowsDeleted = metricaService.remove(id);
+
+		if (rowsDeleted == 0)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
+
 		return Response.status(Status.ACCEPTED).entity(null).build();
 	}
-	
+
 	@POST
-	public Response createMetrica(final String metricaTipo){
-		
+	public Response createMetrica(final String metricaTipo) {
+
 		MetricaTipo metricaTipoConvertido;
-		
-		try{
+
+		try {
 			metricaTipoConvertido = MetricaTipo.valueOf(metricaTipo);
+		} catch (IllegalArgumentException e) {
+			return Response.status(Status.BAD_REQUEST).entity("Valor metricaTipo: " + metricaTipo + " invalido!")
+					.build();
 		}
-		catch(IllegalArgumentException e){
-			return Response.status(Status.BAD_REQUEST).entity("Valor metricaTipo: " + metricaTipo + " invalido!").build();
-		}
-		
-		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
-		
-		int id = metricaService.createMetrica(metricaTipoConvertido);
-		
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path(Integer.toString(id));
-        
-        return Response.created(builder.build()).build();
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		int id = metricaService.create(metricaTipoConvertido);
+
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		builder.path(Integer.toString(id));
+
+		return Response.created(builder.build()).build();
 	}
-	
+
 	@POST
 	@Path("{id}/hosts")
-	public Response addHost(@PathParam("id") int id, HostData hostData) {
-		
-		Metrica metrica = metricaService.getMetrica(id);
-		
-		if(metrica == null)
+	public Response addHost(@PathParam("id") int id, HostViewModel hostData) {
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
-		try{
+
+		try {
 			HostGrupo.valueOf(hostData.grupo);
-		}
-		catch(IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			return Response.status(Status.BAD_REQUEST).entity("Valor grupo: " + hostData.grupo + " invalido!").build();
 		}
-		
-		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
-		
-		int idHost = hostService.addHost(metrica.id, hostData);
-		
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path(Integer.toString(idHost));
-        
-        return Response.created(builder.build()).build();
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		int idHost = hostService.create(metrica.getId(), hostData);
+
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		builder.path(Integer.toString(idHost));
+
+		return Response.created(builder.build()).build();
 	}
-	
+
 	@GET
 	@Path("{id}/hosts")
 	public Response addHost(@PathParam("id") int id) {
-		
-		Metrica metrica = metricaService.getMetrica(id);
-		
-		if(metrica == null)
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
-		//Verificar se o melhor lugar para validar os dados é na controller ou na service.
-		
-		return Response.ok(hostService.getHosts(metrica.id)).build();
-	}	
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		return Response.ok(hostService.retrieveAll(metrica.getId())).build();
+	}
 }

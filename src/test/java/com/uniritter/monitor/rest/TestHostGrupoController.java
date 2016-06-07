@@ -19,7 +19,7 @@ import com.uniritter.monitor.MonitorApplication;
 public class TestHostGrupoController {
 	
 	@Test
-	public void testGetTipos() {
+	public void testGetGrupos() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		

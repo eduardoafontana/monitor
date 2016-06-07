@@ -35,7 +35,7 @@ public class TestHostController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/1/hosts");
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/2/hosts");
 
 		JSONObject request = new JSONObject();
 		request.put("ip", 123465);
@@ -51,14 +51,14 @@ public class TestHostController {
 	}
 	
 	@Test
-	public void testGetTodoHostsDaMetrica1() {
+	public void testGetTodoHostsDaMetrica2() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/1/hosts");
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/2/hosts");
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 

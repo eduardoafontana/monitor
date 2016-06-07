@@ -16,12 +16,12 @@ import com.uniritter.monitor.domain.service.MetricaService;
 @Consumes("application/json")
 @Path("metricastipos")
 public class MetricaTipoController {
-	
+
 	@Autowired
-	MetricaService service;
-	
+	MetricaService metricaService;
+
 	@GET
-	public Response getTipo(){ 
-		return Response.ok(service.getTipos()).build();
+	public Response getTipo() {
+		return Response.ok(metricaService.retrieveTipos()).build();
 	}
 }

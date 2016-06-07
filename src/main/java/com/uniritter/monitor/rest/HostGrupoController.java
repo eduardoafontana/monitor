@@ -16,12 +16,12 @@ import com.uniritter.monitor.domain.service.HostService;
 @Consumes("application/json")
 @Path("hostgrupos")
 public class HostGrupoController {
-	
+
 	@Autowired
 	HostService service;
-	
+
 	@GET
-	public Response getHostGrupos(){ 
-		return Response.ok(service.getGrupos()).build();
+	public Response getHostGrupos() {
+		return Response.ok(service.retrieveGrupos()).build();
 	}
 }

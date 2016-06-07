@@ -30,15 +30,23 @@ public class TestMetricaService {
 	
 	@Test
 	public void testCriarNovaMetrica() {	
-		int id = metricaService.createMetrica(MetricaTipo.CPU);
+		int id = metricaService.create(MetricaTipo.CPU);
 		
 		assertNotEquals(id, 0);
 	}
 	
 	@Test
+	public void testGetMetrica() {	
+		Metrica metrica = metricaService.retrieve(2);
+		
+		assertNotNull(metrica);
+		assertEquals(metrica.getId(), 2);
+	}
+	
+	@Test
 	public void testGetMetricas() {
 		
-		List<Metrica> metricas = metricaService.getMetricas();
+		List<Metrica> metricas = metricaService.retrieveAll();
 		
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
@@ -47,7 +55,7 @@ public class TestMetricaService {
 	@Test
 	public void testGetMetricaComHosts() {
 		
-		Metrica metrica = metricaService.getMetrica(1);
+		Metrica metrica = metricaService.retrieve(2);
 		
 		assertNotNull(metrica);
 		
@@ -56,24 +64,24 @@ public class TestMetricaService {
 	
 	@Test
 	public void testDeleteMetricaEHosts(){
-		int idMetrica = metricaService.createMetrica(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
 		
 		assertNotEquals(idMetrica, 0);
 		
-		HostData hostData = new HostData();
+		HostViewModel hostData = new HostViewModel();
 		hostData.ip = 123465;
 		hostData.mac = 54321;
 		hostData.grupo = "Firewall";
 		
-		int idHost = hostService.addHost(idMetrica, hostData);
+		int idHost = hostService.create(idMetrica, hostData);
 		
 		assertNotEquals(idHost, 0);
 		
-		int rowsAffeted = metricaService.deleteMetrica(idMetrica);
+		int rowsAffeted = metricaService.remove(idMetrica);
 		
-		assertEquals(rowsAffeted, 1);
+		assertTrue(rowsAffeted >= 2);
 		
-		List<Host> hosts = hostService.getHosts(idMetrica);
+		List<Host> hosts = hostService.retrieveAll(idMetrica);
 		
 		assertEquals(hosts.size(), 0);
 	}

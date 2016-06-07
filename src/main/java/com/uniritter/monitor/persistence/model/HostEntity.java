@@ -4,6 +4,13 @@ import java.util.Date;
 
 public class HostEntity {
 
+	public int id;
+	public int metricaId;
+	public int ip;
+	public int mac;
+	public String grupo;
+	public Date created;
+
 	public int getId() {
 		return id;
 	}
@@ -51,13 +58,4 @@ public class HostEntity {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-
-	public int id;
-	public int metricaId;
-	public int ip;
-	public int mac;
-	public String grupo;
-	public Date created;
-	
-	public HostEntity(){}
 }
