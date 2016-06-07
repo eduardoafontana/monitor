@@ -22,13 +22,11 @@ public class MetricaDao {
 
 	public List<MetricaEntity> getMetricas() {
 
-		return jdbcTemplate.query("select * from metrica order by id",
-				new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
+		return jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
 	}
 
 	public int createMetrica(MetricaEntity metrica) {
-		if (jdbcTemplate.update("insert into metrica (tipo, created) values (?, CURRENT_TIMESTAMP())",
-				metrica.tipo) > 0)
+		if (jdbcTemplate.update("insert into metrica (tipo, created) values (?, CURRENT_TIMESTAMP())", metrica.tipo) > 0)
 			return jdbcTemplate.queryForObject("select last_insert_id()", int.class);
 		else
 			// throw new NoRowsAffected("Nenhuma linha afedata para insert into
@@ -40,8 +38,7 @@ public class MetricaDao {
 
 		try {
 			Object[] args = { id };
-			return jdbcTemplate.queryForObject("select * from metrica where id = ?", args,
-					new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
+			return jdbcTemplate.queryForObject("select * from metrica where id = ?", args, new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
 		} catch (EmptyResultDataAccessException ex) {
 			return null;
 		}

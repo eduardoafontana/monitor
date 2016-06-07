@@ -3,6 +3,7 @@ package com.uniritter.monitor.domain.repository;
 import java.util.Date;
 
 public class MetricaEventData implements IEntity {
+	
 	private int id;
 	private String tipo;
 	private Date created;

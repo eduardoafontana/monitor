@@ -40,10 +40,10 @@ public class MetricaRepository implements IMetricaRepository {
 	// @Override
 	// public List<? extends IEntity> getListFromParent(int parentId) throws
 	// HasNoParentException {
-	// throw new HasNoParentException("Metrica não é relacionada a alguém.");
+	// throw new HasNoParentException("Metrica nao eg relacionada a alguem.");
 	// }
 
-	// TODO, implementar acima, lancando exceção customizada.
+	// TODO, implementar acima, lancando excecao customizada.
 	@Override
 	public List<? extends IEntity> getListFromRelation(int relatedId) {
 		return new ArrayList<IEntity>();
@@ -81,14 +81,14 @@ public class MetricaRepository implements IMetricaRepository {
 	@Override
 	public int saveToRelation(IEntity entidade, int relatedId) {
 
-		// lancar execao de objeto nao é relacionada a alguém
+		// lancar execao de objeto nao eh relacionada a alguém
 
 		return 0;
 	}
 
 	@Override
 	public int deleteFromRelation(int relatedId) {
-		// lancar execao de objeto nao é relacionada a alguém
+		// lancar execao de objeto nao eh relacionada a alguém
 
 		return 0;
 	}

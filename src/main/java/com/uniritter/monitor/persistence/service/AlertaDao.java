@@ -21,28 +21,23 @@ public class AlertaDao {
 
 	public List<AlertaEntity> getAlertas() {
 
-		return jdbcTemplate.query("select * from alerta order by id",
-				new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
+		return jdbcTemplate.query("select * from alerta order by id", new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
 	}
 
 	public List<AlertaEntity> getAlertasFromParent(int parentId) {
 
 		Object[] args = { parentId };
-		return jdbcTemplate.query("select * from alerta where metricaid = ?", args,
-				new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
+		return jdbcTemplate.query("select * from alerta where metricaid = ?", args, new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
 	}
 
 	public int createAlerta(AlertaEntity alerta) {
-		return jdbcTemplate.update(
-				"insert into alerta (metricaid, regra, mensagem, created) values (?, ?, ?, CURRENT_TIMESTAMP())",
-				alerta.metricaId, alerta.regra, alerta.mensagem);
+		return jdbcTemplate.update( "insert into alerta (metricaid, regra, mensagem, created) values (?, ?, ?, CURRENT_TIMESTAMP())", alerta.metricaId, alerta.regra, alerta.mensagem);
 	}
 
 	public AlertaEntity getAlerta(int id) {
 
 		Object[] args = { id };
-		return jdbcTemplate.queryForObject("select * from alerta where id = ?", args,
-				new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
+		return jdbcTemplate.queryForObject("select * from alerta where id = ?", args, new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
 	}
 
 	public int deleteAlerta(int id) {

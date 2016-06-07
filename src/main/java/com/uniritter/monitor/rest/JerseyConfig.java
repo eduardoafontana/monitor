@@ -1,4 +1,3 @@
-
 package com.uniritter.monitor.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;

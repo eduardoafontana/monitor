@@ -21,28 +21,23 @@ public class HostDao {
 
 	public List<HostEntity> getHosts() {
 
-		return jdbcTemplate.query("select * from host order by id",
-				new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+		return jdbcTemplate.query("select * from host order by id", new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
 	}
 
 	public List<HostEntity> getHostsFromParent(int parentId) {
 
 		Object[] args = { parentId };
-		return jdbcTemplate.query("select * from host where metricaid = ?", args,
-				new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+		return jdbcTemplate.query("select * from host where metricaid = ?", args, new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
 	}
 
 	public int createHost(HostEntity host) {
-		return jdbcTemplate.update(
-				"insert into host (metricaid, ip, mac, grupo, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())",
-				host.metricaId, host.ip, host.mac, host.grupo);
+		return jdbcTemplate.update("insert into host (metricaid, ip, mac, grupo, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())", host.metricaId, host.ip, host.mac, host.grupo);
 	}
 
 	public HostEntity getHost(int id) {
 
 		Object[] args = { id };
-		return jdbcTemplate.queryForObject("select * from host where id = ?", args,
-				new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
+		return jdbcTemplate.queryForObject("select * from host where id = ?", args, new BeanPropertyRowMapper<HostEntity>(HostEntity.class));
 	}
 
 	public int deleteHost(int id) {
