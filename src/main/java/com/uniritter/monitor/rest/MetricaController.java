@@ -115,7 +115,7 @@ public class MetricaController {
 
 	@GET
 	@Path("{id}/hosts")
-	public Response addHost(@PathParam("id") int id) {
+	public Response getHosts(@PathParam("id") int id) {
 
 		Metrica metrica = metricaService.retrieve(id);
 

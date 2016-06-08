@@ -18,12 +18,14 @@ public class MetricaService {
 	private final IMetricaRepository metricaRepository;
 	private final HostService hostService;
 	private final AlertaService alertaService;
+	private final MedicaoService medicaoService;
 
 	@Autowired
-	public MetricaService(IMetricaRepository metricaRepository, HostService hostService, AlertaService alertaService) {
+	public MetricaService(IMetricaRepository metricaRepository, HostService hostService, AlertaService alertaService, MedicaoService medicaoService) {
 		this.metricaRepository = metricaRepository;
 		this.hostService = hostService;
 		this.alertaService = alertaService;
+		this.medicaoService = medicaoService;
 	}
 
 	public String[] retrieveTipos() {
@@ -39,7 +41,7 @@ public class MetricaService {
 
 		for (MetricaEventData metricaData : metricaEventData) {
 
-			Metrica metrica = new Metrica(this, hostService, alertaService);
+			Metrica metrica = new Metrica(this, hostService, alertaService, medicaoService);
 			ModelMapper modelMapper = new ModelMapper();
 			modelMapper.map(metricaData, metrica);
 
@@ -55,7 +57,7 @@ public class MetricaService {
 		if (metricaEventData == null)
 			return null;
 
-		Metrica metrica = new Metrica(this, hostService, alertaService);
+		Metrica metrica = new Metrica(this, hostService, alertaService, medicaoService);
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(metricaEventData, metrica);
 
@@ -67,13 +69,15 @@ public class MetricaService {
 		int rowsAlertas = alertaService.removePorMetrica(id);
 
 		int rowsHosts = hostService.removePorMetrica(id);
+		
+		int rowsMedicoes = medicaoService.removePorMetrica(id);
 
-		return rowsAlertas + rowsHosts + metricaRepository.deleteById(id);
+		return rowsAlertas + rowsHosts + rowsMedicoes + metricaRepository.deleteById(id);
 	}
 
 	public int create(MetricaTipo metricaTipo) {
 
-		Metrica metrica = new Metrica(this, hostService, alertaService);
+		Metrica metrica = new Metrica(this, hostService, alertaService, medicaoService);
 		metrica.setTipo(metricaTipo);
 
 		return metrica.save();

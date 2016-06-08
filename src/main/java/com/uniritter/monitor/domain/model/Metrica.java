@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.uniritter.monitor.domain.repository.MetricaEventData;
 import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
+import com.uniritter.monitor.domain.service.MedicaoService;
 import com.uniritter.monitor.domain.service.MetricaService;
 
 @Component
@@ -21,18 +22,20 @@ public class Metrica {
 
 	private List<Host> hosts;
 	private List<Alerta> alertas;
-	// private List<Medicao> medicoes;
+	private List<Medicao> medicoes;
 
 	private MetricaService metricaService;
 	private HostService hostService;
 	private AlertaService alertaService;
+	private MedicaoService medicaoService;
 
 	@Autowired
-	public Metrica(MetricaService metricaService, HostService hostService, AlertaService alertaService) {
+	public Metrica(MetricaService metricaService, HostService hostService, AlertaService alertaService, MedicaoService medicaoService) {
 
 		this.metricaService = metricaService;
 		this.hostService = hostService;
 		this.alertaService = alertaService;
+		this.medicaoService = medicaoService;
 	}
 
 	public int getId() {
@@ -77,6 +80,15 @@ public class Metrica {
 		return alertas;
 	}
 
+	public final List<Medicao> getMedicoes() {
+		if (this.medicoes == null)
+			this.medicoes = medicaoService.retrieveAll(this.id);
+
+		// Verificar se medicao do lado de fora de Metrica pode ser foi add
+
+		return medicoes;
+	}
+	
 	public int save() {
 		// testar se metrica eh valida
 
@@ -97,6 +109,12 @@ public class Metrica {
 			}
 		}
 
+		if (this.medicoes != null) {
+			for (Medicao medicao : this.medicoes) {
+				medicao.save(this.id);
+			}
+		}
+		
 		return this.id;
 	}
 
