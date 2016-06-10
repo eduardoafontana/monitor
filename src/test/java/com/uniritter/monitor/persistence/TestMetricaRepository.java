@@ -14,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
 import com.uniritter.monitor.domain.model.Metrica;
-import com.uniritter.monitor.domain.repository.IEntity;
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.persistence.repository.MetricaRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,7 +27,7 @@ public class TestMetricaRepository {
 		
 	@Test 
 	public void testMetricaRepositoryGetList(){
-		List<? extends IEntity> metricas = metricaRepository.getList();
+		List<? extends GenericEventData> metricas = metricaRepository.getList();
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
 	}

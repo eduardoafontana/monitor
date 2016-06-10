@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Host;
-import com.uniritter.monitor.domain.repository.HostEventData;
-import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IHostRepository;
+import com.uniritter.monitor.domain.repository.model.HostEventData;
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.persistence.model.HostEntity;
 import com.uniritter.monitor.persistence.service.HostDao;
 
@@ -26,7 +26,7 @@ public class HostRepository implements IHostRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getList() {
+	public List<? extends GenericEventData> getList() {
 		List<HostEntity> hostEntity = this.hostDao.getHosts();
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -38,7 +38,7 @@ public class HostRepository implements IHostRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getListFromRelation(int relatedId) {
+	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
 		List<HostEntity> hostEntity = this.hostDao.getHostsFromParent(relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -50,7 +50,7 @@ public class HostRepository implements IHostRepository {
 	}
 
 	@Override
-	public int save(IEntity entidade) {
+	public int save(GenericEventData entidade) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		HostEntity hostEntity = modelMapper.map(entidade, HostEntity.class);
@@ -59,23 +59,23 @@ public class HostRepository implements IHostRepository {
 	}
 
 	@Override
-	public int saveToRelation(IEntity entidade, int relatedId) {
+	public int saveToRelation(GenericEventData entidade, int relatedId) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		HostEntity hostEntity = modelMapper.map(entidade, HostEntity.class);
 
-		hostEntity.metricaId = relatedId;
+		hostEntity.setMetricaId(relatedId);
 
 		return this.hostDao.createHost(hostEntity);
 	}
 
 	@Override
-	public IEntity getById(int id) {
+	public GenericEventData getById(int id) {
 
 		HostEntity hostEntity = this.hostDao.getHost(id);
 
 		ModelMapper modelMapper = new ModelMapper();
-		IEntity entidade = modelMapper.map(hostEntity, IEntity.class);
+		GenericEventData entidade = modelMapper.map(hostEntity, GenericEventData.class);
 
 		return entidade;
 	}

@@ -2,19 +2,21 @@ package com.uniritter.monitor.domain.repository;
 
 import java.util.List;
 
-public interface IRepository {
-	public List<? extends IEntity> getList();
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
 
-	public IEntity getById(int id);
+public interface IRepository {
+	public List<? extends GenericEventData> getList();
+
+	public GenericEventData getById(int id);
 
 	// public int save(IEntity entidade) throws Exception;
-	public int save(IEntity entidade);
+	public int save(GenericEventData entidade);
 
-	public int saveToRelation(IEntity entidade, int parentId);
+	public int saveToRelation(GenericEventData entidade, int parentId);
 
 	public int deleteById(int id);
 
-	public List<? extends IEntity> getListFromRelation(int relatedId);
+	public List<? extends GenericEventData> getListFromRelation(int relatedId);
 
 	public int deleteFromRelation(int relatedId);
 }

@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.repository.MetricaEventData;
+import com.uniritter.monitor.domain.repository.model.MetricaEventData;
 import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
 import com.uniritter.monitor.domain.service.MedicaoService;

@@ -26,7 +26,7 @@ public class MetricaDao {
 	}
 
 	public int createMetrica(MetricaEntity metrica) {
-		if (jdbcTemplate.update("insert into metrica (tipo, created) values (?, CURRENT_TIMESTAMP())", metrica.tipo) > 0)
+		if (jdbcTemplate.update("insert into metrica (tipo, created) values (?, CURRENT_TIMESTAMP())", metrica.getTipo()) > 0)
 			return jdbcTemplate.queryForObject("select last_insert_id()", int.class);
 		else
 			// throw new NoRowsAffected("Nenhuma linha afedata para insert into

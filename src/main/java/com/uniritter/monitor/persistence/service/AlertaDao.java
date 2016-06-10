@@ -31,7 +31,7 @@ public class AlertaDao {
 	}
 
 	public int createAlerta(AlertaEntity alerta) {
-		return jdbcTemplate.update( "insert into alerta (metricaid, regra, mensagem, created) values (?, ?, ?, CURRENT_TIMESTAMP())", alerta.metricaId, alerta.regra, alerta.mensagem);
+		return jdbcTemplate.update( "insert into alerta (metricaid, regra, mensagem, created) values (?, ?, ?, CURRENT_TIMESTAMP())", alerta.getMetricaId(), alerta.getRegra(), alerta.getMensagem());
 	}
 
 	public AlertaEntity getAlerta(int id) {

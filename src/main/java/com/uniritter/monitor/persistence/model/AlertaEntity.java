@@ -1,23 +1,11 @@
 package com.uniritter.monitor.persistence.model;
 
-import java.util.Date;
-
-public class AlertaEntity {
-
-	public int id;
-	public int metricaId;
-	public String regra;
-	public String mensagem;
-	public Date created;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+public class AlertaEntity extends GenericEntity {
+	
+	private int metricaId;
+	private String regra;
+	private String mensagem;
+	
 	public int getMetricaId() {
 		return metricaId;
 	}
@@ -40,13 +28,5 @@ public class AlertaEntity {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 }

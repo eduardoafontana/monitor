@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.service.HostService;
 import com.uniritter.monitor.domain.service.MetricaService;
+import com.uniritter.monitor.domain.client.model.HostViewModel;
 import com.uniritter.monitor.domain.model.*;
 
 @Component

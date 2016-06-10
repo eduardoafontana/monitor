@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Alerta;
-import com.uniritter.monitor.domain.repository.AlertaEventData;
-import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IAlertaRepository;
+import com.uniritter.monitor.domain.repository.model.AlertaEventData;
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.persistence.model.AlertaEntity;
 import com.uniritter.monitor.persistence.service.AlertaDao;
 
@@ -26,7 +26,7 @@ public class AlertaRepository implements IAlertaRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getList() {
+	public List<? extends GenericEventData> getList() {
 		List<AlertaEntity> alertaEntity = this.alertaDao.getAlertas();
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -38,7 +38,7 @@ public class AlertaRepository implements IAlertaRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getListFromRelation(int relatedId) {
+	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
 		List<AlertaEntity> alertaEntity = this.alertaDao.getAlertasFromParent(relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -50,7 +50,7 @@ public class AlertaRepository implements IAlertaRepository {
 	}
 
 	@Override
-	public int save(IEntity entidade) {
+	public int save(GenericEventData entidade) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		AlertaEntity alertaEntity = modelMapper.map(entidade, AlertaEntity.class);
@@ -59,23 +59,23 @@ public class AlertaRepository implements IAlertaRepository {
 	}
 
 	@Override
-	public int saveToRelation(IEntity entidade, int relatedId) {
+	public int saveToRelation(GenericEventData entidade, int relatedId) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		AlertaEntity alertaEntity = modelMapper.map(entidade, AlertaEntity.class);
 
-		alertaEntity.metricaId = relatedId;
+		alertaEntity.setMetricaId(relatedId);
 
 		return this.alertaDao.createAlerta(alertaEntity);
 	}
 
 	@Override
-	public IEntity getById(int id) {
+	public GenericEventData getById(int id) {
 
 		AlertaEntity alertaEntity = this.alertaDao.getAlerta(id);
 
 		ModelMapper modelMapper = new ModelMapper();
-		IEntity entidade = modelMapper.map(alertaEntity, IEntity.class);
+		GenericEventData entidade = modelMapper.map(alertaEntity, GenericEventData.class);
 
 		return entidade;
 	}

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
-import com.uniritter.monitor.domain.repository.MetricaEventData;
+import com.uniritter.monitor.domain.repository.model.MetricaEventData;
 
 @Component
 public class MetricaService {

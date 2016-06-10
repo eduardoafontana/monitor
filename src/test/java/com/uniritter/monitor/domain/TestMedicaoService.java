@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
+import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
@@ -30,10 +31,10 @@ public class TestMedicaoService {
 	@Test
 	public void testGetMedicoes() {
 		
-		List<Medicao> medicaos = medicaoService.retrieveAll(144);
+		List<Medicao> medicoes = medicaoService.retrieveAll(144);
 		
-		assertNotNull(medicaos);
-		assertTrue(medicaos.size() > 0);
+		assertNotNull(medicoes);
+		assertTrue(medicoes.size() > 0);
 	}
 	
 	@Test

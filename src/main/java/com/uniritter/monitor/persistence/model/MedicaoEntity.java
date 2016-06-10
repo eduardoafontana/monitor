@@ -2,21 +2,13 @@ package com.uniritter.monitor.persistence.model;
 
 import java.util.Date;
 
-public class MedicaoEntity {
+public class MedicaoEntity extends GenericEntity {
 
-	public int id;
-	public int metricaId;
-	public int mac;
-	public int valor;
-	public Date quando;
-	public Date created;
+	private int metricaId;
+	private int mac;
+	private int valor;
+	private Date quando;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getMetricaId() {
 		return metricaId;
 	}
@@ -40,11 +32,5 @@ public class MedicaoEntity {
 	}
 	public void setQuando(Date quando) {
 		this.quando = quando;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 }

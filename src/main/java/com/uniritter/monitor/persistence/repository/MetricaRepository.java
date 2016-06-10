@@ -9,9 +9,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
-import com.uniritter.monitor.domain.repository.MetricaEventData;
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
+import com.uniritter.monitor.domain.repository.model.MetricaEventData;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
 import com.uniritter.monitor.persistence.service.MetricaDao;
 
@@ -26,7 +26,7 @@ public class MetricaRepository implements IMetricaRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getList() {
+	public List<? extends GenericEventData> getList() {
 		List<MetricaEntity> metricaEntity = this.metricaDao.getMetricas();
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -45,12 +45,12 @@ public class MetricaRepository implements IMetricaRepository {
 
 	// TODO, implementar acima, lancando excecao customizada.
 	@Override
-	public List<? extends IEntity> getListFromRelation(int relatedId) {
-		return new ArrayList<IEntity>();
+	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
+		return new ArrayList<GenericEventData>();
 	}
 
 	@Override
-	public int save(IEntity entidade) {
+	public int save(GenericEventData entidade) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		MetricaEntity metricaEntity = modelMapper.map(entidade, MetricaEntity.class);
@@ -59,7 +59,7 @@ public class MetricaRepository implements IMetricaRepository {
 	}
 
 	@Override
-	public IEntity getById(int id) {
+	public GenericEventData getById(int id) {
 
 		MetricaEntity metricaEntity = this.metricaDao.getMetrica(id);
 
@@ -79,7 +79,7 @@ public class MetricaRepository implements IMetricaRepository {
 	}
 
 	@Override
-	public int saveToRelation(IEntity entidade, int relatedId) {
+	public int saveToRelation(GenericEventData entidade, int relatedId) {
 
 		// lancar execao de objeto nao eh relacionada a alguém
 

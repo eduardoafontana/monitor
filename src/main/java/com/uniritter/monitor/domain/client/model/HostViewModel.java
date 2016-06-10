@@ -1,8 +1,6 @@
-package com.uniritter.monitor.domain.model;
+package com.uniritter.monitor.domain.client.model;
 
-import com.uniritter.monitor.domain.repository.IEntity;
-
-public class HostViewModel implements IEntity {
+public class HostViewModel {
 
 	public int ip;
 	public int mac;

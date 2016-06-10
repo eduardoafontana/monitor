@@ -1,8 +1,6 @@
-package com.uniritter.monitor.domain.model;
+package com.uniritter.monitor.domain.client.model;
 
-import com.uniritter.monitor.domain.repository.IEntity;
-
-public class AlertaViewModel implements IEntity {
+public class AlertaViewModel {
 	
 	public String regra;
 	public String mensagem;

@@ -31,7 +31,7 @@ public class MedicaoDao {
 	}
 
 	public int createMedicao(MedicaoEntity medicao) {
-		return jdbcTemplate.update( "insert into medicao (metricaid, mac, quando, valor, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())", medicao.metricaId, medicao.mac, medicao.quando, medicao.valor);
+		return jdbcTemplate.update( "insert into medicao (metricaid, mac, quando, valor, created) values (?, ?, ?, ?, CURRENT_TIMESTAMP())", medicao.getMetricaId(), medicao.getMac(), medicao.getQuando(), medicao.getValor());
 	}
 
 	public MedicaoEntity getMedicao(int id) {

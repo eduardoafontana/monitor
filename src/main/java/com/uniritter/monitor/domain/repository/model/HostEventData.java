@@ -1,24 +1,12 @@
-package com.uniritter.monitor.domain.repository;
-
-import java.util.Date;
+package com.uniritter.monitor.domain.repository.model;
 
 import com.uniritter.monitor.domain.model.HostGrupo;
 
-public class HostEventData implements IEntity {
+public class HostEventData extends GenericEventData {
 	
-	private int id;
 	private int ip;
 	private int mac;
 	private HostGrupo grupo;
-	private Date created;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getIp() {
 		return ip;
@@ -42,13 +30,5 @@ public class HostEventData implements IEntity {
 
 	public void setGrupo(HostGrupo grupo) {
 		this.grupo = grupo;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 }

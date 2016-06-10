@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Medicao;
-import com.uniritter.monitor.domain.repository.MedicaoEventData;
-import com.uniritter.monitor.domain.repository.IEntity;
 import com.uniritter.monitor.domain.repository.IMedicaoRepository;
+import com.uniritter.monitor.domain.repository.model.GenericEventData;
+import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
 import com.uniritter.monitor.persistence.model.MedicaoEntity;
 import com.uniritter.monitor.persistence.service.MedicaoDao;
 
@@ -26,7 +26,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getList() {
+	public List<? extends GenericEventData> getList() {
 		List<MedicaoEntity> medicaoEntity = this.medicaoDao.getMedicaos();
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -38,7 +38,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 	}
 
 	@Override
-	public List<? extends IEntity> getListFromRelation(int relatedId) {
+	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
 		List<MedicaoEntity> medicaoEntity = this.medicaoDao.getMedicaosFromParent(relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
@@ -50,7 +50,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 	}
 
 	@Override
-	public int save(IEntity entidade) {
+	public int save(GenericEventData entidade) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		MedicaoEntity medicaoEntity = modelMapper.map(entidade, MedicaoEntity.class);
@@ -59,23 +59,23 @@ public class MedicaoRepository implements IMedicaoRepository {
 	}
 
 	@Override
-	public int saveToRelation(IEntity entidade, int relatedId) {
+	public int saveToRelation(GenericEventData entidade, int relatedId) {
 
 		ModelMapper modelMapper = new ModelMapper();
 		MedicaoEntity medicaoEntity = modelMapper.map(entidade, MedicaoEntity.class);
 
-		medicaoEntity.metricaId = relatedId;
+		medicaoEntity.setMetricaId(relatedId);
 
 		return this.medicaoDao.createMedicao(medicaoEntity);
 	}
 
 	@Override
-	public IEntity getById(int id) {
+	public GenericEventData getById(int id) {
 
 		MedicaoEntity medicaoEntity = this.medicaoDao.getMedicao(id);
 
 		ModelMapper modelMapper = new ModelMapper();
-		IEntity entidade = modelMapper.map(medicaoEntity, IEntity.class);
+		GenericEventData entidade = modelMapper.map(medicaoEntity, GenericEventData.class);
 
 		return entidade;
 	}

@@ -7,9 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
 import com.uniritter.monitor.domain.model.*;
-import com.uniritter.monitor.domain.repository.MedicaoEventData;
 import com.uniritter.monitor.domain.repository.IMedicaoRepository;
+import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
 
 @Component
 public class MedicaoService {

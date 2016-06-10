@@ -1,13 +1,12 @@
-package com.uniritter.monitor.domain.repository;
+package com.uniritter.monitor.domain.repository.model;
 
 import java.util.Date;
 
-public class MetricaEventData implements IEntity {
-	
-	private int id;
-	private String tipo;
-	private Date created;
+public abstract class GenericEventData {
 
+	private int id;
+	private Date created;
+	
 	public int getId() {
 		return id;
 	}
@@ -15,20 +14,12 @@ public class MetricaEventData implements IEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public Date getCreated() {
 		return created;
 	}
 
 	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 }

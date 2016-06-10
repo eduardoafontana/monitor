@@ -1,7 +1,7 @@
-package com.uniritter.monitor.persistence.model;
+package com.uniritter.monitor.domain.repository.model;
 
-public class MetricaEntity extends GenericEntity {
-
+public class MetricaEventData extends GenericEventData {
+	
 	private String tipo;
 
 	public String getTipo() {

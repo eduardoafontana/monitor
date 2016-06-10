@@ -1,10 +1,8 @@
-package com.uniritter.monitor.domain.model;
+package com.uniritter.monitor.domain.client.model;
 
 import java.util.Date;
 
-import com.uniritter.monitor.domain.repository.IEntity;
-
-public class MedicaoViewModel implements IEntity {
+public class MedicaoViewModel {
 	
 	public int mac;
 	public int valor;
