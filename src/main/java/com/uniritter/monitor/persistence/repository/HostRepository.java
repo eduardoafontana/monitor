@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.model.Host;
 import com.uniritter.monitor.domain.repository.IHostRepository;
 import com.uniritter.monitor.domain.repository.model.HostEventData;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
@@ -35,7 +34,7 @@ public class HostRepository implements IHostRepository {
 		List<HostEntity> hostEntity = this.dao.<HostEntity>getList(HostEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
-		Type listType = new TypeToken<List<Host>>() {
+		Type listType = new TypeToken<List<HostEventData>>() {
 		}.getType();
 		List<HostEventData> hosts = modelMapper.map(hostEntity, listType);
 

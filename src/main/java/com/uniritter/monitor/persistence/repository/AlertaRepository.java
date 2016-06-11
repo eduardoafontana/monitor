@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.model.Alerta;
 import com.uniritter.monitor.domain.repository.IAlertaRepository;
 import com.uniritter.monitor.domain.repository.model.AlertaEventData;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
@@ -35,7 +34,7 @@ public class AlertaRepository implements IAlertaRepository {
 		List<AlertaEntity> alertaEntity = this.dao.<AlertaEntity>getList(AlertaEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
-		Type listType = new TypeToken<List<Alerta>>() {
+		Type listType = new TypeToken<List<AlertaEventData>>() {
 		}.getType();
 		List<AlertaEventData> alertas = modelMapper.map(alertaEntity, listType);
 

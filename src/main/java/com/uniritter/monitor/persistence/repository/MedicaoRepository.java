@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.model.Medicao;
 import com.uniritter.monitor.domain.repository.IMedicaoRepository;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
@@ -35,7 +34,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 		List<MedicaoEntity> medicaoEntity = this.dao.<MedicaoEntity>getList(MedicaoEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
-		Type listType = new TypeToken<List<Medicao>>() {
+		Type listType = new TypeToken<List<MedicaoEventData>>() {
 		}.getType();
 		List<MedicaoEventData> medicaos = modelMapper.map(medicaoEntity, listType);
 
