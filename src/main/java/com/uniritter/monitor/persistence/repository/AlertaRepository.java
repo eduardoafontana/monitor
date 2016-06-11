@@ -27,7 +27,7 @@ public class AlertaRepository implements IAlertaRepository {
 
 	@Override
 	public List<? extends GenericEventData> getList() {
-		List<AlertaEntity> alertaEntity = this.alertaDao.getAlertas();
+		List<AlertaEntity> alertaEntity = this.alertaDao.<AlertaEntity>getList();
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<Alerta>>() {
@@ -72,7 +72,7 @@ public class AlertaRepository implements IAlertaRepository {
 	@Override
 	public GenericEventData getById(int id) {
 
-		AlertaEntity alertaEntity = this.alertaDao.getAlerta(id);
+		AlertaEntity alertaEntity = this.alertaDao.getById(id);
 
 		ModelMapper modelMapper = new ModelMapper();
 		GenericEventData entidade = modelMapper.map(alertaEntity, GenericEventData.class);
@@ -83,11 +83,11 @@ public class AlertaRepository implements IAlertaRepository {
 	@Override
 	public int deleteById(int id) {
 
-		return this.alertaDao.deleteAlerta(id);
+		return this.alertaDao.delete(id);
 	}
 
 	@Override
 	public int deleteFromRelation(int relatedId) {
-		return this.alertaDao.deleteAlertasFromParent(relatedId);
+		return this.alertaDao.deleteFromParent(relatedId);
 	}
 }

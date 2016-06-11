@@ -10,18 +10,15 @@ import org.springframework.stereotype.Component;
 import com.uniritter.monitor.persistence.model.AlertaEntity;
 
 @Component
-public class AlertaDao {
+public class AlertaDao extends GenericDao {
 
-	private final JdbcTemplate jdbcTemplate;
-
+	private JdbcTemplate jdbcTemplate;
+	
 	@Autowired
 	public AlertaDao(JdbcTemplate jdbcTemplate) {
+		super(jdbcTemplate, "alerta", "metricaid");
+		
 		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	public List<AlertaEntity> getAlertas() {
-
-		return jdbcTemplate.query("select * from alerta order by id", new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
 	}
 
 	public List<AlertaEntity> getAlertasFromParent(int parentId) {
@@ -32,19 +29,5 @@ public class AlertaDao {
 
 	public int createAlerta(AlertaEntity alerta) {
 		return jdbcTemplate.update( "insert into alerta (metricaid, regra, mensagem, created) values (?, ?, ?, CURRENT_TIMESTAMP())", alerta.getMetricaId(), alerta.getRegra(), alerta.getMensagem());
-	}
-
-	public AlertaEntity getAlerta(int id) {
-
-		Object[] args = { id };
-		return jdbcTemplate.queryForObject("select * from alerta where id = ?", args, new BeanPropertyRowMapper<AlertaEntity>(AlertaEntity.class));
-	}
-
-	public int deleteAlerta(int id) {
-		return jdbcTemplate.update("delete alerta where id = ?", id);
-	}
-
-	public int deleteAlertasFromParent(int id) {
-		return jdbcTemplate.update("delete alerta where metricaid = ?", id);
 	}
 }
