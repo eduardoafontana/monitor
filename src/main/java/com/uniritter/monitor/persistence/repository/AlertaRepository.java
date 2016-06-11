@@ -19,7 +19,7 @@ import com.uniritter.monitor.persistence.service.GenericDao;
 @Component
 public class AlertaRepository implements IAlertaRepository {
 
-	private GenericDao alertaDao;
+	private GenericDao dao;
 
 	private final JdbcTemplate jdbcTemplate;
 		
@@ -27,12 +27,12 @@ public class AlertaRepository implements IAlertaRepository {
 	public AlertaRepository(JdbcTemplate jdbcTemplate) {
 		
 		this.jdbcTemplate = jdbcTemplate;
-		this.alertaDao = new GenericDao(this.jdbcTemplate, "alerta", "metricaid");
+		this.dao = new GenericDao(this.jdbcTemplate, "alerta", "metricaid");
 	}
 
 	@Override
 	public List<? extends GenericEventData> getList() {
-		List<AlertaEntity> alertaEntity = this.alertaDao.<AlertaEntity>getList(AlertaEntity.class);
+		List<AlertaEntity> alertaEntity = this.dao.<AlertaEntity>getList(AlertaEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<Alerta>>() {
@@ -44,7 +44,7 @@ public class AlertaRepository implements IAlertaRepository {
 
 	@Override
 	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
-		List<AlertaEntity> alertaEntity = this.alertaDao.getFromParent(relatedId);
+		List<AlertaEntity> alertaEntity = this.dao.<AlertaEntity>getFromParent(AlertaEntity.class, relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<AlertaEventData>>() {
@@ -60,7 +60,7 @@ public class AlertaRepository implements IAlertaRepository {
 		ModelMapper modelMapper = new ModelMapper();
 		AlertaEntity alertaEntity = modelMapper.map(entidade, AlertaEntity.class);
 
-		return this.alertaDao.createAlerta(alertaEntity);
+		return this.dao.create(alertaEntity);
 	}
 
 	@Override
@@ -71,13 +71,13 @@ public class AlertaRepository implements IAlertaRepository {
 
 		alertaEntity.setMetricaId(relatedId);
 
-		return this.alertaDao.createAlerta(alertaEntity);
+		return this.dao.create(alertaEntity);
 	}
 
 	@Override
 	public GenericEventData getById(int id) {
 
-		AlertaEntity alertaEntity = this.alertaDao.<AlertaEntity>getById(AlertaEntity.class, id);
+		AlertaEntity alertaEntity = this.dao.<AlertaEntity>getById(AlertaEntity.class, id);
 
 		ModelMapper modelMapper = new ModelMapper();
 		GenericEventData entidade = modelMapper.map(alertaEntity, GenericEventData.class);
@@ -88,11 +88,11 @@ public class AlertaRepository implements IAlertaRepository {
 	@Override
 	public int deleteById(int id) {
 
-		return this.alertaDao.delete(id);
+		return this.dao.delete(id);
 	}
 
 	@Override
 	public int deleteFromRelation(int relatedId) {
-		return this.alertaDao.deleteFromParent(relatedId);
+		return this.dao.deleteFromParent(relatedId);
 	}
 }

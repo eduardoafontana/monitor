@@ -7,27 +7,32 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.domain.repository.model.MetricaEventData;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
-import com.uniritter.monitor.persistence.service.MetricaDao;
+import com.uniritter.monitor.persistence.service.GenericDao;
 
 @Component
 public class MetricaRepository implements IMetricaRepository {
 
-	private final MetricaDao metricaDao;
+	private GenericDao dao;
 
+	private final JdbcTemplate jdbcTemplate;
+		
 	@Autowired
-	public MetricaRepository(MetricaDao metricaDao) {
-		this.metricaDao = metricaDao;
+	public MetricaRepository(JdbcTemplate jdbcTemplate) {
+		
+		this.jdbcTemplate = jdbcTemplate;
+		this.dao = new GenericDao(this.jdbcTemplate, "metrica", "");
 	}
 
 	@Override
 	public List<? extends GenericEventData> getList() {
-		List<MetricaEntity> metricaEntity = this.metricaDao.getMetricas();
+		List<MetricaEntity> metricaEntity = this.dao.<MetricaEntity>getList(MetricaEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<MetricaEventData>>() {
@@ -55,13 +60,13 @@ public class MetricaRepository implements IMetricaRepository {
 		ModelMapper modelMapper = new ModelMapper();
 		MetricaEntity metricaEntity = modelMapper.map(entidade, MetricaEntity.class);
 
-		return this.metricaDao.createMetrica(metricaEntity);
+		return this.dao.create(metricaEntity);
 	}
 
 	@Override
 	public GenericEventData getById(int id) {
 
-		MetricaEntity metricaEntity = this.metricaDao.getMetrica(id);
+		MetricaEntity metricaEntity = this.dao.<MetricaEntity>getById(MetricaEntity.class, id);
 
 		if (metricaEntity == null)
 			return null;
@@ -75,7 +80,7 @@ public class MetricaRepository implements IMetricaRepository {
 	@Override
 	public int deleteById(int id) {
 
-		return this.metricaDao.deleteMetrica(id);
+		return this.dao.delete(id);
 	}
 
 	@Override

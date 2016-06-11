@@ -16,7 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
 import com.uniritter.monitor.persistence.model.MetricaEntity;
-import com.uniritter.monitor.persistence.service.MetricaDao;
+import com.uniritter.monitor.persistence.service.GenericDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MonitorApplication.class)
@@ -25,26 +25,28 @@ public class TestMetricaDao {
 
 	@Autowired
 	public JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	public MetricaDao metricaDao;
 	
 	@Test
 	public void testMetricaDaoGetMetricas() {
 		
-		List<MetricaEntity> metricas = metricaDao.getMetricas();
+		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "");
+		
+		List<MetricaEntity> metricas = dao.<MetricaEntity>getList(MetricaEntity.class);
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
 	}
 	
 	@Test
 	public void testMetricaDaoCreateMetrica() {
+		
+		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "metricaid");
+		
 		MetricaEntity metrica = new MetricaEntity();
 		metrica.setId(777);
 		metrica.setTipo("metrica de teste de repositorio dao");
 		metrica.setCreated(new Date());
 		
-		assertNotEquals(0, metricaDao.createMetrica(metrica));
+		assertNotEquals(0, dao.create(metrica));
 	}
 	
 	@Test

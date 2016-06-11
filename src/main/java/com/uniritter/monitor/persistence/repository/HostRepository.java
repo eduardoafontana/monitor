@@ -6,6 +6,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Host;
@@ -13,21 +14,25 @@ import com.uniritter.monitor.domain.repository.IHostRepository;
 import com.uniritter.monitor.domain.repository.model.HostEventData;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.persistence.model.HostEntity;
-import com.uniritter.monitor.persistence.service.HostDao;
+import com.uniritter.monitor.persistence.service.GenericDao;
 
 @Component
 public class HostRepository implements IHostRepository {
 
-	private final HostDao hostDao;
+	private GenericDao dao;
 
+	private final JdbcTemplate jdbcTemplate;
+		
 	@Autowired
-	public HostRepository(HostDao hostDao) {
-		this.hostDao = hostDao;
+	public HostRepository(JdbcTemplate jdbcTemplate) {
+		
+		this.jdbcTemplate = jdbcTemplate;
+		this.dao = new GenericDao(this.jdbcTemplate, "host", "metricaid");
 	}
-
+	
 	@Override
 	public List<? extends GenericEventData> getList() {
-		List<HostEntity> hostEntity = this.hostDao.getHosts();
+		List<HostEntity> hostEntity = this.dao.<HostEntity>getList(HostEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<Host>>() {
@@ -39,7 +44,7 @@ public class HostRepository implements IHostRepository {
 
 	@Override
 	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
-		List<HostEntity> hostEntity = this.hostDao.getHostsFromParent(relatedId);
+		List<HostEntity> hostEntity = this.dao.<HostEntity>getFromParent(HostEntity.class, relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<HostEventData>>() {
@@ -55,7 +60,7 @@ public class HostRepository implements IHostRepository {
 		ModelMapper modelMapper = new ModelMapper();
 		HostEntity hostEntity = modelMapper.map(entidade, HostEntity.class);
 
-		return this.hostDao.createHost(hostEntity);
+		return this.dao.create(hostEntity);
 	}
 
 	@Override
@@ -66,13 +71,13 @@ public class HostRepository implements IHostRepository {
 
 		hostEntity.setMetricaId(relatedId);
 
-		return this.hostDao.createHost(hostEntity);
+		return this.dao.create(hostEntity);
 	}
 
 	@Override
 	public GenericEventData getById(int id) {
 
-		HostEntity hostEntity = this.hostDao.getHost(id);
+		HostEntity hostEntity = this.dao.<HostEntity>getById(HostEntity.class, id);
 
 		ModelMapper modelMapper = new ModelMapper();
 		GenericEventData entidade = modelMapper.map(hostEntity, GenericEventData.class);
@@ -83,11 +88,11 @@ public class HostRepository implements IHostRepository {
 	@Override
 	public int deleteById(int id) {
 
-		return this.hostDao.deleteHost(id);
+		return this.dao.delete(id);
 	}
 
 	@Override
 	public int deleteFromRelation(int relatedId) {
-		return this.hostDao.deleteHostsFromParent(relatedId);
+		return this.dao.deleteFromParent(relatedId);
 	}
 }

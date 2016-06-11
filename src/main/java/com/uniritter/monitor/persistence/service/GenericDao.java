@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
@@ -11,7 +12,7 @@ import org.springframework.util.StringUtils;
 import com.uniritter.monitor.persistence.model.GenericEntity;
 
 public class GenericDao {
-	
+
 	private JdbcTemplate jdbcTemplate;
 	private String table;
 	private String relatedFieldId;
@@ -37,23 +38,29 @@ public class GenericDao {
 
 	public <T> T getById(Class<T> objClass, int id) {
 
-		Object[] args = { id };
-		return jdbcTemplate.queryForObject("select * from " + this.table + " where id = ?", args,
-				new BeanPropertyRowMapper<T>(objClass));
+		try {
+			
+			Object[] args = { id };
+			return jdbcTemplate.queryForObject("select * from " + this.table + " where id = ?", args,
+					new BeanPropertyRowMapper<T>(objClass));
+			
+		} catch (EmptyResultDataAccessException ex) {
+			return null;
+		}
 	}
 
-	public <T> List<T> getFromParent(int parentId) {
+	public <T> List<T> getFromParent(Class<T> objClass, int parentId) {
 
 		Object[] args = { parentId };
 		return jdbcTemplate.query("select * from " + this.table + " where " + this.relatedFieldId + " = ?", args,
-				new BeanPropertyRowMapper<T>());
+				new BeanPropertyRowMapper<T>(objClass));
 	}
 
-	public int createAlerta(GenericEntity entity) {
+	public int create(GenericEntity entity) {
 
 		List<String> names = new ArrayList<String>();
 		List<String> separators = new ArrayList<String>();
-		List<String> values = new ArrayList<String>();
+		List<Object> values = new ArrayList<Object>();
 
 		Class<?> classe = entity.getClass();
 
@@ -75,7 +82,7 @@ public class GenericDao {
 
 			names.add(field.getName());
 			separators.add("?");
-			values.add(String.valueOf(value));
+			values.add(value);
 		}
 
 		String sql = "insert into " + this.table + " (" + StringUtils.arrayToCommaDelimitedString(names.toArray())

@@ -6,6 +6,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.model.Medicao;
@@ -13,21 +14,25 @@ import com.uniritter.monitor.domain.repository.IMedicaoRepository;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
 import com.uniritter.monitor.persistence.model.MedicaoEntity;
-import com.uniritter.monitor.persistence.service.MedicaoDao;
+import com.uniritter.monitor.persistence.service.GenericDao;
 
 @Component
 public class MedicaoRepository implements IMedicaoRepository {
+	
+	private GenericDao dao;
 
-	private final MedicaoDao medicaoDao;
-
+	private final JdbcTemplate jdbcTemplate;
+		
 	@Autowired
-	public MedicaoRepository(MedicaoDao medicaoDao) {
-		this.medicaoDao = medicaoDao;
+	public MedicaoRepository(JdbcTemplate jdbcTemplate) {
+		
+		this.jdbcTemplate = jdbcTemplate;
+		this.dao = new GenericDao(this.jdbcTemplate, "medicao", "metricaid");
 	}
 
 	@Override
 	public List<? extends GenericEventData> getList() {
-		List<MedicaoEntity> medicaoEntity = this.medicaoDao.getMedicaos();
+		List<MedicaoEntity> medicaoEntity = this.dao.<MedicaoEntity>getList(MedicaoEntity.class);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<Medicao>>() {
@@ -39,7 +44,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 
 	@Override
 	public List<? extends GenericEventData> getListFromRelation(int relatedId) {
-		List<MedicaoEntity> medicaoEntity = this.medicaoDao.getMedicaosFromParent(relatedId);
+		List<MedicaoEntity> medicaoEntity = this.dao.<MedicaoEntity>getFromParent(MedicaoEntity.class, relatedId);
 
 		ModelMapper modelMapper = new ModelMapper();
 		Type listType = new TypeToken<List<MedicaoEventData>>() {
@@ -55,7 +60,7 @@ public class MedicaoRepository implements IMedicaoRepository {
 		ModelMapper modelMapper = new ModelMapper();
 		MedicaoEntity medicaoEntity = modelMapper.map(entidade, MedicaoEntity.class);
 
-		return this.medicaoDao.createMedicao(medicaoEntity);
+		return this.dao.create(medicaoEntity);
 	}
 
 	@Override
@@ -66,13 +71,13 @@ public class MedicaoRepository implements IMedicaoRepository {
 
 		medicaoEntity.setMetricaId(relatedId);
 
-		return this.medicaoDao.createMedicao(medicaoEntity);
+		return this.dao.create(medicaoEntity);
 	}
 
 	@Override
 	public GenericEventData getById(int id) {
 
-		MedicaoEntity medicaoEntity = this.medicaoDao.getMedicao(id);
+		MedicaoEntity medicaoEntity = this.dao.getById(MedicaoEntity.class, id);
 
 		ModelMapper modelMapper = new ModelMapper();
 		GenericEventData entidade = modelMapper.map(medicaoEntity, GenericEventData.class);
@@ -83,11 +88,11 @@ public class MedicaoRepository implements IMedicaoRepository {
 	@Override
 	public int deleteById(int id) {
 
-		return this.medicaoDao.deleteMedicao(id);
+		return this.dao.delete(id);
 	}
 
 	@Override
 	public int deleteFromRelation(int relatedId) {
-		return this.medicaoDao.deleteMedicaosFromParent(relatedId);
+		return this.dao.deleteFromParent(relatedId);
 	}
 }

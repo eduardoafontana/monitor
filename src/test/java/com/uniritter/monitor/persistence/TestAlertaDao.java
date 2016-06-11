@@ -28,11 +28,39 @@ public class TestAlertaDao {
 	@Test
 	public void testAlertaDaoGetAlertas() {
 		
-		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
+		GenericDao dao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
-		List<AlertaEntity> alertas = alertaDao.<AlertaEntity>getList(AlertaEntity.class);
+		List<AlertaEntity> alertas = dao.<AlertaEntity>getList(AlertaEntity.class);
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
+	}
+	
+	@Test
+	public void testAlertaDaoGetFromParentAlertas() {
+		
+		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
+		
+		List<AlertaEntity> alertas = alertaDao.<AlertaEntity>getFromParent(AlertaEntity.class, 40);
+		assertNotNull(alertas);
+		assertTrue(alertas.size() > 0);
+	}
+	
+	@Test
+	public void testAlertaDaoGetListAlertas() {
+		
+		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
+		
+		AlertaEntity alerta = new AlertaEntity();
+		alerta.setMetricaId(40);
+		alerta.setMensagem("Teste refatoracao persistencia.");
+		alerta.setRegra("MenorIgual");
+		alerta.setCreated(new Date());
+		
+		int idAlerta = alertaDao.create(alerta);
+		
+		AlertaEntity alertaEspecifico = alertaDao.<AlertaEntity>getById(AlertaEntity.class, idAlerta);
+		assertNotNull(alertaEspecifico);
+		assertEquals(idAlerta, alertaEspecifico.getId());
 	}
 	
 	@Test
@@ -46,7 +74,7 @@ public class TestAlertaDao {
 		alerta.setRegra("MenorIgual");
 		alerta.setCreated(new Date());
 		
-		int idAlerta = alertaDao.createAlerta(alerta);
+		int idAlerta = alertaDao.create(alerta);
 
 		assertNotEquals(0, idAlerta);
 		
