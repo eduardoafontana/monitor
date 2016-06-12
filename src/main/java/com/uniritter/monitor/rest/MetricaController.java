@@ -16,9 +16,13 @@ import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
+import com.uniritter.monitor.domain.service.MedicaoService;
 import com.uniritter.monitor.domain.service.MetricaService;
+import com.uniritter.monitor.domain.client.model.AlertaViewModel;
 import com.uniritter.monitor.domain.client.model.HostViewModel;
+import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
 import com.uniritter.monitor.domain.model.*;
 
 @Component
@@ -33,6 +37,12 @@ public class MetricaController {
 	@Autowired
 	HostService hostService;
 
+	@Autowired
+	AlertaService alertaService;
+
+	@Autowired
+	MedicaoService medicaoService;
+	
 	@Context
 	UriInfo uriInfo;
 
@@ -127,5 +137,78 @@ public class MetricaController {
 		// na service.
 
 		return Response.ok(hostService.retrieveAll(metrica.getId())).build();
+	}
+	
+	@POST
+	@Path("{id}/alertas")
+	public Response addAlerta(@PathParam("id") int id, AlertaViewModel clientModel) {
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+
+		try {
+			AlertaRegra.valueOf(clientModel.regra);
+		} catch (IllegalArgumentException e) {
+			return Response.status(Status.BAD_REQUEST).entity("Valor regra: " + clientModel.regra + " invalido!").build();
+		}
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		int idAlerta = alertaService.create(metrica.getId(), clientModel);
+
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		builder.path(Integer.toString(idAlerta));
+
+		return Response.created(builder.build()).build();
+	}
+	
+	@GET
+	@Path("{id}/alertas")
+	public Response getAlertas(@PathParam("id") int id) {
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		return Response.ok(alertaService.retrieveAll(metrica.getId())).build();
+	}
+	
+	@POST
+	@Path("{id}/medicoes")
+	public Response addMedicao(@PathParam("id") int id, MedicaoViewModel clientModel) {
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+
+		int idMedicao = medicaoService.create(metrica.getId(), clientModel);
+
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		builder.path(Integer.toString(idMedicao));
+
+		return Response.created(builder.build()).build();
+	}
+	
+	@GET
+	@Path("{id}/medicoes")
+	public Response getMedicoes(@PathParam("id") int id) {
+
+		Metrica metrica = metricaService.retrieve(id);
+
+		if (metrica == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+
+		// Verificar se o melhor lugar para validar os dados é na controller ou
+		// na service.
+
+		return Response.ok(medicaoService.retrieveAll(metrica.getId())).build();
 	}
 }

@@ -27,7 +27,7 @@ public class TestMetricaDao {
 	public JdbcTemplate jdbcTemplate;
 	
 	@Test
-	public void testMetricaDaoGetMetricas() {
+	public void testMetricaDaoGetList() {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "");
 		
@@ -37,7 +37,7 @@ public class TestMetricaDao {
 	}
 	
 	@Test
-	public void testMetricaDaoCreateMetrica() {
+	public void testMetricaDaoCreate() {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "metricaid");
 		

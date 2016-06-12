@@ -51,7 +51,7 @@ public class TestHostController {
 	}
 	
 	@Test
-	public void testGetTodoHostsDaMetrica2() {
+	public void testGetTodoHostsDaMetrica() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		

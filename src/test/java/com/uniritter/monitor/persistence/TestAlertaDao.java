@@ -26,7 +26,7 @@ public class TestAlertaDao {
 	public JdbcTemplate jdbcTemplate;
 		
 	@Test
-	public void testAlertaDaoGetAlertas() {
+	public void testAlertaDaoGetList() {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
@@ -36,7 +36,7 @@ public class TestAlertaDao {
 	}
 	
 	@Test
-	public void testAlertaDaoGetFromParentAlertas() {
+	public void testAlertaDaoGetFromParent() {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
@@ -46,7 +46,7 @@ public class TestAlertaDao {
 	}
 	
 	@Test
-	public void testAlertaDaoGetListAlertas() {
+	public void testAlertaDaoGetById() {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
@@ -64,7 +64,7 @@ public class TestAlertaDao {
 	}
 	
 	@Test
-	public void testAlertaDaoCreateAlerta() {
+	public void testAlertaDaoCreate() {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
@@ -81,6 +81,8 @@ public class TestAlertaDao {
 		AlertaEntity entity = alertaDao.<AlertaEntity>getById(AlertaEntity.class, idAlerta);
 		
 		assertNotNull(entity);
+		assertEquals(idAlerta, entity.getId());
 		assertEquals("MenorIgual", entity.getRegra());
+		assertEquals("Teste refatoracao persistencia.", entity.getMensagem());
 	}
 }
