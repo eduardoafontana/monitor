@@ -15,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
 import com.uniritter.monitor.domain.client.model.HostViewModel;
+import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
@@ -28,6 +29,9 @@ public class TestMetricaService {
 	
 	@Autowired
 	public HostService hostService;
+
+	@Autowired
+	public MedicaoService medicaoService;
 	
 	@Test
 	public void testCriarNovaMetrica() {	
@@ -85,5 +89,29 @@ public class TestMetricaService {
 		List<Host> hosts = hostService.retrieveAll(idMetrica);
 		
 		assertEquals(hosts.size(), 0);
+	}
+	
+	@Test
+	public void testMetricaGetHistoricoMedicoes(){
+		List<Medicao> historico = metricaService.getHistoricoMedicoes(2);
+		
+		assertTrue(historico.size() > 0);
+	}
+	
+	@Test
+	public void testMetricaGetUltimaMedicao(){
+		
+		int idMetrica = 2;
+		
+		MedicaoViewModel medicaoViewModel = new MedicaoViewModel();
+		medicaoViewModel.mac = 98745;
+		medicaoViewModel.quando = new Date();
+		medicaoViewModel.valor = 10;
+		
+		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel);
+				
+		Medicao medicao = metricaService.getUltimaMedicao(idMetrica);
+		
+		assertEquals(idMedicao, medicao.getId());
 	}
 }

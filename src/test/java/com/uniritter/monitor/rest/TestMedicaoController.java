@@ -109,4 +109,40 @@ public class TestMedicaoController {
 		assertNotNull(response);
 		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
 	}
+	
+	@Test
+	public void testGetHistoricoMedicoesDaMetrica() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/2/medicoes/historico");
+
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}
+	
+	@Test
+	public void testGetUltimaMedicaoDaMetrica() {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/2/medicoes/ultima");
+
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		
+		assertNotNull(response);
+		assertEquals(response.getStatusCode(), HttpStatus.OK);
+	}
 }

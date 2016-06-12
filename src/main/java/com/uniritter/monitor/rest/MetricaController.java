@@ -1,5 +1,7 @@
 package com.uniritter.monitor.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -210,5 +212,29 @@ public class MetricaController {
 		// na service.
 
 		return Response.ok(medicaoService.retrieveAll(metrica.getId())).build();
+	}
+	
+	@GET
+	@Path("{id}/medicoes/historico")
+	public Response getHistoricoMedicoes(@PathParam("id") int id) {
+		
+		List<Medicao> historico = metricaService.getHistoricoMedicoes(id);
+		
+		if(historico == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+		
+		return Response.ok(historico).build();
+	}
+	
+	@GET
+	@Path("{id}/medicoes/ultima")
+	public Response getUltimaMedicao(@PathParam("id") int id) {
+		
+		Medicao medicao = metricaService.getUltimaMedicao(id);
+		
+		if(medicao == null)
+			return Response.status(Status.NO_CONTENT).entity(null).build();
+		
+		return Response.ok(medicao).build();
 	}
 }

@@ -86,4 +86,24 @@ public class MetricaService {
 	public int persist(MetricaEventData metricaData) {
 		return metricaRepository.save(metricaData);
 	}
+	
+	public List<Medicao> getHistoricoMedicoes(int metricaId) {
+
+		Metrica metrica = this.retrieve(metricaId);
+
+		if(metrica == null)
+			return null;
+		
+		return metrica.getHistoricoMedicoes();
+	}
+	
+	public Medicao getUltimaMedicao(int metricaId) {
+
+		Metrica metrica = this.retrieve(metricaId);
+
+		if(metrica == null)
+			return null;
+		
+		return metrica.getUltimaMedicao();
+	}
 }

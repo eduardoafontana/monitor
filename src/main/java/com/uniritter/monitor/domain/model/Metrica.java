@@ -1,5 +1,7 @@
 package com.uniritter.monitor.domain.model;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class Metrica {
 	private MedicaoService medicaoService;
 
 	@Autowired
-	public Metrica(MetricaService metricaService, HostService hostService, AlertaService alertaService, MedicaoService medicaoService) {
+	public Metrica(MetricaService metricaService, HostService hostService, AlertaService alertaService,
+			MedicaoService medicaoService) {
 
 		this.metricaService = metricaService;
 		this.hostService = hostService;
@@ -88,7 +91,7 @@ public class Metrica {
 
 		return medicoes;
 	}
-	
+
 	public int save() {
 		// testar se metrica eh valida
 
@@ -114,32 +117,32 @@ public class Metrica {
 				medicao.save(this.id);
 			}
 		}
-		
+
 		return this.id;
 	}
 
-	// private void adicionarMedicao(Medicao medicao) {
-	// medicoes.add(medicao);
-	// }
-	//
-	// public List<Medicao> historicoMedicoes() {
-	// return medicoes;
-	// }
-	//
-	// public Medicao getUltimaMedicao() {
-	// if (medicoes.size() > 0)
-	// return medicoes.get(medicoes.size() - 1);
-	//
-	// return null;
-	// }
-	//
-	// public boolean novaMedicao(int valor) {
-	// Medicao medicao = new Medicao(valor);
-	// adicionarMedicao(medicao);
-	//
-	// setChanged();
-	// notifyObservers(getUltimaMedicao());
-	//
-	// return true;
-	// }
+	public List<Medicao> getHistoricoMedicoes() {
+		List<Medicao> medicoes = this.getMedicoes();
+
+		Collections.sort(medicoes, new Comparator<Medicao>() {
+			@Override
+			public int compare(Medicao o1, Medicao o2) {
+				return o1.getQuando().compareTo(o2.getQuando());
+			}
+		});
+
+		//TODO: Aplicar lambda, porem so java 8
+		//http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
+		
+		return medicoes;
+	}
+
+	 public Medicao getUltimaMedicao() {
+		 List<Medicao> historico = this.getHistoricoMedicoes();
+		 
+		 if(historico.size() > 0)
+			 return historico.get(historico.size() - 1);
+		 
+		 return null;
+	 }
 }
