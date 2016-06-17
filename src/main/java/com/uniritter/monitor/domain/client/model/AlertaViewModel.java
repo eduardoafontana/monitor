@@ -4,6 +4,7 @@ public class AlertaViewModel {
 	
 	public String regra;
 	public String mensagem;
+	public int valor;
 	
 	public String getMensagem() {
 		return mensagem;
@@ -16,5 +17,11 @@ public class AlertaViewModel {
 	}
 	public void setRegra(String regra) {
 		this.regra = regra;
+	}
+	public int getValor() {
+		return valor;
+	}
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }

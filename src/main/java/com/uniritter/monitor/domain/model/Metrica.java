@@ -2,7 +2,6 @@ package com.uniritter.monitor.domain.model;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -16,11 +15,9 @@ import com.uniritter.monitor.domain.service.MedicaoService;
 import com.uniritter.monitor.domain.service.MetricaService;
 
 @Component
-public class Metrica {
+public class Metrica extends ControlData {
 
-	private int id;
 	private MetricaTipo tipo;
-	private Date created;
 
 	private List<Host> hosts;
 	private List<Alerta> alertas;
@@ -41,28 +38,12 @@ public class Metrica {
 		this.medicaoService = medicaoService;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public MetricaTipo getTipo() {
 		return this.tipo;
 	}
 
 	public void setTipo(MetricaTipo tipo) {
 		this.tipo = tipo;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 
 	public final List<Host> getHosts() {
@@ -145,4 +126,15 @@ public class Metrica {
 		 
 		 return null;
 	 }
+
+	public void verificarAlertasNotificar() {
+		
+		Medicao ultimaMedicao = this.getUltimaMedicao();
+		List<Alerta> alertas = this.getAlertas();
+		
+		for (Alerta alerta : alertas) {
+			if(alerta.RegraVerdadeira(ultimaMedicao))
+				alerta.Notificar(ultimaMedicao);//host tal
+		}
+	}
 }

@@ -2,7 +2,6 @@ package com.uniritter.monitor.domain;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -24,31 +23,48 @@ public class TestAlertaService {
 
 	@Autowired
 	public MetricaService metricaService;
-	
+
 	@Autowired
 	public AlertaService alertaService;
-	
+
 	@Test
 	public void testGetAlertas() {
-		
-		List<Alerta> alertas = alertaService.retrieveAll(40);
-		
+
+		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+
+		assertNotEquals(0, idMetrica);
+
+		for (int i = 0; i < 3; i++) {
+			
+			AlertaViewModel alertaViewModel = new AlertaViewModel();
+			alertaViewModel.mensagem = "O valor é maior " + i + "0.";
+			alertaViewModel.regra = "Maior";
+			alertaViewModel.valor = i * 10;
+
+			int idAlerta = alertaService.create(idMetrica, alertaViewModel);
+
+			assertNotEquals(0, idAlerta);
+		}
+
+		List<Alerta> alertas = alertaService.retrieveAll(idMetrica);
+
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
 	}
-	
+
 	@Test
-	public void testCreateAlerta(){
+	public void testCreateAlerta() {
 		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
-		
+
 		assertNotEquals(0, idMetrica);
-		
+
 		AlertaViewModel alertaViewModel = new AlertaViewModel();
-		alertaViewModel.mensagem = "O valor é maior ou igual a 50.";
-		alertaViewModel.regra = "MaiorIgual";
-		
+		alertaViewModel.mensagem = "O valor é maior 20.";
+		alertaViewModel.regra = "Maior";
+		alertaViewModel.valor = 20;
+
 		int idAlerta = alertaService.create(idMetrica, alertaViewModel);
-		
+
 		assertNotEquals(0, idAlerta);
 	}
 }

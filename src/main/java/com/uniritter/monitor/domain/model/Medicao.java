@@ -10,13 +10,11 @@ import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
 import com.uniritter.monitor.domain.service.MedicaoService;
 
 @Component
-public class Medicao {
+public class Medicao extends ControlData {
 	
-	private int id;
 	private int mac;
 	private int valor;
 	private Date quando;
-	private Date created;
 	
 	private MedicaoService medicaoService;
 
@@ -25,12 +23,6 @@ public class Medicao {
 		this.medicaoService = medicaoService;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getMac() {
 		return mac;
 	}
@@ -48,12 +40,6 @@ public class Medicao {
 	}
 	public void setQuando(Date quando) {
 		this.quando = quando;
-	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 	
 	public int save(int metricaId) {

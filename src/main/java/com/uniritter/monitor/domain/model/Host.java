@@ -1,7 +1,5 @@
 package com.uniritter.monitor.domain.model;
 
-import java.util.Date;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,27 +8,17 @@ import com.uniritter.monitor.domain.repository.model.HostEventData;
 import com.uniritter.monitor.domain.service.HostService;
 
 @Component
-public class Host {
+public class Host extends ControlData {
 
-	private int id;
 	private int ip;
 	private int mac;
 	private HostGrupo grupo;
-	private Date created;
 
 	private HostService hostService;
 
 	@Autowired
 	public Host(HostService hostService) {
 		this.hostService = hostService;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getIp() {
@@ -55,14 +43,6 @@ public class Host {
 
 	public void setGrupo(HostGrupo grupo) {
 		this.grupo = grupo;
-	}
-
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
 	}
 
 	public int save(int metricaId) {

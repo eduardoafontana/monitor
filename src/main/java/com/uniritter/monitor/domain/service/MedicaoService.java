@@ -40,13 +40,18 @@ public class MedicaoService {
 		return medicaos;
 	}
 
-	public int create(int metricaId, MedicaoViewModel medicaoViewModel) {
+	public int create(int metricaId, MedicaoViewModel medicaoViewModel, MetricaService metricaService) {
 
 		Medicao medicao = new Medicao(this);
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(medicaoViewModel, medicao);
-
-		return medicao.save(metricaId);
+		
+		int id = medicao.save(metricaId);
+		
+		Metrica metrica = metricaService.retrieve(metricaId);
+		metrica.verificarAlertasNotificar();
+		
+		return id;
 	}
 
 	public int persist(MedicaoEventData medicaoEventData, int metricaId) {

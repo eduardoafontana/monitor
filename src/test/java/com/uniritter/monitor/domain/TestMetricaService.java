@@ -108,7 +108,7 @@ public class TestMetricaService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;
 		
-		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel);
+		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
 				
 		Medicao medicao = metricaService.getUltimaMedicao(idMetrica);
 		

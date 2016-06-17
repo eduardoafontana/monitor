@@ -191,7 +191,7 @@ public class MetricaController {
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
 
-		int idMedicao = medicaoService.create(metrica.getId(), clientModel);
+		int idMedicao = medicaoService.create(metrica.getId(), clientModel, metricaService);
 
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(Integer.toString(idMedicao));

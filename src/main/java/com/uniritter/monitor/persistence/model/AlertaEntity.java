@@ -5,6 +5,7 @@ public class AlertaEntity extends GenericEntity {
 	private int metricaId;
 	private String regra;
 	private String mensagem;
+	private int valor;
 	
 	public int getMetricaId() {
 		return metricaId;
@@ -28,5 +29,13 @@ public class AlertaEntity extends GenericEntity {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+	
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }

@@ -6,6 +6,7 @@ public class AlertaEventData extends GenericEventData {
 
 	private AlertaRegra regra;
 	private String mensagem;
+	private int valor;
 	
 	public AlertaRegra getRegra() {
 		return regra;
@@ -21,5 +22,13 @@ public class AlertaEventData extends GenericEventData {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+	
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }

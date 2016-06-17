@@ -1,35 +1,25 @@
 package com.uniritter.monitor.domain.model;
 
-import java.util.Date;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.repository.model.AlertaEventData;
 import com.uniritter.monitor.domain.service.AlertaService;
+import com.uniritter.monitor.domain.model.AlertaRegra;
 
 @Component
-public class Alerta {
+public class Alerta extends ControlData {
 
-	private int id;
 	private AlertaRegra regra;
 	private String mensagem;
-	private Date created;
+	private int valor;
 
 	private AlertaService alertaService;
 
 	@Autowired
 	public Alerta(AlertaService alertaService) {
 		this.alertaService = alertaService;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getMensagem() {
@@ -48,12 +38,12 @@ public class Alerta {
 		this.regra = regra;
 	}
 
-	public Date getCreated() {
-		return created;
+	public int getValor() {
+		return valor;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 
 	public int save(int metricaId) {
@@ -65,5 +55,23 @@ public class Alerta {
 		this.id = alertaService.persist(alertaData, metricaId);
 
 		return this.id;
+	}
+
+	public boolean RegraVerdadeira(Medicao ultimaMedicao) {
+
+		switch (this.getRegra()) {
+		case Maior:
+			return ultimaMedicao.getValor() > this.getValor();
+		case Menor:
+			return ultimaMedicao.getValor() < this.getValor();
+		case Igual:
+			return ultimaMedicao.getValor() == this.getValor();
+		}
+
+		return false;
+	}
+
+	public void Notificar(Medicao ultimaMedicao) {
+		System.out.println(this.getMensagem());
 	}
 }
