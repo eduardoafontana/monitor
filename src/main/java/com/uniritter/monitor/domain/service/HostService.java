@@ -27,9 +27,8 @@ public class HostService {
 		return Arrays.toString(HostGrupo.values()).split(", ");
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Host> retrieveAll(int metricaId) {
-		List<HostEventData> hostEventData = (List<HostEventData>) hostRepository.getListFromRelation(metricaId);
+		List<HostEventData> hostEventData = hostRepository.<HostEventData>getListFromRelation(metricaId);
 
 		List<Host> hosts = new ArrayList<Host>();
 

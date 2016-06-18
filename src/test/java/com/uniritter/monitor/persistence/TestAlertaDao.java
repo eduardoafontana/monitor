@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.persistence.model.AlertaEntity;
+import com.uniritter.monitor.domain.repository.model.AlertaEventData;
 import com.uniritter.monitor.persistence.service.GenericDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +30,7 @@ public class TestAlertaDao {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
-		List<AlertaEntity> alertas = dao.<AlertaEntity>getList(AlertaEntity.class);
+		List<AlertaEventData> alertas = dao.<AlertaEventData>getList(AlertaEventData.class);
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
 	}
@@ -40,7 +40,7 @@ public class TestAlertaDao {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
-		List<AlertaEntity> alertas = alertaDao.<AlertaEntity>getFromParent(AlertaEntity.class, 40);
+		List<AlertaEventData> alertas = alertaDao.<AlertaEventData>getFromParent(AlertaEventData.class, 40);
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
 	}
@@ -50,15 +50,14 @@ public class TestAlertaDao {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
-		AlertaEntity alerta = new AlertaEntity();
-		alerta.setMetricaId(40);
+		AlertaEventData alerta = new AlertaEventData();
 		alerta.setMensagem("Teste refatoracao persistencia.");
 		alerta.setRegra("MenorIgual");
 		alerta.setCreated(new Date());
 		
-		int idAlerta = alertaDao.create(alerta);
+		int idAlerta = alertaDao.create(alerta, 40);
 		
-		AlertaEntity alertaEspecifico = alertaDao.<AlertaEntity>getById(AlertaEntity.class, idAlerta);
+		AlertaEventData alertaEspecifico = alertaDao.<AlertaEventData>getById(AlertaEventData.class, idAlerta);
 		assertNotNull(alertaEspecifico);
 		assertEquals(idAlerta, alertaEspecifico.getId());
 	}
@@ -68,17 +67,16 @@ public class TestAlertaDao {
 		
 		GenericDao alertaDao = new GenericDao(jdbcTemplate, "alerta", "metricaid");
 		
-		AlertaEntity alerta = new AlertaEntity();
-		alerta.setMetricaId(40);
+		AlertaEventData alerta = new AlertaEventData();
 		alerta.setMensagem("Teste refatoracao persistencia.");
 		alerta.setRegra("MenorIgual");
 		alerta.setCreated(new Date());
 		
-		int idAlerta = alertaDao.create(alerta);
+		int idAlerta = alertaDao.create(alerta, 40);
 
 		assertNotEquals(0, idAlerta);
 		
-		AlertaEntity entity = alertaDao.<AlertaEntity>getById(AlertaEntity.class, idAlerta);
+		AlertaEventData entity = alertaDao.<AlertaEventData>getById(AlertaEventData.class, idAlerta);
 		
 		assertNotNull(entity);
 		assertEquals(idAlerta, entity.getId());

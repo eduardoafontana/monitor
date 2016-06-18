@@ -1,12 +1,10 @@
 package com.uniritter.monitor.domain.repository.model;
 
-import com.uniritter.monitor.domain.model.HostGrupo;
-
 public class HostEventData extends GenericEventData {
 	
 	private int ip;
 	private int mac;
-	private HostGrupo grupo;
+	private String grupo;
 
 	public int getIp() {
 		return ip;
@@ -24,11 +22,11 @@ public class HostEventData extends GenericEventData {
 		this.mac = mac;
 	}
 
-	public HostGrupo getGrupo() {
+	public String getGrupo() {
 		return grupo;
 	}
 
-	public void setGrupo(HostGrupo grupo) {
+	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
 }

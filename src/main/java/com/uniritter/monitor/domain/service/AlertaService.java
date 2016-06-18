@@ -29,9 +29,8 @@ public class AlertaService {
 		return Arrays.toString(AlertaRegra.values()).split(", ");
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Alerta> retrieveAll(int metricaId) {
-		List<AlertaEventData> alertaEventData = (List<AlertaEventData>) alertaRepository.getListFromRelation(metricaId);
+		List<AlertaEventData> alertaEventData = alertaRepository.<AlertaEventData>getListFromRelation(metricaId);
 
 		List<Alerta> alertas = new ArrayList<Alerta>();
 

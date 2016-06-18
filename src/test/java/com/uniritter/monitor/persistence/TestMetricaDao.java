@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.persistence.model.MetricaEntity;
+import com.uniritter.monitor.domain.repository.model.MetricaEventData;
 import com.uniritter.monitor.persistence.service.GenericDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +31,7 @@ public class TestMetricaDao {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "");
 		
-		List<MetricaEntity> metricas = dao.<MetricaEntity>getList(MetricaEntity.class);
+		List<MetricaEventData> metricas = dao.<MetricaEventData>getList(MetricaEventData.class);
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
 	}
@@ -41,7 +41,7 @@ public class TestMetricaDao {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "metricaid");
 		
-		MetricaEntity metrica = new MetricaEntity();
+		MetricaEventData metrica = new MetricaEventData();
 		metrica.setId(777);
 		metrica.setTipo("metrica de teste de repositorio dao");
 		metrica.setCreated(new Date());
@@ -53,7 +53,7 @@ public class TestMetricaDao {
 	public void testDataBase(){
 		assertNotNull(jdbcTemplate);
 		
-		List<MetricaEntity> metricaEntity = this.jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEntity>(MetricaEntity.class));
+		List<MetricaEventData> metricaEntity = this.jdbcTemplate.query("select * from metrica order by id", new BeanPropertyRowMapper<MetricaEventData>(MetricaEventData.class));
 		
 		assertNotNull(metricaEntity);
 	}

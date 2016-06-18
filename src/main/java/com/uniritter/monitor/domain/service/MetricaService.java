@@ -32,10 +32,9 @@ public class MetricaService {
 		return Arrays.toString(MetricaTipo.values()).split(", ");
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Metrica> retrieveAll() {
 
-		List<MetricaEventData> metricaEventData = (List<MetricaEventData>) metricaRepository.getList();
+		List<MetricaEventData> metricaEventData = metricaRepository.<MetricaEventData>getList();
 
 		List<Metrica> metricas = new ArrayList<Metrica>();
 
@@ -52,7 +51,7 @@ public class MetricaService {
 	}
 
 	public Metrica retrieve(int id) {
-		MetricaEventData metricaEventData = (MetricaEventData) metricaRepository.getById(id);
+		MetricaEventData metricaEventData = metricaRepository.<MetricaEventData>getById(id);
 
 		if (metricaEventData == null)
 			return null;

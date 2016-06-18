@@ -22,9 +22,8 @@ public class MedicaoService {
 		this.medicaoRepository = medicaoRepository;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Medicao> retrieveAll(int metricaId) {
-		List<MedicaoEventData> medicaoEventData = (List<MedicaoEventData>) medicaoRepository.getListFromRelation(metricaId);
+		List<MedicaoEventData> medicaoEventData = medicaoRepository.<MedicaoEventData>getListFromRelation(metricaId);
 
 		List<Medicao> medicaos = new ArrayList<Medicao>();
 

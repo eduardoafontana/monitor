@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.persistence.model.MedicaoEntity;
+import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
 import com.uniritter.monitor.persistence.service.GenericDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +30,7 @@ public class TestMedicaoDao {
 		
 		GenericDao dao = new GenericDao(jdbcTemplate, "medicao", "metricaid");
 		
-		List<MedicaoEntity> medicoes = dao.<MedicaoEntity>getList(MedicaoEntity.class);
+		List<MedicaoEventData> medicoes = dao.<MedicaoEventData>getList(MedicaoEventData.class);
 		assertNotNull(medicoes);
 		assertTrue(medicoes.size() > 0);
 	}
@@ -40,7 +40,7 @@ public class TestMedicaoDao {
 		
 		GenericDao medicaoDao = new GenericDao(jdbcTemplate, "medicao", "metricaid");
 		
-		List<MedicaoEntity> medicoes = medicaoDao.<MedicaoEntity>getFromParent(MedicaoEntity.class, 40);
+		List<MedicaoEventData> medicoes = medicaoDao.<MedicaoEventData>getFromParent(MedicaoEventData.class, 40);
 		assertNotNull(medicoes);
 		assertTrue(medicoes.size() > 0);
 	}
@@ -50,16 +50,15 @@ public class TestMedicaoDao {
 		
 		GenericDao medicaoDao = new GenericDao(jdbcTemplate, "medicao", "metricaid");
 		
-		MedicaoEntity medicao = new MedicaoEntity();
-		medicao.setMetricaId(40);
+		MedicaoEventData medicao = new MedicaoEventData();
 		medicao.setMac(123456);
 		medicao.setValor(50);;
 		medicao.setQuando(new Date());
 		medicao.setCreated(new Date());
 		
-		int idMedicao = medicaoDao.create(medicao);
+		int idMedicao = medicaoDao.create(medicao, 40);
 		
-		MedicaoEntity medicaoEspecifico = medicaoDao.<MedicaoEntity>getById(MedicaoEntity.class, idMedicao);
+		MedicaoEventData medicaoEspecifico = medicaoDao.<MedicaoEventData>getById(MedicaoEventData.class, idMedicao);
 		assertNotNull(medicaoEspecifico);
 		assertEquals(idMedicao, medicaoEspecifico.getId());
 	}
@@ -69,18 +68,17 @@ public class TestMedicaoDao {
 		
 		GenericDao medicaoDao = new GenericDao(jdbcTemplate, "medicao", "metricaid");
 		
-		MedicaoEntity medicao = new MedicaoEntity();
-		medicao.setMetricaId(40);
+		MedicaoEventData medicao = new MedicaoEventData();
 		medicao.setMac(123456);
 		medicao.setValor(50);;
 		medicao.setQuando(new Date());
 		medicao.setCreated(new Date());
 		
-		int idMedicao = medicaoDao.create(medicao);
+		int idMedicao = medicaoDao.create(medicao, 40);
 
 		assertNotEquals(0, idMedicao);
 		
-		MedicaoEntity entity = medicaoDao.<MedicaoEntity>getById(MedicaoEntity.class, idMedicao);
+		MedicaoEventData entity = medicaoDao.<MedicaoEventData>getById(MedicaoEventData.class, idMedicao);
 		
 		assertNotNull(entity);
 		assertEquals(idMedicao, entity.getId());
