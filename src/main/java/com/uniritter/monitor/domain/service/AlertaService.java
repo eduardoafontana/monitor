@@ -17,10 +17,12 @@ import com.uniritter.monitor.domain.repository.model.AlertaEventData;
 public class AlertaService {
 
 	private final IAlertaRepository alertaRepository;
+	private final NotificacaoService notificacaoService;
 
 	@Autowired
-	public AlertaService(IAlertaRepository alertaRepository) {
+	public AlertaService(IAlertaRepository alertaRepository, NotificacaoService notificacaoService) {
 		this.alertaRepository = alertaRepository;
+		this.notificacaoService = notificacaoService;
 	}
 
 	public String[] retrieveRegras() {
@@ -35,7 +37,7 @@ public class AlertaService {
 
 		for (AlertaEventData alertaData : alertaEventData) {
 
-			Alerta alerta = new Alerta(this);
+			Alerta alerta = new Alerta(this, notificacaoService);
 			ModelMapper modelMapper = new ModelMapper();
 			modelMapper.map(alertaData, alerta);
 
@@ -47,7 +49,7 @@ public class AlertaService {
 
 	public int create(int metricaId, AlertaViewModel alertaViewModel) {
 
-		Alerta alerta = new Alerta(this);
+		Alerta alerta = new Alerta(this, notificacaoService);
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(alertaViewModel, alerta);
 

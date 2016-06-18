@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.uniritter.monitor.domain.repository.model.AlertaEventData;
 import com.uniritter.monitor.domain.service.AlertaService;
+import com.uniritter.monitor.domain.service.NotificacaoService;
 import com.uniritter.monitor.domain.model.AlertaRegra;
 
 @Component
@@ -16,10 +17,12 @@ public class Alerta extends ControlData {
 	private int valor;
 
 	private AlertaService alertaService;
+	private NotificacaoService notificacaoService;
 
 	@Autowired
-	public Alerta(AlertaService alertaService) {
+	public Alerta(AlertaService alertaService, NotificacaoService notificacaoService) {
 		this.alertaService = alertaService;
+		this.notificacaoService = notificacaoService;
 	}
 
 	public String getMensagem() {
@@ -72,6 +75,7 @@ public class Alerta extends ControlData {
 	}
 
 	public void Notificar(Medicao ultimaMedicao) {
-		System.out.println(this.getMensagem());
+		// ?? ultimaMedicao
+		notificacaoService.create(this.getMensagem());
 	}
 }
