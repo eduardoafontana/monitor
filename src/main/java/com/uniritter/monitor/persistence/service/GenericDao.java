@@ -48,6 +48,18 @@ public class GenericDao {
 			return null;
 		}
 	}
+	
+	public <T> T getLastInserted(Class<T> objClass) {
+
+		try {
+			
+			return jdbcTemplate.queryForObject("select top 1 * from " + this.table + " order by id desc",
+					new BeanPropertyRowMapper<T>(objClass));
+			
+		} catch (EmptyResultDataAccessException ex) {
+			return null;
+		}
+	}
 
 	public <T> List<T> getFromParent(Class<T> objClass, int parentId) {
 

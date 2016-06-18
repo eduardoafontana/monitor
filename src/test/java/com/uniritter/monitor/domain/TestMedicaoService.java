@@ -2,8 +2,6 @@ package com.uniritter.monitor.domain;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +31,9 @@ public class TestMedicaoService {
 	
 	@Autowired
 	public AlertaService alertaService;
-	
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+	@Autowired
+	public NotificacaoService notificacaoService;	
 	
 	@Test
 	public void testGetMedicoes() {
@@ -64,8 +63,6 @@ public class TestMedicaoService {
 	@Test
 	public void testDisparaNotificaoAlertaValidoParaMedicaoRealizada(){
 		
-		//System.setOut(new PrintStream(outContent));
-		
 		int idMetrica = metricaService.create(MetricaTipo.Memoria);
 		
 		assertNotEquals(idMetrica, 0);
@@ -87,10 +84,6 @@ public class TestMedicaoService {
 		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
 		
 		assertNotEquals(0, idMedicao);
-		assertEquals(alertaViewModel.mensagem + System.lineSeparator(), outContent.toString());
-		
-		//TODO: Gravar a notificacao na tabela de notificacao porque a saida nao funciona
-		
-		//System.setOut(null);
+		assertEquals(alertaViewModel.mensagem, notificacaoService.getLastMessage());
 	}
 }

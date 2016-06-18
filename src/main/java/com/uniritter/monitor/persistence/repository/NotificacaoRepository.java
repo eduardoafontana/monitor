@@ -87,4 +87,15 @@ public class NotificacaoRepository implements INotificacaoRepository {
 
 		return 0;
 	}
+	
+	@Override
+	public NotificacaoEventData getLast() {
+
+		NotificacaoEntity notificacaoEntity = this.dao.getLastInserted(NotificacaoEntity.class);
+
+		ModelMapper modelMapper = new ModelMapper();
+		NotificacaoEventData entidade = modelMapper.map(notificacaoEntity, NotificacaoEventData.class);
+
+		return entidade;
+	}
 }

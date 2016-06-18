@@ -1,13 +1,8 @@
 package com.uniritter.monitor.domain.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.INotificacaoRepository;
 import com.uniritter.monitor.domain.repository.model.NotificacaoEventData;
 
@@ -21,30 +16,21 @@ public class NotificacaoService {
 		this.notificacaoRepository = notificacaoRepository;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Notificacao> retrieveAll(int metricaId) {
-		List<NotificacaoEventData> notificacaoEventData = (List<NotificacaoEventData>) notificacaoRepository.getListFromRelation(metricaId);
+	public String getLastMessage() {
+		NotificacaoEventData notificacaoEventData = notificacaoRepository.getLast();
 
-		List<Notificacao> notificacoes = new ArrayList<Notificacao>();
+		if (notificacaoEventData == null)
+			return null;
 
-		for (NotificacaoEventData notificacaoData : notificacaoEventData) {
-
-			Notificacao notificacao = new Notificacao(this);
-			ModelMapper modelMapper = new ModelMapper();
-			modelMapper.map(notificacaoData, notificacao);
-
-			notificacoes.add(notificacao);
-		}
-
-		return notificacoes;
+		return notificacaoEventData.getMensagem();
 	}
 
 	public int create(String mensagem) {
 
-		Notificacao notificacao = new Notificacao(this);
+		NotificacaoEventData notificacao = new NotificacaoEventData();
 		notificacao.setMensagem(mensagem);
 
-		return notificacao.save();
+		return this.persist(notificacao);
 	}
 
 	public int persist(NotificacaoEventData notificacaoEventData) {

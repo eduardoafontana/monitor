@@ -1588,3 +1588,6 @@ Caused by: java.lang.IllegalArgumentException: Sat Jun 11 17:40:11 GMT-03:00 201
 	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
 	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:120)
 	... 49 more
+2016-06-18 13:07:10 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT TOP 1 * FROM NOTIFICACAO ORDER BY ID DESC ?[*] "; SQL statement:
+select top 1 * from notificacao order by id desc ? [42000-191]
