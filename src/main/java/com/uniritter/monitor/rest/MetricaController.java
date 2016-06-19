@@ -72,12 +72,14 @@ public class MetricaController {
 	@Path("{id}")
 	public Response deleteMetrica(@PathParam("id") int id) {
 
-		int rowsDeleted = metricaService.apagar(id);
-
-		if (rowsDeleted == 0)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-
-		return Response.status(Status.ACCEPTED).entity(null).build();
+		try {
+			metricaService.apagar(id);
+			
+			return Response.status(Status.ACCEPTED).entity(null).build();
+			
+		} catch (NoResultFound e) {
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
 
 	@POST

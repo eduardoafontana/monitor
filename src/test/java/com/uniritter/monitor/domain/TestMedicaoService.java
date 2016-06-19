@@ -19,8 +19,6 @@ import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
-import junit.framework.AssertionFailedError;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MonitorApplication.class)
 @WebAppConfiguration

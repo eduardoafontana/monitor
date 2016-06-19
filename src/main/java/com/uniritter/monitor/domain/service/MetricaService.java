@@ -65,15 +65,20 @@ public class MetricaService {
 		return metrica;
 	}
 
-	public int apagar(int id) {
+	public int apagar(int id) throws NoResultFound {
 
-		int rowsAlertas = alertaService.apagarPorMetrica(id);
+		alertaService.apagarPorMetrica(id);
 
-		int rowsHosts = hostService.apagarPorMetrica(id);
+		hostService.apagarPorMetrica(id);
 		
-		int rowsMedicoes = medicaoService.apagarPorMetrica(id);
+		medicaoService.apagarPorMetrica(id);
 
-		return rowsAlertas + rowsHosts + rowsMedicoes + metricaRepository.deleteById(id);
+		int rows = metricaRepository.deleteById(id);
+		
+		if(rows == 0)
+			throw new NoResultFound("Nenhuma metrica encontrada para o id: " + id);
+		
+		return rows;
 	}
 
 	public int criar(MetricaTipo metricaTipo) {

@@ -90,13 +90,19 @@ public class TestMetricaService {
 
 		assertNotEquals(idHost, 0);
 
-		int rowsAffeted = metricaService.apagar(idMetrica);
-
-		assertTrue(rowsAffeted >= 2);
+		try {
+			
+			int rowsAffeted = metricaService.apagar(idMetrica);
+			
+			assertEquals(1, rowsAffeted);
+		} catch (NoResultFound e) {
+			
+			fail(e.getMessage());
+		}
 
 		List<Host> hosts = hostService.getTodos(idMetrica);
 
-		assertEquals(hosts.size(), 0);
+		assertEquals(0, hosts.size());
 	}
 
 	@Test
