@@ -9,6 +9,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -43,7 +44,7 @@ public class TestAlertaController {
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
 	
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testCreateAlertaDeMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -59,10 +60,7 @@ public class TestAlertaController {
 		
         HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), entity, String.class);
-		
-		assertNotNull(response);
-		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        restTemplate.postForEntity(builder.toUriString(), entity, String.class);
 	}
 	
 	@Test(expected=RestClientException.class)
@@ -102,7 +100,7 @@ public class TestAlertaController {
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 	}
 
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testGetAlertasDeMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -114,9 +112,6 @@ public class TestAlertaController {
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
-		
-		assertNotNull(response);
-		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+		restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 	}
 }

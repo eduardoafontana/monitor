@@ -2,7 +2,6 @@ package com.uniritter.monitor.rest;
 
 import static org.junit.Assert.*;
 
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,15 +12,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.model.MetricaTipo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MonitorApplication.class)
@@ -51,7 +46,7 @@ public class TestMedicaoController {
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
 	
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testCreateMedicaoDeMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -68,10 +63,7 @@ public class TestMedicaoController {
 		
         HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), entity, String.class);
-		
-		assertNotNull(response);
-		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        restTemplate.postForEntity(builder.toUriString(), entity, String.class);
 	}
 	
 	@Test
@@ -92,7 +84,7 @@ public class TestMedicaoController {
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 	}
 
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testGetMedicoesDeMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -104,10 +96,7 @@ public class TestMedicaoController {
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
-		
-		assertNotNull(response);
-		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+		restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 	}
 	
 	@Test

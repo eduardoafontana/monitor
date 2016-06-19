@@ -2,7 +2,6 @@ package com.uniritter.monitor.persistence;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.model.Metrica;
 import com.uniritter.monitor.domain.repository.model.GenericEventData;
 import com.uniritter.monitor.persistence.repository.MetricaRepository;
 
@@ -30,12 +28,5 @@ public class TestMetricaRepository {
 		List<? extends GenericEventData> metricas = metricaRepository.getList();
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
-	}
-	
-	@Test
-	public void testMetricaRepositorySave() {
-//		Metrica metrica = new Metrica(888, "metrica de teste de repositorio", new Date());		
-//		
-//		assertEquals(1, metricaRepository.save(metrica));
 	}
 }

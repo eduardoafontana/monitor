@@ -64,7 +64,7 @@ public class MetricaController {
 			return Response.status(Status.OK).entity(metricaService.getUnico(id)).build();
 		} catch (NoResultFound e) {
 			
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -75,10 +75,10 @@ public class MetricaController {
 		try {
 			metricaService.apagar(id);
 			
-			return Response.status(Status.ACCEPTED).entity(null).build();
+			return Response.status(Status.OK).entity(null).build();
 			
 		} catch (NoResultFound e) {
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -120,7 +120,7 @@ public class MetricaController {
 
 		} catch (NoResultFound e1) {
 			
-			return Response.status(Status.NO_CONTENT).entity(e1.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e1.getMessage()).build();
 		} catch (InvalidType e1) {
 			
 			return Response.status(Status.BAD_REQUEST).entity(e1.getMessage()).build();
@@ -138,7 +138,7 @@ public class MetricaController {
 			return Response.ok(hostService.getTodos(metrica.getId())).build();
 		} catch (NoResultFound e) {
 			
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -160,7 +160,7 @@ public class MetricaController {
 			return Response.created(builder.build()).build();
 		} catch (NoResultFound e1) {
 
-			return Response.status(Status.NO_CONTENT).entity(e1.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e1.getMessage()).build();
 		} catch (InvalidType e1) {
 
 			return Response.status(Status.BAD_REQUEST).entity(e1.getMessage()).build();
@@ -178,7 +178,7 @@ public class MetricaController {
 			return Response.ok(alertaService.getTodos(metrica.getId())).build();
 		} catch (NoResultFound e) {
 
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -198,7 +198,7 @@ public class MetricaController {
 			return Response.created(builder.build()).build();
 		} catch (NoResultFound e) {
 
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -213,7 +213,7 @@ public class MetricaController {
 			return Response.ok(medicaoService.getTodos(metrica.getId())).build();
 		} catch (NoResultFound e) {
 
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -228,7 +228,7 @@ public class MetricaController {
 			return Response.ok(historico).build();
 		} catch (NoResultFound e) {
 
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 
@@ -241,8 +241,8 @@ public class MetricaController {
 
 			return Response.ok(medicao).build();
 		} catch (NoResultFound e) {
-			
-			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+
+			return Response.status(Status.NOT_FOUND).entity(e.getMessage()).build();
 		}
 	}
 }

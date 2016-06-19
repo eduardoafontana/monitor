@@ -4,22 +4,17 @@ import static org.junit.Assert.*;
 
 import java.net.URI;
 
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.model.HostGrupo;
 import com.uniritter.monitor.domain.model.MetricaTipo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -85,12 +80,12 @@ public class TestMetricaController {
 		ResponseEntity<String> responseD = restTemplate.exchange(builderD.toUriString(), HttpMethod.DELETE, new HttpEntity<>(headersD), String.class);
 		
 		assertNotNull(responseD);
-		assertEquals(responseD.getStatusCode(), HttpStatus.ACCEPTED);
+		assertEquals(responseD.getStatusCode(), HttpStatus.OK);
 	}
 	
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testDeleteMetricaInexistente() {
-
+		
 		RestTemplate restTemplate = new RestTemplate();		
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -98,14 +93,10 @@ public class TestMetricaController {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/999999");
 
-		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
-		
-		assertNotNull(response);
-		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
-		//Not found aqui
+		restTemplate.exchange(builder.toUriString(), HttpMethod.DELETE, new HttpEntity<>(headers), String.class);
 	}
 	
-	@Test
+	@Test(expected=HttpClientErrorException.class)
 	public void testGetMetricaInexistente() {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -117,10 +108,7 @@ public class TestMetricaController {
 
 		HttpEntity<?> entity = new HttpEntity<>(headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
-		
-		assertNotNull(response);
-		assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+		restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
 	}
 
 	@Test
@@ -145,7 +133,7 @@ public class TestMetricaController {
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 	}
 	
-	@Test(expected=RestClientException.class)
+	@Test(expected=HttpClientErrorException.class)
 	public void testCreateMetricaTipoInvalido() {
 
 		RestTemplate restTemplate = new RestTemplate();
