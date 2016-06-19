@@ -18,6 +18,8 @@ import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
+import junit.framework.AssertionFailedError;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MonitorApplication.class)
 @WebAppConfiguration
@@ -55,9 +57,13 @@ public class TestMedicaoService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;
 		
-		int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
-		
-		assertNotEquals(0, idMedicao);
+		try {
+			int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
+			
+			assertNotEquals(0, idMedicao);
+		} catch (NoResultFound e) {
+			fail(e.getMessage());
+		}		
 	}
 	
 	@Test
@@ -81,9 +87,13 @@ public class TestMedicaoService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 80;
 		
-		int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
-		
-		assertNotEquals(0, idMedicao);
-		assertEquals(alertaViewModel.mensagem, notificacaoService.getUltimaMensagem());
+		try {
+			int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
+			
+			assertNotEquals(0, idMedicao);
+			assertEquals(alertaViewModel.mensagem, notificacaoService.getUltimaMensagem());
+		} catch (NoResultFound e) {
+			fail(e.getMessage());
+		}
 	}
 }

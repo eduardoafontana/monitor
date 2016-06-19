@@ -39,7 +39,7 @@ public class MedicaoService {
 		return medicaos;
 	}
 
-	public int criar(int metricaId, MedicaoClientModel medicaoViewModel, MetricaService metricaService) {
+	public int criar(int metricaId, MedicaoClientModel medicaoViewModel, MetricaService metricaService) throws NoResultFound {
 
 		Medicao medicao = new Medicao(this);
 		ModelMapper modelMapper = new ModelMapper();

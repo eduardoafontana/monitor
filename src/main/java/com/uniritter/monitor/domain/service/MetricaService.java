@@ -50,11 +50,11 @@ public class MetricaService {
 		return metricas;
 	}
 
-	public Metrica getUnico(int id) {
+	public Metrica getUnico(int id) throws NoResultFound {
 		MetricaEventData metricaEventData = metricaRepository.<MetricaEventData>getById(id);
 
 		if (metricaEventData == null)
-			return null;
+			throw new NoResultFound("Metrica nao encontrada para o id: " + id);
 
 		Metrica metrica = new Metrica(this, hostService, alertaService, medicaoService);
 		ModelMapper modelMapper = new ModelMapper();
@@ -86,22 +86,16 @@ public class MetricaService {
 		return metricaRepository.save(metricaData);
 	}
 	
-	public List<Medicao> getHistoricoMedicoes(int metricaId) {
+	public List<Medicao> getHistoricoMedicoes(int metricaId) throws NoResultFound {
 
 		Metrica metrica = this.getUnico(metricaId);
 
-		if(metrica == null)
-			return null;
-		
 		return metrica.getHistoricoMedicoes();
 	}
 	
-	public Medicao getUltimaMedicao(int metricaId) {
+	public Medicao getUltimaMedicao(int metricaId) throws NoResultFound {
 
 		Metrica metrica = this.getUnico(metricaId);
-
-		if(metrica == null)
-			return null;
 		
 		return metrica.getUltimaMedicao();
 	}

@@ -22,6 +22,7 @@ import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
 import com.uniritter.monitor.domain.service.MedicaoService;
 import com.uniritter.monitor.domain.service.MetricaService;
+import com.uniritter.monitor.domain.service.NoResultFound;
 import com.uniritter.monitor.domain.client.model.AlertaClientModel;
 import com.uniritter.monitor.domain.client.model.HostClientModel;
 import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
@@ -44,7 +45,7 @@ public class MetricaController {
 
 	@Autowired
 	MedicaoService medicaoService;
-	
+
 	@Context
 	UriInfo uriInfo;
 
@@ -57,12 +58,11 @@ public class MetricaController {
 	@Path("{id}")
 	public Response getMetrica(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.getUnico(id);
-
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-
-		return Response.status(Status.OK).entity(metrica).build();
+		try {
+			return Response.status(Status.OK).entity(metricaService.getUnico(id)).build();
+		} catch (NoResultFound e) {
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
 
 	@DELETE
@@ -104,137 +104,151 @@ public class MetricaController {
 	@Path("{id}/hosts")
 	public Response addHost(@PathParam("id") int id, HostClientModel hostData) {
 
-		Metrica metrica = metricaService.getUnico(id);
-
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-
 		try {
-			HostGrupo.valueOf(hostData.grupo);
-		} catch (IllegalArgumentException e) {
-			return Response.status(Status.BAD_REQUEST).entity("Valor grupo: " + hostData.grupo + " invalido!").build();
+			Metrica metrica = metricaService.getUnico(id);
+
+			try {
+				HostGrupo.valueOf(hostData.grupo);
+			} catch (IllegalArgumentException e) {
+				return Response.status(Status.BAD_REQUEST).entity("Valor grupo: " + hostData.grupo + " invalido!")
+						.build();
+			}
+
+			// Verificar se o melhor lugar para validar os dados é na controller
+			// ou
+			// na service.
+
+			int idHost = hostService.criar(metrica.getId(), hostData);
+
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+			builder.path(Integer.toString(idHost));
+
+			return Response.created(builder.build()).build();
+
+		} catch (NoResultFound e1) {
+			return Response.status(Status.NO_CONTENT).entity(e1.getMessage()).build();
 		}
-
-		// Verificar se o melhor lugar para validar os dados é na controller ou
-		// na service.
-
-		int idHost = hostService.criar(metrica.getId(), hostData);
-
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-		builder.path(Integer.toString(idHost));
-
-		return Response.created(builder.build()).build();
 	}
 
 	@GET
 	@Path("{id}/hosts")
 	public Response getHosts(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.getUnico(id);
+		try {
 
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
+			Metrica metrica = metricaService.getUnico(id);
 
-		// Verificar se o melhor lugar para validar os dados é na controller ou
-		// na service.
-
-		return Response.ok(hostService.getTodos(metrica.getId())).build();
+			return Response.ok(hostService.getTodos(metrica.getId())).build();
+		} catch (NoResultFound e) {
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
-	
+
 	@POST
 	@Path("{id}/alertas")
 	public Response addAlerta(@PathParam("id") int id, AlertaClientModel clientModel) {
 
-		Metrica metrica = metricaService.getUnico(id);
-
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-
 		try {
-			AlertaRegra.valueOf(clientModel.regra);
-		} catch (IllegalArgumentException e) {
-			return Response.status(Status.BAD_REQUEST).entity("Valor regra: " + clientModel.regra + " invalido!").build();
+
+			Metrica metrica = metricaService.getUnico(id);
+
+			try {
+				AlertaRegra.valueOf(clientModel.regra);
+			} catch (IllegalArgumentException e) {
+				return Response.status(Status.BAD_REQUEST).entity("Valor regra: " + clientModel.regra + " invalido!")
+						.build();
+			}
+
+			// Verificar se o melhor lugar para validar os dados é na controller
+			// ou
+			// na service.
+
+			int idAlerta = alertaService.criar(metrica.getId(), clientModel);
+
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+			builder.path(Integer.toString(idAlerta));
+
+			return Response.created(builder.build()).build();
+		} catch (NoResultFound e1) {
+
+			return Response.status(Status.NO_CONTENT).entity(e1.getMessage()).build();
 		}
-
-		// Verificar se o melhor lugar para validar os dados é na controller ou
-		// na service.
-
-		int idAlerta = alertaService.criar(metrica.getId(), clientModel);
-
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-		builder.path(Integer.toString(idAlerta));
-
-		return Response.created(builder.build()).build();
 	}
-	
+
 	@GET
 	@Path("{id}/alertas")
 	public Response getAlertas(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.getUnico(id);
+		try {
 
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
+			Metrica metrica = metricaService.getUnico(id);
 
-		// Verificar se o melhor lugar para validar os dados é na controller ou
-		// na service.
+			return Response.ok(alertaService.getTodos(metrica.getId())).build();
+		} catch (NoResultFound e) {
 
-		return Response.ok(alertaService.getTodos(metrica.getId())).build();
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
-	
+
 	@POST
 	@Path("{id}/medicoes")
 	public Response addMedicao(@PathParam("id") int id, MedicaoClientModel clientModel) {
 
-		Metrica metrica = metricaService.getUnico(id);
+		try {
 
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
+			Metrica metrica = metricaService.getUnico(id);
 
-		int idMedicao = medicaoService.criar(metrica.getId(), clientModel, metricaService);
+			int idMedicao = medicaoService.criar(metrica.getId(), clientModel, metricaService);
 
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-		builder.path(Integer.toString(idMedicao));
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+			builder.path(Integer.toString(idMedicao));
 
-		return Response.created(builder.build()).build();
+			return Response.created(builder.build()).build();
+		} catch (NoResultFound e) {
+
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
-	
+
 	@GET
 	@Path("{id}/medicoes")
 	public Response getMedicoes(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.getUnico(id);
+		try {
+			Metrica metrica = metricaService.getUnico(id);
 
-		if (metrica == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
+			return Response.ok(medicaoService.getTodos(metrica.getId())).build();
+		} catch (NoResultFound e) {
 
-		// Verificar se o melhor lugar para validar os dados é na controller ou
-		// na service.
-
-		return Response.ok(medicaoService.getTodos(metrica.getId())).build();
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
-	
+
 	@GET
 	@Path("{id}/medicoes/historico")
 	public Response getHistoricoMedicoes(@PathParam("id") int id) {
-		
-		List<Medicao> historico = metricaService.getHistoricoMedicoes(id);
-		
-		if(historico == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
-		return Response.ok(historico).build();
+
+		try {
+
+			List<Medicao> historico = metricaService.getHistoricoMedicoes(id);
+
+			return Response.ok(historico).build();
+		} catch (NoResultFound e) {
+
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
-	
+
 	@GET
 	@Path("{id}/medicoes/ultima")
 	public Response getUltimaMedicao(@PathParam("id") int id) {
-		
-		Medicao medicao = metricaService.getUltimaMedicao(id);
-		
-		if(medicao == null)
-			return Response.status(Status.NO_CONTENT).entity(null).build();
-		
-		return Response.ok(medicao).build();
+
+		try {
+			Medicao medicao = metricaService.getUltimaMedicao(id);
+			
+			return Response.ok(medicao).build();
+		} catch (NoResultFound e) {
+			return Response.status(Status.NO_CONTENT).entity(e.getMessage()).build();
+		}
 	}
 }
