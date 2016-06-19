@@ -25,15 +25,15 @@ public class NotificacaoService {
 		return notificacaoEventData.getMensagem();
 	}
 
-	public int create(String mensagem) {
+	public int criar(String mensagem) {
 
 		NotificacaoEventData notificacao = new NotificacaoEventData();
 		notificacao.setMensagem(mensagem);
 
-		return this.persist(notificacao);
+		return this.gravar(notificacao);
 	}
 
-	public int persist(NotificacaoEventData notificacaoEventData) {
+	public int gravar(NotificacaoEventData notificacaoEventData) {
 		return notificacaoRepository.save(notificacaoEventData);
 	}
 }

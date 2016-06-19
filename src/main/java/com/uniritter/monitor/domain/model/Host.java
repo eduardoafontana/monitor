@@ -52,7 +52,7 @@ public class Host extends ControlData {
 		ModelMapper modelMapper = new ModelMapper();
 		HostEventData hostData = modelMapper.map(this, HostEventData.class);
 
-		this.id = hostService.persist(hostData, metricaId);
+		this.id = hostService.gravar(hostData, metricaId);
 
 		return this.id;
 	}

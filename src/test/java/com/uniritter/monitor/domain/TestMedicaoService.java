@@ -38,7 +38,7 @@ public class TestMedicaoService {
 	@Test
 	public void testGetMedicoes() {
 		
-		List<Medicao> medicoes = medicaoService.retrieveAll(144);
+		List<Medicao> medicoes = medicaoService.getTodos(144);
 		
 		assertNotNull(medicoes);
 		assertTrue(medicoes.size() > 0);
@@ -46,7 +46,7 @@ public class TestMedicaoService {
 	
 	@Test
 	public void testCreateMedicao(){
-		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.criar(MetricaTipo.EspacoEmDisco);
 		
 		assertNotEquals(0, idMetrica);
 		
@@ -55,7 +55,7 @@ public class TestMedicaoService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;
 		
-		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
+		int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
 		
 		assertNotEquals(0, idMedicao);
 	}
@@ -63,7 +63,7 @@ public class TestMedicaoService {
 	@Test
 	public void testDisparaNotificaoAlertaValidoParaMedicaoRealizada(){
 		
-		int idMetrica = metricaService.create(MetricaTipo.Memoria);
+		int idMetrica = metricaService.criar(MetricaTipo.Memoria);
 		
 		assertNotEquals(idMetrica, 0);
 		
@@ -72,7 +72,7 @@ public class TestMedicaoService {
 		alertaViewModel.regra = "Igual";
 		alertaViewModel.valor = 80;
 
-		int idAlerta = alertaService.create(idMetrica, alertaViewModel);
+		int idAlerta = alertaService.criar(idMetrica, alertaViewModel);
 
 		assertNotEquals(0, idAlerta);
 		
@@ -81,7 +81,7 @@ public class TestMedicaoService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 80;
 		
-		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
+		int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
 		
 		assertNotEquals(0, idMedicao);
 		assertEquals(alertaViewModel.mensagem, notificacaoService.getUltimaMensagem());

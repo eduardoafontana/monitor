@@ -50,14 +50,14 @@ public class MetricaController {
 
 	@GET
 	public Response getMetricas() {
-		return Response.ok(metricaService.retrieveAll()).build();
+		return Response.ok(metricaService.getTodos()).build();
 	}
 
 	@GET
 	@Path("{id}")
 	public Response getMetrica(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -69,7 +69,7 @@ public class MetricaController {
 	@Path("{id}")
 	public Response deleteMetrica(@PathParam("id") int id) {
 
-		int rowsDeleted = metricaService.remove(id);
+		int rowsDeleted = metricaService.apagar(id);
 
 		if (rowsDeleted == 0)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -92,7 +92,7 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		int id = metricaService.create(metricaTipoConvertido);
+		int id = metricaService.criar(metricaTipoConvertido);
 
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(Integer.toString(id));
@@ -104,7 +104,7 @@ public class MetricaController {
 	@Path("{id}/hosts")
 	public Response addHost(@PathParam("id") int id, HostClientModel hostData) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -118,7 +118,7 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		int idHost = hostService.create(metrica.getId(), hostData);
+		int idHost = hostService.criar(metrica.getId(), hostData);
 
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(Integer.toString(idHost));
@@ -130,7 +130,7 @@ public class MetricaController {
 	@Path("{id}/hosts")
 	public Response getHosts(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -138,14 +138,14 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		return Response.ok(hostService.retrieveAll(metrica.getId())).build();
+		return Response.ok(hostService.getTodos(metrica.getId())).build();
 	}
 	
 	@POST
 	@Path("{id}/alertas")
 	public Response addAlerta(@PathParam("id") int id, AlertaClientModel clientModel) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -159,7 +159,7 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		int idAlerta = alertaService.create(metrica.getId(), clientModel);
+		int idAlerta = alertaService.criar(metrica.getId(), clientModel);
 
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(Integer.toString(idAlerta));
@@ -171,7 +171,7 @@ public class MetricaController {
 	@Path("{id}/alertas")
 	public Response getAlertas(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -179,19 +179,19 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		return Response.ok(alertaService.retrieveAll(metrica.getId())).build();
+		return Response.ok(alertaService.getTodos(metrica.getId())).build();
 	}
 	
 	@POST
 	@Path("{id}/medicoes")
 	public Response addMedicao(@PathParam("id") int id, MedicaoClientModel clientModel) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
 
-		int idMedicao = medicaoService.create(metrica.getId(), clientModel, metricaService);
+		int idMedicao = medicaoService.criar(metrica.getId(), clientModel, metricaService);
 
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		builder.path(Integer.toString(idMedicao));
@@ -203,7 +203,7 @@ public class MetricaController {
 	@Path("{id}/medicoes")
 	public Response getMedicoes(@PathParam("id") int id) {
 
-		Metrica metrica = metricaService.retrieve(id);
+		Metrica metrica = metricaService.getUnico(id);
 
 		if (metrica == null)
 			return Response.status(Status.NO_CONTENT).entity(null).build();
@@ -211,7 +211,7 @@ public class MetricaController {
 		// Verificar se o melhor lugar para validar os dados é na controller ou
 		// na service.
 
-		return Response.ok(medicaoService.retrieveAll(metrica.getId())).build();
+		return Response.ok(medicaoService.getTodos(metrica.getId())).build();
 	}
 	
 	@GET

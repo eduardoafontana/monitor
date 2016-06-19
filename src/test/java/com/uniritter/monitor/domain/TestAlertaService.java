@@ -30,7 +30,7 @@ public class TestAlertaService {
 	@Test
 	public void testGetAlertas() {
 
-		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.criar(MetricaTipo.EspacoEmDisco);
 
 		assertNotEquals(0, idMetrica);
 
@@ -41,12 +41,12 @@ public class TestAlertaService {
 			alertaViewModel.regra = "Maior";
 			alertaViewModel.valor = i * 10;
 
-			int idAlerta = alertaService.create(idMetrica, alertaViewModel);
+			int idAlerta = alertaService.criar(idMetrica, alertaViewModel);
 
 			assertNotEquals(0, idAlerta);
 		}
 
-		List<Alerta> alertas = alertaService.retrieveAll(idMetrica);
+		List<Alerta> alertas = alertaService.getTodos(idMetrica);
 
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
@@ -54,7 +54,7 @@ public class TestAlertaService {
 
 	@Test
 	public void testCreateAlerta() {
-		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.criar(MetricaTipo.EspacoEmDisco);
 
 		assertNotEquals(0, idMetrica);
 
@@ -63,7 +63,7 @@ public class TestAlertaService {
 		alertaViewModel.regra = "Maior";
 		alertaViewModel.valor = 20;
 
-		int idAlerta = alertaService.create(idMetrica, alertaViewModel);
+		int idAlerta = alertaService.criar(idMetrica, alertaViewModel);
 
 		assertNotEquals(0, idAlerta);
 	}

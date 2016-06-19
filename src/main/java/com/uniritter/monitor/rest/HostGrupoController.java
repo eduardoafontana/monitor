@@ -22,6 +22,6 @@ public class HostGrupoController {
 
 	@GET
 	public Response getHostGrupos() {
-		return Response.ok(service.retrieveGrupos()).build();
+		return Response.ok(service.getGrupos()).build();
 	}
 }

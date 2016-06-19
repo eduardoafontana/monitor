@@ -22,6 +22,6 @@ public class AlertaRegraController {
 
 	@GET
 	public Response getAlertaRegras() {
-		return Response.ok(alerta.retrieveRegras()).build();
+		return Response.ok(alerta.getRegras()).build();
 	}
 }

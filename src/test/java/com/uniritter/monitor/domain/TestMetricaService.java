@@ -35,14 +35,14 @@ public class TestMetricaService {
 	
 	@Test
 	public void testCriarNovaMetrica() {	
-		int id = metricaService.create(MetricaTipo.CPU);
+		int id = metricaService.criar(MetricaTipo.CPU);
 		
 		assertNotEquals(id, 0);
 	}
 	
 	@Test
 	public void testGetMetrica() {	
-		Metrica metrica = metricaService.retrieve(2);
+		Metrica metrica = metricaService.getUnico(2);
 		
 		assertNotNull(metrica);
 		assertEquals(metrica.getId(), 2);
@@ -51,7 +51,7 @@ public class TestMetricaService {
 	@Test
 	public void testGetMetricas() {
 		
-		List<Metrica> metricas = metricaService.retrieveAll();
+		List<Metrica> metricas = metricaService.getTodos();
 		
 		assertNotNull(metricas);
 		assertTrue(metricas.size() > 0);
@@ -60,7 +60,7 @@ public class TestMetricaService {
 	@Test
 	public void testGetMetricaComHosts() {
 		
-		Metrica metrica = metricaService.retrieve(2);
+		Metrica metrica = metricaService.getUnico(2);
 		
 		assertNotNull(metrica);
 		
@@ -69,7 +69,7 @@ public class TestMetricaService {
 	
 	@Test
 	public void testDeleteMetricaEHosts(){
-		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.criar(MetricaTipo.EspacoEmDisco);
 		
 		assertNotEquals(idMetrica, 0);
 		
@@ -78,15 +78,15 @@ public class TestMetricaService {
 		hostData.mac = 54321;
 		hostData.grupo = "Firewall";
 		
-		int idHost = hostService.create(idMetrica, hostData);
+		int idHost = hostService.criar(idMetrica, hostData);
 		
 		assertNotEquals(idHost, 0);
 		
-		int rowsAffeted = metricaService.remove(idMetrica);
+		int rowsAffeted = metricaService.apagar(idMetrica);
 		
 		assertTrue(rowsAffeted >= 2);
 		
-		List<Host> hosts = hostService.retrieveAll(idMetrica);
+		List<Host> hosts = hostService.getTodos(idMetrica);
 		
 		assertEquals(hosts.size(), 0);
 	}
@@ -108,7 +108,7 @@ public class TestMetricaService {
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;
 		
-		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
+		int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
 				
 		Medicao medicao = metricaService.getUltimaMedicao(idMetrica);
 		

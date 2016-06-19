@@ -23,11 +23,11 @@ public class HostService {
 		this.hostRepository = hostRepository;
 	}
 
-	public String[] retrieveGrupos() {
+	public String[] getGrupos() {
 		return Arrays.toString(HostGrupo.values()).split(", ");
 	}
 
-	public List<Host> retrieveAll(int metricaId) {
+	public List<Host> getTodos(int metricaId) {
 		List<HostEventData> hostEventData = hostRepository.<HostEventData>getListFromRelation(metricaId);
 
 		List<Host> hosts = new ArrayList<Host>();
@@ -44,7 +44,7 @@ public class HostService {
 		return hosts;
 	}
 
-	public int create(int metricaId, HostClientModel hostViewModel) {
+	public int criar(int metricaId, HostClientModel hostViewModel) {
 
 		Host host = new Host(this);
 		ModelMapper modelMapper = new ModelMapper();
@@ -53,11 +53,11 @@ public class HostService {
 		return host.save(metricaId);
 	}
 
-	public int persist(HostEventData hostEventData, int metricaId) {
+	public int gravar(HostEventData hostEventData, int metricaId) {
 		return hostRepository.saveToRelation(hostEventData, metricaId);
 	}
 
-	public int removePorMetrica(int metricaId) {
+	public int gravarPorMetrica(int metricaId) {
 		return hostRepository.deleteFromRelation(metricaId);
 	}
 }

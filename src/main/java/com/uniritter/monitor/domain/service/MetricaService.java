@@ -32,7 +32,7 @@ public class MetricaService {
 		return Arrays.toString(MetricaTipo.values()).split(", ");
 	}
 
-	public List<Metrica> retrieveAll() {
+	public List<Metrica> getTodos() {
 
 		List<MetricaEventData> metricaEventData = metricaRepository.<MetricaEventData>getList();
 
@@ -50,7 +50,7 @@ public class MetricaService {
 		return metricas;
 	}
 
-	public Metrica retrieve(int id) {
+	public Metrica getUnico(int id) {
 		MetricaEventData metricaEventData = metricaRepository.<MetricaEventData>getById(id);
 
 		if (metricaEventData == null)
@@ -63,18 +63,18 @@ public class MetricaService {
 		return metrica;
 	}
 
-	public int remove(int id) {
+	public int apagar(int id) {
 
-		int rowsAlertas = alertaService.removePorMetrica(id);
+		int rowsAlertas = alertaService.apagarPorMetrica(id);
 
-		int rowsHosts = hostService.removePorMetrica(id);
+		int rowsHosts = hostService.gravarPorMetrica(id);
 		
-		int rowsMedicoes = medicaoService.removePorMetrica(id);
+		int rowsMedicoes = medicaoService.apagarPorMetrica(id);
 
 		return rowsAlertas + rowsHosts + rowsMedicoes + metricaRepository.deleteById(id);
 	}
 
-	public int create(MetricaTipo metricaTipo) {
+	public int criar(MetricaTipo metricaTipo) {
 
 		Metrica metrica = new Metrica(this, hostService, alertaService, medicaoService);
 		metrica.setTipo(metricaTipo);
@@ -82,13 +82,13 @@ public class MetricaService {
 		return metrica.save();
 	}
 
-	public int persist(MetricaEventData metricaData) {
+	public int gravar(MetricaEventData metricaData) {
 		return metricaRepository.save(metricaData);
 	}
 	
 	public List<Medicao> getHistoricoMedicoes(int metricaId) {
 
-		Metrica metrica = this.retrieve(metricaId);
+		Metrica metrica = this.getUnico(metricaId);
 
 		if(metrica == null)
 			return null;
@@ -98,7 +98,7 @@ public class MetricaService {
 	
 	public Medicao getUltimaMedicao(int metricaId) {
 
-		Metrica metrica = this.retrieve(metricaId);
+		Metrica metrica = this.getUnico(metricaId);
 
 		if(metrica == null)
 			return null;

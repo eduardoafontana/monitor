@@ -25,11 +25,11 @@ public class AlertaService {
 		this.notificacaoService = notificacaoService;
 	}
 
-	public String[] retrieveRegras() {
+	public String[] getRegras() {
 		return Arrays.toString(AlertaRegra.values()).split(", ");
 	}
 
-	public List<Alerta> retrieveAll(int metricaId) {
+	public List<Alerta> getTodos(int metricaId) {
 		List<AlertaEventData> alertaEventData = alertaRepository.<AlertaEventData>getListFromRelation(metricaId);
 
 		List<Alerta> alertas = new ArrayList<Alerta>();
@@ -46,7 +46,7 @@ public class AlertaService {
 		return alertas;
 	}
 
-	public int create(int metricaId, AlertaClientModel alertaViewModel) {
+	public int criar(int metricaId, AlertaClientModel alertaViewModel) {
 
 		Alerta alerta = new Alerta(this, notificacaoService);
 		ModelMapper modelMapper = new ModelMapper();
@@ -55,11 +55,11 @@ public class AlertaService {
 		return alerta.save(metricaId);
 	}
 
-	public int persist(AlertaEventData alertaEventData, int metricaId) {
+	public int gravar(AlertaEventData alertaEventData, int metricaId) {
 		return alertaRepository.saveToRelation(alertaEventData, metricaId);
 	}
 
-	public int removePorMetrica(int metricaId) {
+	public int apagarPorMetrica(int metricaId) {
 		return alertaRepository.deleteFromRelation(metricaId);
 	}
 }

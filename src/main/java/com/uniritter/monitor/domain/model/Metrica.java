@@ -48,7 +48,7 @@ public class Metrica extends ControlData {
 
 	public final List<Host> getHosts() {
 		if (this.hosts == null)
-			this.hosts = hostService.retrieveAll(this.id);
+			this.hosts = hostService.getTodos(this.id);
 
 		//TODO: Verificar se hosts do lado de fora de Metrica pode ser foi add
 
@@ -57,7 +57,7 @@ public class Metrica extends ControlData {
 
 	public final List<Alerta> getAlertas() {
 		if (this.alertas == null)
-			this.alertas = alertaService.retrieveAll(this.id);
+			this.alertas = alertaService.getTodos(this.id);
 
 		//TODO: Verificar se alerta do lado de fora de Metrica pode ser foi add
 
@@ -66,7 +66,7 @@ public class Metrica extends ControlData {
 
 	public final List<Medicao> getMedicoes() {
 		if (this.medicoes == null)
-			this.medicoes = medicaoService.retrieveAll(this.id);
+			this.medicoes = medicaoService.getTodos(this.id);
 
 		//TODO: Verificar se medicao do lado de fora de Metrica pode ser foi add
 
@@ -80,7 +80,7 @@ public class Metrica extends ControlData {
 		ModelMapper modelMapper = new ModelMapper();
 		MetricaEventData metricaData = modelMapper.map(this, MetricaEventData.class);
 
-		this.id = metricaService.persist(metricaData);
+		this.id = metricaService.gravar(metricaData);
 
 		if (this.hosts != null) {
 			for (Host host : this.hosts) {

@@ -56,7 +56,7 @@ public class Alerta extends ControlData {
 		ModelMapper modelMapper = new ModelMapper();
 		AlertaEventData alertaData = modelMapper.map(this, AlertaEventData.class);
 
-		this.id = alertaService.persist(alertaData, metricaId);
+		this.id = alertaService.gravar(alertaData, metricaId);
 
 		return this.id;
 	}
@@ -77,6 +77,6 @@ public class Alerta extends ControlData {
 
 	public void Notificar() {
 		
-		notificacaoService.create(this.getMensagem());
+		notificacaoService.criar(this.getMensagem());
 	}
 }

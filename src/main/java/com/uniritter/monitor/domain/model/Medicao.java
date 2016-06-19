@@ -49,7 +49,7 @@ public class Medicao extends ControlData {
 		ModelMapper modelMapper = new ModelMapper();
 		MedicaoEventData medicaoData = modelMapper.map(this, MedicaoEventData.class);
 
-		this.id = medicaoService.persist(medicaoData, metricaId);
+		this.id = medicaoService.gravar(medicaoData, metricaId);
 
 		return this.id;
 	}

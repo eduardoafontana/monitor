@@ -31,7 +31,7 @@ public class TestHostService {
 	@Test
 	public void testGetHosts() {
 		
-		List<Host> hosts = hostService.retrieveAll(2);
+		List<Host> hosts = hostService.getTodos(2);
 		
 		assertNotNull(hosts);
 		assertTrue(hosts.size() > 0);
@@ -39,7 +39,7 @@ public class TestHostService {
 	
 	@Test
 	public void testCreateHost(){
-		int idMetrica = metricaService.create(MetricaTipo.EspacoEmDisco);
+		int idMetrica = metricaService.criar(MetricaTipo.EspacoEmDisco);
 		
 		assertNotEquals(0, idMetrica);
 		
@@ -48,7 +48,7 @@ public class TestHostService {
 		hostData.mac = 54321;
 		hostData.grupo = "Firewall";
 		
-		int idHost = hostService.create(idMetrica, hostData);
+		int idHost = hostService.criar(idMetrica, hostData);
 		
 		assertNotEquals(0, idHost);
 	}

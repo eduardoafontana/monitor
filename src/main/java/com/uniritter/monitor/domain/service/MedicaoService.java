@@ -22,7 +22,7 @@ public class MedicaoService {
 		this.medicaoRepository = medicaoRepository;
 	}
 	
-	public List<Medicao> retrieveAll(int metricaId) {
+	public List<Medicao> getTodos(int metricaId) {
 		List<MedicaoEventData> medicaoEventData = medicaoRepository.<MedicaoEventData>getListFromRelation(metricaId);
 
 		List<Medicao> medicaos = new ArrayList<Medicao>();
@@ -39,7 +39,7 @@ public class MedicaoService {
 		return medicaos;
 	}
 
-	public int create(int metricaId, MedicaoClientModel medicaoViewModel, MetricaService metricaService) {
+	public int criar(int metricaId, MedicaoClientModel medicaoViewModel, MetricaService metricaService) {
 
 		Medicao medicao = new Medicao(this);
 		ModelMapper modelMapper = new ModelMapper();
@@ -47,17 +47,17 @@ public class MedicaoService {
 		
 		int id = medicao.save(metricaId);
 		
-		Metrica metrica = metricaService.retrieve(metricaId);
+		Metrica metrica = metricaService.getUnico(metricaId);
 		metrica.verificarAlertasNotificar();
 		
 		return id;
 	}
 
-	public int persist(MedicaoEventData medicaoEventData, int metricaId) {
+	public int gravar(MedicaoEventData medicaoEventData, int metricaId) {
 		return medicaoRepository.saveToRelation(medicaoEventData, metricaId);
 	}
 
-	public int removePorMetrica(int metricaId) {
+	public int apagarPorMetrica(int metricaId) {
 		return medicaoRepository.deleteFromRelation(metricaId);
 	}
 }
