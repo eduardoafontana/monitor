@@ -1828,3 +1828,57 @@ insert into host (metricaId,ip,mac,grupo, metricaid, created) values (?,?,?,?, 6
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2016-06-18 21:55:59 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:03 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:11 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:11 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO ALERTA ({[*]0}, METRICAID, CREATED) VALUES ({1}, 40, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into alerta ({0}, metricaid, created) values ({1}, 40, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO ALERTA ({[*]0}, METRICAID, CREATED) VALUES ({1}, 40, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into alerta ({0}, metricaid, created) values ({1}, 40, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO MEDICAO ({[*]0}, METRICAID, CREATED) VALUES ({1}, 40, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into medicao ({0}, metricaid, created) values ({1}, 40, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:12 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO MEDICAO ({[*]0}, METRICAID, CREATED) VALUES ({1}, 40, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into medicao ({0}, metricaid, created) values ({1}, 40, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:13 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO MEDICAO ({[*]0}, METRICAID, CREATED) VALUES ({1}, 2, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into medicao ({0}, metricaid, created) values ({1}, 2, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:13 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:13 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO HOST ({[*]0}, METRICAID, CREATED) VALUES ({1}, 2, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into host ({0}, metricaid, created) values ({1}, 2, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:13 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:14 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO MEDICAO ({[*]0}, METRICAID, CREATED) VALUES ({1}, 2, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into medicao ({0}, metricaid, created) values ({1}, 2, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:14 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:14 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO ALERTA ({[*]0}, METRICAID, CREATED) VALUES ({1}, 2, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into alerta ({0}, metricaid, created) values ({1}, 2, CURRENT_TIMESTAMP()) [42001-191]
+2016-06-18 21:56:14 jdbc[22]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO METRICA ({[*]0}, CREATED) VALUES ({1}, CURRENT_TIMESTAMP()) "; expected "identifier"; SQL statement:
+insert into metrica ({0}, created) values ({1}, CURRENT_TIMESTAMP()) [42001-191]
