@@ -50,7 +50,8 @@ public class Alerta extends ControlData {
 	}
 
 	public int save(int metricaId) {
-		// testar se alerta eh valido e outras regras de negocio
+		
+		//TODO: local para aplicar regras de negocio antes de salvar. Ex: validacao
 
 		ModelMapper modelMapper = new ModelMapper();
 		AlertaEventData alertaData = modelMapper.map(this, AlertaEventData.class);
@@ -60,22 +61,22 @@ public class Alerta extends ControlData {
 		return this.id;
 	}
 
-	public boolean RegraVerdadeira(Medicao ultimaMedicao) {
+	public boolean RegraVerdadeira(int valorUltimaMedicao) {
 
 		switch (this.getRegra()) {
 		case Maior:
-			return ultimaMedicao.getValor() > this.getValor();
+			return valorUltimaMedicao > this.getValor();
 		case Menor:
-			return ultimaMedicao.getValor() < this.getValor();
+			return valorUltimaMedicao < this.getValor();
 		case Igual:
-			return ultimaMedicao.getValor() == this.getValor();
+			return valorUltimaMedicao == this.getValor();
 		}
 
 		return false;
 	}
 
-	public void Notificar(Medicao ultimaMedicao) {
-		// ?? ultimaMedicao
+	public void Notificar() {
+		
 		notificacaoService.create(this.getMensagem());
 	}
 }

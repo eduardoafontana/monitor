@@ -1,15 +1,10 @@
 package com.uniritter.monitor.persistence.service;
 
-public class NoRowsAffected extends Exception {
-
-	public String message;
-
+@SuppressWarnings("serial")
+public class NoRowsAffected extends RuntimeException {
+	
 	public NoRowsAffected(String message) {
-		this.message = message;
-	}
-
-	@Override
-	public String getMessage() {
-		return message;
+		
+		super(message);
 	}
 }

@@ -50,7 +50,7 @@ public class Metrica extends ControlData {
 		if (this.hosts == null)
 			this.hosts = hostService.retrieveAll(this.id);
 
-		// Verificar se hosts do lado de fora de Metrica pode ser foi add
+		//TODO: Verificar se hosts do lado de fora de Metrica pode ser foi add
 
 		return hosts;
 	}
@@ -59,7 +59,7 @@ public class Metrica extends ControlData {
 		if (this.alertas == null)
 			this.alertas = alertaService.retrieveAll(this.id);
 
-		// Verificar se alerta do lado de fora de Metrica pode ser foi add
+		//TODO: Verificar se alerta do lado de fora de Metrica pode ser foi add
 
 		return alertas;
 	}
@@ -68,13 +68,14 @@ public class Metrica extends ControlData {
 		if (this.medicoes == null)
 			this.medicoes = medicaoService.retrieveAll(this.id);
 
-		// Verificar se medicao do lado de fora de Metrica pode ser foi add
+		//TODO: Verificar se medicao do lado de fora de Metrica pode ser foi add
 
 		return medicoes;
 	}
 
 	public int save() {
-		// testar se metrica eh valida
+
+		//TODO: local para aplicar regras de negocio antes de salvar. Ex: validacao
 
 		ModelMapper modelMapper = new ModelMapper();
 		MetricaEventData metricaData = modelMapper.map(this, MetricaEventData.class);
@@ -133,8 +134,8 @@ public class Metrica extends ControlData {
 		List<Alerta> alertas = this.getAlertas();
 		
 		for (Alerta alerta : alertas) {
-			if(alerta.RegraVerdadeira(ultimaMedicao))
-				alerta.Notificar(ultimaMedicao);//host tal
+			if(alerta.RegraVerdadeira(ultimaMedicao.getValor()))
+				alerta.Notificar();
 		}
 	}
 }

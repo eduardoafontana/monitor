@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.uniritter.monitor.rest.TestMetricaController" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-06-17T21:38:28" hostname="ZS-LAB103-65023" time="0.62">
+<testsuite name="com.uniritter.monitor.rest.TestMetricaController" tests="7" skipped="0" failures="0" errors="0" timestamp="2016-06-19T13:33:10" hostname="Note_Fontana" time="2.311">
   <properties/>
-  <testcase name="testDeleteMetricaInexistente" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.011"/>
-  <testcase name="testDeleteMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.021"/>
-  <testcase name="testGetMetricaInexistente" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.012"/>
-  <testcase name="testGetTodasMetricas" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.496"/>
-  <testcase name="testCreateMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.018"/>
-  <testcase name="testGetMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.048"/>
-  <testcase name="testCreateMetricaTipoInvalido" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.013"/>
-  <system-out><![CDATA[2016-06-17 18:38:28.568  INFO 5636 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.uniritter.monitor.rest.TestMetricaController]: no resource found for suffixes {-context.xml, Context.groovy}.
-2016-06-17 18:38:28.569  INFO 5636 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2016-06-17 18:38:28.569  INFO 5636 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6157aa06, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@425ba1d7, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@dde4c4a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7d629562, org.springframework.test.context.transaction.TransactionalTestExecutionListener@533d953d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7011027c]
+  <testcase name="testDeleteMetricaInexistente" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.025"/>
+  <testcase name="testDeleteMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.413"/>
+  <testcase name="testGetMetricaInexistente" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.029"/>
+  <testcase name="testGetTodasMetricas" classname="com.uniritter.monitor.rest.TestMetricaController" time="1.496"/>
+  <testcase name="testCreateMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.026"/>
+  <testcase name="testGetMetrica" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.297"/>
+  <testcase name="testCreateMetricaTipoInvalido" classname="com.uniritter.monitor.rest.TestMetricaController" time="0.021"/>
+  <system-out><![CDATA[2016-06-19 10:33:10.375  INFO 2012 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.uniritter.monitor.rest.TestMetricaController]: no resource found for suffixes {-context.xml, Context.groovy}.
+2016-06-19 10:33:10.377  INFO 2012 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-06-19 10:33:10.378  INFO 2012 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7c58fd79, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@9d0fe89, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4b6e114b, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7bc8b40d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@40c02d38, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4e6ab71f]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

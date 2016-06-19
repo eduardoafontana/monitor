@@ -43,7 +43,8 @@ public class Medicao extends ControlData {
 	}
 	
 	public int save(int metricaId) {
-		// testar se medicao eh valido e outras regras de negocio
+
+		//TODO: local para aplicar regras de negocio antes de salvar. Ex: validacao
 
 		ModelMapper modelMapper = new ModelMapper();
 		MedicaoEventData medicaoData = modelMapper.map(this, MedicaoEventData.class);

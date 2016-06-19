@@ -46,7 +46,8 @@ public class Host extends ControlData {
 	}
 
 	public int save(int metricaId) {
-		// testar se host eh valido e outras regras de negocio
+		
+		//TODO: local para aplicar regras de negocio antes de salvar. Ex: validacao
 
 		ModelMapper modelMapper = new ModelMapper();
 		HostEventData hostData = modelMapper.map(this, HostEventData.class);

@@ -16,7 +16,7 @@ public class NotificacaoService {
 		this.notificacaoRepository = notificacaoRepository;
 	}
 
-	public String getLastMessage() {
+	public String getUltimaMensagem() {
 		NotificacaoEventData notificacaoEventData = notificacaoRepository.getLast();
 
 		if (notificacaoEventData == null)

@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
+import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IMedicaoRepository;
 import com.uniritter.monitor.domain.repository.model.MedicaoEventData;
@@ -39,7 +39,7 @@ public class MedicaoService {
 		return medicaos;
 	}
 
-	public int create(int metricaId, MedicaoViewModel medicaoViewModel, MetricaService metricaService) {
+	public int create(int metricaId, MedicaoClientModel medicaoViewModel, MetricaService metricaService) {
 
 		Medicao medicao = new Medicao(this);
 		ModelMapper modelMapper = new ModelMapper();

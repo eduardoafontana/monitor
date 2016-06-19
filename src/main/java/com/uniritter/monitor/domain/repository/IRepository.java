@@ -12,7 +12,6 @@ public interface IRepository {
 
 	public <T> T getById(int id);
 
-	// public int save(IEntity entidade) throws Exception;
 	public int save(GenericEventData entidade);
 
 	public int saveToRelation(GenericEventData entidade, int parentId);

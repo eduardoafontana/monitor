@@ -22,9 +22,9 @@ import com.uniritter.monitor.domain.service.AlertaService;
 import com.uniritter.monitor.domain.service.HostService;
 import com.uniritter.monitor.domain.service.MedicaoService;
 import com.uniritter.monitor.domain.service.MetricaService;
-import com.uniritter.monitor.domain.client.model.AlertaViewModel;
-import com.uniritter.monitor.domain.client.model.HostViewModel;
-import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
+import com.uniritter.monitor.domain.client.model.AlertaClientModel;
+import com.uniritter.monitor.domain.client.model.HostClientModel;
+import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 
 @Component
@@ -102,7 +102,7 @@ public class MetricaController {
 
 	@POST
 	@Path("{id}/hosts")
-	public Response addHost(@PathParam("id") int id, HostViewModel hostData) {
+	public Response addHost(@PathParam("id") int id, HostClientModel hostData) {
 
 		Metrica metrica = metricaService.retrieve(id);
 
@@ -143,7 +143,7 @@ public class MetricaController {
 	
 	@POST
 	@Path("{id}/alertas")
-	public Response addAlerta(@PathParam("id") int id, AlertaViewModel clientModel) {
+	public Response addAlerta(@PathParam("id") int id, AlertaClientModel clientModel) {
 
 		Metrica metrica = metricaService.retrieve(id);
 
@@ -184,7 +184,7 @@ public class MetricaController {
 	
 	@POST
 	@Path("{id}/medicoes")
-	public Response addMedicao(@PathParam("id") int id, MedicaoViewModel clientModel) {
+	public Response addMedicao(@PathParam("id") int id, MedicaoClientModel clientModel) {
 
 		Metrica metrica = metricaService.retrieve(id);
 

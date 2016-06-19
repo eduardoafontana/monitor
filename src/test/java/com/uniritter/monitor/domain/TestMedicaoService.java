@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.client.model.AlertaViewModel;
-import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
+import com.uniritter.monitor.domain.client.model.AlertaClientModel;
+import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
@@ -50,7 +50,7 @@ public class TestMedicaoService {
 		
 		assertNotEquals(0, idMetrica);
 		
-		MedicaoViewModel medicaoViewModel = new MedicaoViewModel();
+		MedicaoClientModel medicaoViewModel = new MedicaoClientModel();
 		medicaoViewModel.mac = 123456;
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;
@@ -67,7 +67,7 @@ public class TestMedicaoService {
 		
 		assertNotEquals(idMetrica, 0);
 		
-		AlertaViewModel alertaViewModel = new AlertaViewModel();
+		AlertaClientModel alertaViewModel = new AlertaClientModel();
 		alertaViewModel.mensagem = "O valor é igual a 80.";
 		alertaViewModel.regra = "Igual";
 		alertaViewModel.valor = 80;
@@ -76,7 +76,7 @@ public class TestMedicaoService {
 
 		assertNotEquals(0, idAlerta);
 		
-		MedicaoViewModel medicaoViewModel = new MedicaoViewModel();
+		MedicaoClientModel medicaoViewModel = new MedicaoClientModel();
 		medicaoViewModel.mac = 147;
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 80;
@@ -84,6 +84,6 @@ public class TestMedicaoService {
 		int idMedicao = medicaoService.create(idMetrica, medicaoViewModel, metricaService);
 		
 		assertNotEquals(0, idMedicao);
-		assertEquals(alertaViewModel.mensagem, notificacaoService.getLastMessage());
+		assertEquals(alertaViewModel.mensagem, notificacaoService.getUltimaMensagem());
 	}
 }

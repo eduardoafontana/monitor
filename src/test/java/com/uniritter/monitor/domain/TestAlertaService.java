@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.client.model.AlertaViewModel;
+import com.uniritter.monitor.domain.client.model.AlertaClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
@@ -36,7 +36,7 @@ public class TestAlertaService {
 
 		for (int i = 0; i < 3; i++) {
 			
-			AlertaViewModel alertaViewModel = new AlertaViewModel();
+			AlertaClientModel alertaViewModel = new AlertaClientModel();
 			alertaViewModel.mensagem = "O valor é maior " + i + "0.";
 			alertaViewModel.regra = "Maior";
 			alertaViewModel.valor = i * 10;
@@ -58,7 +58,7 @@ public class TestAlertaService {
 
 		assertNotEquals(0, idMetrica);
 
-		AlertaViewModel alertaViewModel = new AlertaViewModel();
+		AlertaClientModel alertaViewModel = new AlertaClientModel();
 		alertaViewModel.mensagem = "O valor é maior 20.";
 		alertaViewModel.regra = "Maior";
 		alertaViewModel.valor = 20;

@@ -14,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.uniritter.monitor.MonitorApplication;
-import com.uniritter.monitor.domain.client.model.HostViewModel;
-import com.uniritter.monitor.domain.client.model.MedicaoViewModel;
+import com.uniritter.monitor.domain.client.model.HostClientModel;
+import com.uniritter.monitor.domain.client.model.MedicaoClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.service.*;
 
@@ -73,7 +73,7 @@ public class TestMetricaService {
 		
 		assertNotEquals(idMetrica, 0);
 		
-		HostViewModel hostData = new HostViewModel();
+		HostClientModel hostData = new HostClientModel();
 		hostData.ip = 123465;
 		hostData.mac = 54321;
 		hostData.grupo = "Firewall";
@@ -103,7 +103,7 @@ public class TestMetricaService {
 		
 		int idMetrica = 2;
 		
-		MedicaoViewModel medicaoViewModel = new MedicaoViewModel();
+		MedicaoClientModel medicaoViewModel = new MedicaoClientModel();
 		medicaoViewModel.mac = 98745;
 		medicaoViewModel.quando = new Date();
 		medicaoViewModel.valor = 10;

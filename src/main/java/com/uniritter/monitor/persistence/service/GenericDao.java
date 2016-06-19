@@ -70,16 +70,18 @@ public class GenericDao {
 
 	public int create(GenericEventData entity) {
 
-		return this.createExecute(entity, "insert into " + this.table + " (%1$s, created) values (%2$s, CURRENT_TIMESTAMP())");
+		return this.createExecute(entity,
+				"insert into " + this.table + " (%1$s, created) values (%2$s, CURRENT_TIMESTAMP())");
 	}
 
 	public int create(GenericEventData entity, int relatedId) {
 
-		return this.createExecute(entity, "insert into " + this.table + " (%1$s, " + this.relatedFieldId + ", created) values (%2$s, " + relatedId + ", CURRENT_TIMESTAMP())");
+		return this.createExecute(entity, "insert into " + this.table + " (%1$s, " + this.relatedFieldId
+				+ ", created) values (%2$s, " + relatedId + ", CURRENT_TIMESTAMP())");
 	}
-	
-	private int createExecute(GenericEventData entity, String sql){
-		
+
+	private int createExecute(GenericEventData entity, String sql) {
+
 		List<String> names = new ArrayList<String>();
 		List<String> separators = new ArrayList<String>();
 		List<Object> values = new ArrayList<Object>();
@@ -106,16 +108,15 @@ public class GenericDao {
 			separators.add("?");
 			values.add(value);
 		}
-		
-		String formattedSql = String.format(sql, StringUtils.arrayToCommaDelimitedString(names.toArray()), StringUtils.arrayToCommaDelimitedString(separators.toArray()));
-		
+
+		String formattedSql = String.format(sql, StringUtils.arrayToCommaDelimitedString(names.toArray()),
+				StringUtils.arrayToCommaDelimitedString(separators.toArray()));
+
 		Object[] args = values.toArray();
 
 		if (jdbcTemplate.update(formattedSql, args) > 0)
 			return jdbcTemplate.queryForObject("select last_insert_id()", int.class);
 		else
-			// throw new NoRowsAffected("Nenhuma linha afedata para insert into
-			// metrica (nome, created) values (?, ?)");
-			return 0;
+			throw new NoRowsAffected("Nenhuma linha afedata para insert into");
 	}
 }

@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.uniritter.monitor.domain.client.model.AlertaViewModel;
+import com.uniritter.monitor.domain.client.model.AlertaClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IAlertaRepository;
 import com.uniritter.monitor.domain.repository.model.AlertaEventData;
@@ -46,7 +46,7 @@ public class AlertaService {
 		return alertas;
 	}
 
-	public int create(int metricaId, AlertaViewModel alertaViewModel) {
+	public int create(int metricaId, AlertaClientModel alertaViewModel) {
 
 		Alerta alerta = new Alerta(this, notificacaoService);
 		ModelMapper modelMapper = new ModelMapper();
