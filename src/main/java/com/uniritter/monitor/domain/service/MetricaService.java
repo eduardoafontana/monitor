@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uniritter.monitor.common.InvalidType;
+import com.uniritter.monitor.common.NoResultFound;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IMetricaRepository;
 import com.uniritter.monitor.domain.repository.model.MetricaEventData;
@@ -67,7 +69,7 @@ public class MetricaService {
 
 		int rowsAlertas = alertaService.apagarPorMetrica(id);
 
-		int rowsHosts = hostService.gravarPorMetrica(id);
+		int rowsHosts = hostService.apagarPorMetrica(id);
 		
 		int rowsMedicoes = medicaoService.apagarPorMetrica(id);
 
@@ -98,5 +100,14 @@ public class MetricaService {
 		Metrica metrica = this.getUnico(metricaId);
 		
 		return metrica.getUltimaMedicao();
+	}
+
+	public MetricaTipo verificarTipo(String metricaTipo) throws InvalidType {
+
+		try {
+			return MetricaTipo.valueOf(metricaTipo);
+		} catch (IllegalArgumentException e) {
+			throw new InvalidType("Valor metricaTipo: " + metricaTipo + " invalido!");
+		}
 	}
 }

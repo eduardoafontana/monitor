@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uniritter.monitor.common.InvalidType;
 import com.uniritter.monitor.domain.client.model.HostClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IHostRepository;
@@ -57,7 +58,18 @@ public class HostService {
 		return hostRepository.saveToRelation(hostEventData, metricaId);
 	}
 
-	public int gravarPorMetrica(int metricaId) {
+	public int apagarPorMetrica(int metricaId) {
 		return hostRepository.deleteFromRelation(metricaId);
+	}
+
+	public HostGrupo verificarGrupo(String grupo) throws InvalidType {
+		
+		try {
+			
+			return HostGrupo.valueOf(grupo);
+		} catch (IllegalArgumentException e) {
+			
+			throw new InvalidType("Valor grupo: " + grupo + " invalido!");
+		}
 	}
 }

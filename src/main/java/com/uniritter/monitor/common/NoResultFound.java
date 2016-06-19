@@ -1,4 +1,4 @@
-package com.uniritter.monitor.domain.service;
+package com.uniritter.monitor.common;
 
 @SuppressWarnings("serial")
 public class NoResultFound extends Exception {

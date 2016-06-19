@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.uniritter.monitor.common.InvalidType;
 import com.uniritter.monitor.domain.client.model.AlertaClientModel;
 import com.uniritter.monitor.domain.model.*;
 import com.uniritter.monitor.domain.repository.IAlertaRepository;
@@ -61,5 +62,16 @@ public class AlertaService {
 
 	public int apagarPorMetrica(int metricaId) {
 		return alertaRepository.deleteFromRelation(metricaId);
+	}
+
+	public AlertaRegra verificarTipo(String regra) throws InvalidType {
+		
+		try {
+			
+			return AlertaRegra.valueOf(regra);
+		} catch (IllegalArgumentException e) {
+			
+			throw new InvalidType("Valor regra: " + regra + " invalido!");
+		}
 	}
 }
