@@ -67,12 +67,50 @@ public class TestMetricaService {
 
 		try {
 			Metrica metrica = metricaService.getUnico(2);
-			
+
 			assertNotNull(metrica);
 			assertTrue(metrica.getHosts().size() > 0);
 		} catch (NoResultFound e) {
 			fail(e.getMessage());
 		}
+	}
+
+	@Test
+	public void testAddHostNaMetrica() {
+
+		Metrica metrica = null;
+
+		try {
+			metrica = metricaService.getUnico(2);
+		} catch (NoResultFound e) {
+			fail(e.getMessage());
+		}
+		
+		assertNotNull(metrica);
+
+		int sizeHostAnterior = metrica.getHosts().size();
+
+		Host novoHost = new Host(hostService);
+		novoHost.setIp(1965);
+		novoHost.setGrupo(HostGrupo.WebServer);
+		novoHost.setMac(3241);
+		
+		List<Host> listHost = metrica.getHosts();
+		listHost.add(novoHost);
+
+		metrica.save();
+		
+		metrica = null;
+		
+		try {
+			metrica = metricaService.getUnico(2);
+		} catch (NoResultFound e) {
+			fail(e.getMessage());
+		}
+		
+		int sizeHostAtual = metrica.getHosts().size();
+		
+		assertEquals(sizeHostAnterior + 1, sizeHostAtual);
 	}
 
 	@Test
@@ -91,12 +129,12 @@ public class TestMetricaService {
 		assertNotEquals(idHost, 0);
 
 		try {
-			
+
 			int rowsAffeted = metricaService.apagar(idMetrica);
-			
+
 			assertEquals(1, rowsAffeted);
 		} catch (NoResultFound e) {
-			
+
 			fail(e.getMessage());
 		}
 
@@ -109,12 +147,12 @@ public class TestMetricaService {
 	public void testMetricaGetHistoricoMedicoes() {
 
 		try {
-			
+
 			List<Medicao> historico = metricaService.getHistoricoMedicoes(2);
-			
+
 			assertTrue(historico.size() > 0);
 		} catch (NoResultFound e) {
-			
+
 			fail(e.getMessage());
 		}
 	}
@@ -130,14 +168,14 @@ public class TestMetricaService {
 		medicaoViewModel.valor = 10;
 
 		try {
-			
+
 			int idMedicao = medicaoService.criar(idMetrica, medicaoViewModel, metricaService);
-			
+
 			Medicao medicao = metricaService.getUltimaMedicao(idMetrica);
 
 			assertEquals(idMedicao, medicao.getId());
 		} catch (NoResultFound e) {
-			
+
 			fail(e.getMessage());
 		}
 	}

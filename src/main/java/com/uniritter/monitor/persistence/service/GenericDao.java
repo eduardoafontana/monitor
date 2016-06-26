@@ -119,4 +119,60 @@ public class GenericDao {
 		else
 			throw new NoRowsAffected("Nenhuma linha afedata para insert into");
 	}
+
+	public boolean registerExist(int id) {
+
+		Object[] args = { id };
+		int registerCount = jdbcTemplate.queryForObject("select count(*) from " + this.table + " where id = ?", args,
+				Integer.class);
+
+		return registerCount > 0;
+	}
+	
+	public int update(GenericEventData entity) {
+
+		return this.updateExecute(entity, "update " + this.table + " set %1$s where id = " + entity.getId());
+	}
+
+	public int update(GenericEventData entity, int relatedId) {
+
+		return this.updateExecute(entity, "update " + this.table + " set %1$s, "+ this.relatedFieldId + " = "+relatedId+" where id = " + entity.getId());
+	}
+
+	public int updateExecute(GenericEventData entity, String sql) {
+		
+		List<String> names = new ArrayList<String>();
+		List<Object> values = new ArrayList<Object>();
+
+		Class<?> classe = entity.getClass();
+
+		for (Field field : classe.getDeclaredFields()) {
+
+			Object value = null;
+
+			field.setAccessible(true);
+
+			try {
+				value = field.get(entity);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			names.add(field.getName() + " = ? ");
+			values.add(value);
+		}
+
+		String formattedSql = String.format(sql, StringUtils.arrayToCommaDelimitedString(names.toArray()));
+
+		Object[] args = values.toArray();
+
+		if (jdbcTemplate.update(formattedSql, args) > 0)
+			return entity.getId();
+		else
+			throw new NoRowsAffected("Nenhuma linha afedata para insert into");
+	}
 }

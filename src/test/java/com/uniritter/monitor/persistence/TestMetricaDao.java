@@ -50,6 +50,22 @@ public class TestMetricaDao {
 	}
 	
 	@Test
+	public void testMetricaDaoRegisterExist() {
+		
+		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "metricaid");
+		
+		assertTrue(dao.registerExist(2));
+	}
+	
+	@Test
+	public void testMetricaDaoRegisterNotExist() {
+		
+		GenericDao dao = new GenericDao(jdbcTemplate, "metrica", "metricaid");
+		
+		assertFalse(dao.registerExist(9999999));
+	}
+	
+	@Test
 	public void testDataBase(){
 		assertNotNull(jdbcTemplate);
 		

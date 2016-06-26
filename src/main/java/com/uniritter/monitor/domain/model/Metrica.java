@@ -50,8 +50,6 @@ public class Metrica extends ControlData {
 		if (this.hosts == null)
 			this.hosts = hostService.getTodos(this.id);
 
-		//TODO: Verificar se hosts do lado de fora de Metrica pode ser foi add
-
 		return hosts;
 	}
 
@@ -59,16 +57,12 @@ public class Metrica extends ControlData {
 		if (this.alertas == null)
 			this.alertas = alertaService.getTodos(this.id);
 
-		//TODO: Verificar se alerta do lado de fora de Metrica pode ser foi add
-
 		return alertas;
 	}
 
 	public final List<Medicao> getMedicoes() {
 		if (this.medicoes == null)
 			this.medicoes = medicaoService.getTodos(this.id);
-
-		//TODO: Verificar se medicao do lado de fora de Metrica pode ser foi add
 
 		return medicoes;
 	}

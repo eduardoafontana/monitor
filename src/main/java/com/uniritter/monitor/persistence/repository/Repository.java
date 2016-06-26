@@ -31,13 +31,19 @@ public class Repository<T> implements IRepository {
 	@Override
 	public int save(GenericEventData entidade) {
 
-		return this.dao.create(entidade);
+		if(this.dao.registerExist(entidade.getId()))
+			return this.dao.update(entidade);
+		else
+			return this.dao.create(entidade);
 	}
 
 	@Override
 	public int saveToRelation(GenericEventData entidade, int relatedId) {
 
-		return this.dao.create(entidade, relatedId);
+		if(this.dao.registerExist(entidade.getId()))
+			return this.dao.update(entidade, relatedId);
+		else
+			return this.dao.create(entidade, relatedId);
 	}
 
 	@SuppressWarnings({ "unchecked", "hiding" })

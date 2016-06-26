@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -26,6 +27,12 @@ public class TestHostService {
 	
 	@Autowired
 	public HostService hostService;
+	
+	@Test(expected=DataIntegrityViolationException.class)
+	public void testSalvarHostVazio(){
+		Host host = new Host(hostService);
+		host.save(2);
+	}
 	
 	@Test
 	public void testGetHosts() {
