@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.uniritter.monitor.domain.TestMetricaService" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-07-01T22:51:55" hostname="ZS-LAB103-65023" time="0.83">
+<testsuite name="com.uniritter.monitor.domain.TestMetricaService" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-07-01T23:38:27" hostname="ZS-LAB103-65023" time="0.836">
   <properties/>
-  <testcase name="testMetricaGetHistoricoMedicoes" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.175"/>
-  <testcase name="testAddHostNaMetrica" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.271"/>
-  <testcase name="testDeleteMetricaEHosts" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.0"/>
-  <testcase name="testGetMetricaComHosts" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.048"/>
-  <testcase name="testMetricaGetUltimaMedicao" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.162"/>
-  <testcase name="testCriarNovaMetrica" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.0"/>
-  <testcase name="testGetMetricas" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.172"/>
+  <testcase name="testMetricaGetHistoricoMedicoes" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.149"/>
+  <testcase name="testAddHostNaMetrica" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.274"/>
+  <testcase name="testDeleteMetricaEHosts" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.004"/>
+  <testcase name="testGetMetricaComHosts" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.049"/>
+  <testcase name="testMetricaGetUltimaMedicao" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.16"/>
+  <testcase name="testCriarNovaMetrica" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.002"/>
+  <testcase name="testGetMetricas" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.193"/>
   <testcase name="testGetMetrica" classname="com.uniritter.monitor.domain.TestMetricaService" time="0.001"/>
-  <system-out><![CDATA[2016-07-01 19:51:55.740  INFO 6560 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.uniritter.monitor.domain.TestMetricaService]: no resource found for suffixes {-context.xml, Context.groovy}.
-2016-07-01 19:51:55.742  INFO 6560 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2016-07-01 19:51:55.742  INFO 6560 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@14f205ce, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1d5b2220, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4a1d71ee, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5322e645, org.springframework.test.context.transaction.TransactionalTestExecutionListener@183be6a7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4a3ea5f]
+  <system-out><![CDATA[2016-07-01 20:38:27.026  INFO 7228 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.uniritter.monitor.domain.TestMetricaService]: no resource found for suffixes {-context.xml, Context.groovy}.
+2016-07-01 20:38:27.029  INFO 7228 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-07-01 20:38:27.029  INFO 7228 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2c5ae898, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@45c69e8, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4f2d0094, org.springframework.test.context.support.DirtiesContextTestExecutionListener@13811d28, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1a13719, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7f284b24]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
