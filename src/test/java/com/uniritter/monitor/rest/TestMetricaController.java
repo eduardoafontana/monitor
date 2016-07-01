@@ -121,10 +121,6 @@ public class TestMetricaController {
 
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:9000/metricas/");
 
-		//JSONObject request = new JSONObject();
-		//request.put("metricaTipo", MetricaTipo.CargaDeRede.toString());
-		
-        //HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
 		HttpEntity<String> entity = new HttpEntity<String>(MetricaTipo.CargaDeRede.toString(), headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), entity, String.class);

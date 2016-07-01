@@ -106,9 +106,6 @@ public class Metrica extends ControlData {
 				return o1.getQuando().compareTo(o2.getQuando());
 			}
 		});
-
-		//TODO: Aplicar lambda, porem so java 8
-		//http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
 		
 		return medicoes;
 	}
