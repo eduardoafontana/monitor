@@ -50,8 +50,6 @@ public class TestAlertaService {
 
 		assertNotNull(alertas);
 		assertTrue(alertas.size() > 0);
-		
-		fail("Erro teste");
 	}
 
 	@Test
